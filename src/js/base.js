@@ -33,5 +33,20 @@ require(['config'],function(){
                 $('.headLogo').css({'margin-bottom':'0'});
             }
         })
+
+
+        //底部每个li图片位置
+        var $spans = $('#footer ul li a span');
+        var $links = $('#footer ul li');
+        for(var i=0;i<$spans.length;i++){
+            $spans.eq(i).css({'background-position':'-220px -'+i*40+'px'});
+        }
+        $links.hover(function(){
+            var idx = $(this).index();
+            $(this).find('span').css({'background-position':'-280px -'+idx*40+'px'});
+        },function(){
+            var idx = $(this).index();
+            $(this).find('span').css({'background-position':'-220px -'+idx*40+'px'});
+        })
     })
 })

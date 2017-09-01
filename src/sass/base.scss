@@ -91,3 +91,29 @@ a{color:#000;text-decoration:none;}
         position:fixed;top:0;z-index:99;
     }
 }
+#footer{
+    height:235px;width:100%;background:#f2f2f2;padding-top:30px;position:relative;
+    ul{
+        margin-bottom:25px;
+        li{
+            float:left;
+            a{
+                display:block;width:165px;height:60px;border-right:1px solid #615e5e;text-align:center;font-size:$fontSize1;position:relative;
+                span{display:block;width:60px;height:40px;background-image:url("../img/set.fw.png");
+                margin-left:52px;}
+                p{position:absolute;left:0;bottom:7px;width:100%;text-align:center;}
+            }
+        }
+    }
+    p{
+        text-align:center;
+        a{margin:0 14px;font-size:$fontSize;}
+        a:hover{color:#db2726;}
+    }
+    p.lastP{
+        line-height:50px;
+    }
+    .footerlastPic{
+        display:block;width:35px;height:36px;position:absolute;left:50%;margin-left:-18px;bottom:45px;background:url("img/icon_badge.png");
+    }
+}

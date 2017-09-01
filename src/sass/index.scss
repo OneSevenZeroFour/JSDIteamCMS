@@ -9,7 +9,7 @@
         }    
     }
     #mains{
-        position:relative;top:470px;margin:0 auto;width:1020px;padding:20px;background:#fff;padding-right:0;
+        position:relative;top:470px;margin:0 auto;width:1020px;padding:20px;background:rgba(255,255,255,.9);padding-right:0;
         li{
             width:320px;height:232px;float:left;margin-bottom:20px;margin-right:20px;background:#f2f2f2;position:relative;
             .imgBox{
@@ -23,8 +23,36 @@
                 span:last-child{color:red;display:block;float:right;line-height:40px;font-size:$fontSize1;margin-right:5px;}
             }           
         }
+        li.outSeagoods{
+                p{
+                    height:40px;padding-left:5px;
+                    span:first-child{display:block;background:url("img/event_label.png");width:56px;height:18px;line-height:18px;margin-top:11px;color:#fff;padding-left:3px;}
+                    span:nth-child(2){display:block;float:left;width:180px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:40px;}
+                }
+            }
+        h3{font-size:24px;margin-bottom:8px;font-weight:normal;}
+        .lastlink{
+            text-align:right;padding-right:25px;
+            a{font-size:$fontSize;}
+            a:hover{color:#db2726;}
+        }
+        .eventlink{
+            width:320px;height:484px;float:left;position:relative;background:url("img/home_silo_banner.jpg");margin-right:20px;margin-bottom:20px;
+            .eventlinkbox{
+                position:absolute;bottom:10px;left:0;width:320px;text-align:center;
+                h4{font-size:40px;font-weight:normal;font-family:"宋体";-webkit-user-select:none;}
+                h4:nth-child(2){font-size:50px;font-weight:bold;letter-spacing:12px;}
+                .Inlist{
+                    width:217px;margin:8px auto;padding:6px 0;border-top:1px solid #000;border-bottom:1px solid #000;line-height:26px;
+                    a{font-size:$fontSize1;margin:0 5px;}
+                    a:hover{color:#db2726;}
+                    .Inlink{
+                        a{font-size:$fontSize;}
+                    }
+                }
+            }           
+        }
         .updateshow{
-            h3{font-size:24px;margin-bottom:4px;font-weight:normal;}
             ul{
                 .carousel{
                     width:320px;height:485px;margin-right:20px;margin-bottom:20px;position:relative;
@@ -41,6 +69,89 @@
                     }
                 }
             }            
+        }
+        .womenlist{
+            color:#000;
+        }
+        .menlist{           
+            .menIn{
+                h4{color:#fff;}
+                background:url("img/home_silo_banner.jpg") -320px 0;color:#fff;
+                a{color:#fff;}
+                .Inlist{border-top:1px solid #fff;border-bottom:1px solid #fff;}
+            }            
+        }
+        .beautylist{
+            .beautyIn{
+                background:url("img/home_silo_banner.jpg") -640px 0;
+            }
+        }
+        .houselist{
+            .houseIn{
+                background:url("img/home_silo_banner.jpg") -960px 0;
+                h4:nth-child(2){letter-spacing:1px;}
+            }
+        }
+        .babylist{
+            .babyIn{
+                background:url("img/home_silo_banner.jpg") -1280px 0;
+            }
+        }
+        .oversealist{
+            .overseaIn{
+                background:url("img/home_silo_banner.jpg") -1600px 0;
+                .eventlinkbox{
+                    bottom:100px;
+                    h4:nth-child(2){letter-spacing:2px;}
+                }
+            }           
+        }
+        .neweventlist{
+            .neweventTop{
+                width:1000px;height:27px;position:relative;margin-top:20px;
+                .weeklist{
+                    float:left;
+                    span{text-align:center;display:block;float:left;border-right:1px solid #000;width:89px;cursor:pointer;font-size:$fontSize1;}
+                    span:first-child{border-left:1px solid #000;}
+                }
+                div:nth-child(2){
+                    float:right;font-size:$fontSize1;
+                    .newtime{color:red;font-size:24px;font-family:"宋体";margin:0 2px 2px 0;}
+                }
+                .borderline{width:91px;height:4px;background:#000;position:absolute;left:0;bottom:0;}
+            }
+            .weekevents{
+                width:1000px;position:relative;margin-top:10px;
+                .weekevent{
+                    width:1020px;height:auto;position:absolute;left:0;top:0;display:none;
+                    li{
+                        width:318px;height:88px;border:1px solid #e7e7e7;background:#f2f2f2;float:left;margin-right:20px;margin-bottom:20px;position:relative;overflow:hidden;
+                        img{
+                            display:block;float:left;width:150px;
+                        }
+                        .eventright{
+                            float:left;width:158px;height:78px;padding:5px;
+                            p{
+                                line-height:18px;
+                            }
+                            p:last-child{
+                                font-size:$fontSize;line-height:46px;color:#db2726;
+                                span{font-size:20px;display:inline-block;width:auto;float:left;}
+                            }
+                        }
+                        .eventcover{
+                            width:100%;height:100%;position:absolute;left:0;top:0;background:rgba(0,0,0,.7);display:none;
+                            .eventcenter{
+                                display:inline-block;width:100px;height:20px;background:#db2726;position:absolute;left:50%;top:50%;margin-left:-60px;margin-top:-15px;padding:5px 10px;
+                                a{font-size:$fontSize1;color:#fff;}
+                                a:hover{text-decoration:underline;}
+                                a:first-child{padding-right:18px;border-right:2px solid #fff;}
+                                a:last-child{padding-left:18px;}
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
