@@ -1,0 +1,39 @@
+#content { width: 100%; }
+
+#content #banner { position: absolute; width: 100%; overflow: hidden; height: 524px; }
+
+#content #banner a.bannerLink { display: block; width: 1800px; height: 524px; position: absolute; left: -200px; }
+
+#content #banner a.bannerLink img { width: 100%; height: 100%; }
+
+#content #mains { position: relative; top: 470px; margin: 0 auto; width: 1020px; padding: 20px; background: #fff; padding-right: 0; }
+
+#content #mains li { width: 320px; height: 232px; float: left; margin-bottom: 20px; margin-right: 20px; background: #f2f2f2; position: relative; }
+
+#content #mains li .imgBox { width: 320px; height: 192px; overflow: hidden; position: relative; }
+
+#content #mains li .imgBox img { width: 320px; display: block; position: absolute; }
+
+#content #mains li .imgBox .shade { width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: rgba(0, 0, 0, 0.5); line-height: 192px; text-align: center; color: #fff; display: none; }
+
+#content #mains li p { height: 40px; padding-left: 5px; }
+
+#content #mains li p span:first-child { display: block; float: left; width: 180px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 40px; }
+
+#content #mains li p span:last-child { color: red; display: block; float: right; line-height: 40px; font-size: 14px; margin-right: 5px; }
+
+#content #mains .updateshow h3 { font-size: 24px; margin-bottom: 4px; font-weight: normal; }
+
+#content #mains .updateshow ul .carousel { width: 320px; height: 485px; margin-right: 20px; margin-bottom: 20px; position: relative; float: right; overflow: hidden; }
+
+#content #mains .updateshow ul .carousel .crsImg { position: absolute; left: 0; top: 0; }
+
+#content #mains .updateshow ul .carousel .crsbtn { display: block; width: 25px; height: 40px; z-index: 2; font-size: 40px; line-height: 40px; text-align: center; position: absolute; top: 50%; cursor: pointer; color: #afa1a1; display: none; -webkit-user-select: none; }
+
+#content #mains .updateshow ul .carousel .crsbtn.next { right: 3px; }
+
+#content #mains .updateshow ul .carousel .page { position: absolute; left: 0; bottom: 10px; text-align: center; width: 320px; height: 20px; z-index: 3; }
+
+#content #mains .updateshow ul .carousel .page .pagebtn { width: 12px; height: 12px; background: #fff; border-radius: 50%; display: inline-block; margin: 0 5px; cursor: pointer; }
+
+#content #mains .updateshow ul .carousel .page .pagebtn.active { background: red; }
