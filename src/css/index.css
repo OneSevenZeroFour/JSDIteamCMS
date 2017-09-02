@@ -7,7 +7,7 @@
 
 #content #banner a.bannerLink img { width: 100%; height: 100%; }
 
-#content #mains { position: relative; top: 470px; margin: 0 auto; width: 1020px; padding: 20px; background: rgba(255, 255, 255, 0.9); padding-right: 0; }
+#content #mains { position: relative; top: 480px; margin: 0 auto; width: 1020px; padding: 20px; background: rgba(255, 255, 255, 0.9); padding-right: 0; padding-top: 10px; }
 
 #content #mains li { width: 320px; height: 232px; float: left; margin-bottom: 20px; margin-right: 20px; background: #f2f2f2; position: relative; }
 
@@ -132,3 +132,21 @@
 #content #mains .neweventlist .weekevents .weekevent li .eventcover .eventcenter a:first-child { padding-right: 18px; border-right: 2px solid #fff; }
 
 #content #mains .neweventlist .weekevents .weekevent li .eventcover .eventcenter a:last-child { padding-left: 18px; }
+
+#returnTop { width: 98px; position: fixed; right: -10px; bottom: 80px; z-index: 999; height: auto; }
+
+#returnTop div { border-left: 1px solid #ccc; border-right: 1px solid #ccc; background: #fff; }
+
+#returnTop div p { text-align: center; line-height: 20px; }
+
+#returnTop div img { display: block; width: 75px; margin: 0 auto; }
+
+#returnTop div:first-child { background: #000; text-align: center; width: 78px; height: 42px; padding: 5px 10px; border: 0 none; }
+
+#returnTop div:first-child span { font-size: 16px; color: red; letter-spacing: 2px; font-weight: bold; }
+
+#returnTop div:first-child p { color: #fff; font-size: 14px; }
+
+#returnTop div:nth-child(3) { padding-bottom: 10px; border-bottom: 1px solid #ccc; }
+
+#returnTop .toTop { width: 98px; height: 28px; background: url("../img/set.fw.png") 0 -200px; border-bottom: 1px solid #ccc; display: none; cursor: pointer; }

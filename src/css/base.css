@@ -84,6 +84,8 @@ a { color: #000; text-decoration: none; }
 
 #footer ul li a p { position: absolute; left: 0; bottom: 7px; width: 100%; text-align: center; }
 
+#footer ul li:last-child a { border: 0 none; }
+
 #footer p { text-align: center; }
 
 #footer p a { margin: 0 14px; font-size: 12px; }

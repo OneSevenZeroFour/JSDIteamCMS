@@ -104,6 +104,9 @@ a{color:#000;text-decoration:none;}
                 p{position:absolute;left:0;bottom:7px;width:100%;text-align:center;}
             }
         }
+        li:last-child{
+            a{border:0 none;}
+        }
     }
     p{
         text-align:center;

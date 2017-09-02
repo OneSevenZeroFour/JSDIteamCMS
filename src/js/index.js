@@ -1,17 +1,17 @@
 require(['config'],function(){
-    require(['jqurey'],function(){
-        //加载公共头部html
+    require(['jquery'],function(){
+        //加载公共头部和尾部html
         $('#header').load('html/header.html');
         $('#footer').load('html/footer.html');
-        //底部活动更新
-        //tab标签星期根据实时时间获取
+        //底部每日活动更新
         //获取当前星期几
+        //创建tab标签页，根据当前时间决定写入顺序
         function weekinput(){
             var weeks=['周日','周一','周二','周三','周四','周五','周六'];
             var now = new Date();
             var week = now.getDay();
             var idx = week+2;
-            for(var i=0;i<4;i++){
+            for(var i=0;i<5;i++){
                 if(idx>6){
                     idx = week-5;
                 }
@@ -20,40 +20,49 @@ require(['config'],function(){
             }
         }
         weekinput();
-        //每日活动显示根据星期几决定显示哪一个活动板块
+        //每日活动显示根据星期几决定显示哪一天的活动板块
         //星期tab点击切换事件
+        //避免出现加在过程中div消失会造成父元素没有高度，决定显示那一天的活动板块之后把高度给到父级盒子，避免出现样式问题
         function weektab(){
             var now = new Date();
             var week = now.getDay();
-            $('.weekevent').eq(week+1).show().siblings('.weekevent').hide();
-            $('.weekevents').height($('.weekevent').eq(week+1).height());
+            //星期运算，根据不同情况决定计算公式
+            var idx = (week+1)>6?(week+1-7):(week+1); 
+            $('.weekevent').eq(idx).show().siblings('.weekevent').hide();
+            $('.weekevents').height($('.weekevent').eq(idx).height());
             $('.weeklist span').click(function(){
                 var idx = $(this).index();
+                //星期运算，根据不同情况决定计算公式
                 var eventidx = (idx+1+week)>6?(idx+1+week-7):(idx+1+week);
                 $('.weekevent').eq(eventidx).show().siblings('.weekevent').hide();
                 var left = idx*90 + 'px';
                 $('.borderline').css({left:left});
                 $('.weekevents').height($('.weekevent').eq(eventidx).height());
             })
-
         }
         weektab();
         //每日活动hover事件
+        //遮罩出现与消失
         $('.weekevents li').hover(function(){
             $(this).find('.eventcover').stop().fadeIn('slow');
         },function(){
             $(this).find('.eventcover').stop().fadeOut('slow');
         })
+        //会优先加载公共Js，然后再加载当前js，要在加载公共JS之前优先导入公共的头部尾部html页面，以免加载完头部尾部没有动画效果
         require(['common','base'],function(com){
+            //头部注册登录页面路径设置
+            var $headlink = $('#header .headTop .top_left span a');
+            $headlink.eq(0).attr('href','html/user.html?type=register');
+            $headlink.eq(1).attr('href','html/user.html?type=login')
             //获取当前时间大图轮换
             var now = new Date();
             var day = now.getDate();
             if(day%2===0){
-                $('#banner').find('img').attr('src',"img/20170830114615621.jpg");
+                $('#banner').find('img').attr('src',"img/banner1.jpg");
             }else{
-                $('#banner').find('img').attr('src',"img/20170831145033772.jpg");
+                $('#banner').find('img').attr('src',"img/banner2.jpg");
             }
-
+            // 品牌活动列表图片hover事件
             var $imgs = $('#mains ul.clearfixed li .imgBox');
             $imgs.hover(function(){
                 $(this).find('img').stop().animate({width:'340px',height:'212px',left:'-10px',top:'-10px'},700);
@@ -109,17 +118,32 @@ require(['config'],function(){
                 })
             }
             carousel();
+            //根据滚动事件，大图下方商品向上迎合移动
+            //导航栏吸顶
+            //右下侧二维码，二维码下方返回顶部按钮出现消失
             $(window).scroll(function(){
                 if($(document).scrollTop()<200){
-                    var marget = 470-$(document).scrollTop()*1.5;
+                    var marget = 480-$(document).scrollTop()*1.5;
                     $('#mains').css({top:marget,'margin-bottom':marget});
                     $('.headNav').removeClass('fixTop');
                     $('.headLogo').css({'margin-bottom':'0'});
+                    $('.toTop').hide();
+                    $('#returnTop').css({bottom:'80px'});
                 }else if($(document).scrollTop()>=200){
                     $('.headNav').addClass('fixTop');
                     $('.headLogo').css({'margin-bottom':'42px'});
                     $('#mains').css({top:'170px','margin-bottom':'170px'});
+                    $('.toTop').show();
+                    $('#returnTop').css({bottom:'51px'});
                 }
+            })
+            //返回顶部
+            $('.toTop').click(function(){
+                $('body,html').animate({scrollTop:0},1500);
+            })
+            //返回顶部过程中如果客户滑动滚轮取消body，html动画
+            $(document).on('mousewheel',function(){
+                $('body,html').stop(true,false);
             })
         })
 

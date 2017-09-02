@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>注册/登录</title>
+    <link rel="stylesheet" type="text/css" href="../css/user.css" />
+    <script src="../lib/require.js" data-main="../js/user"></script>
+</head>
+<body>
+    <div class="container box">
+        <header id="header">
+            <a href="../index.html" class="logo">
+                <img src="../img/logo1_r1_c1.png"/>
+            </a>
+        </header>
+        <div class="content">
+            <div class="register">
+                <div class="top clearfixed">
+                    <h2>免费注册</h2>
+                    <p>已注册？<a href="user.html?type=login">登录</a></p>                    
+                </div>
+                <p class="red">新客专享 1000元现金券礼包</p>
+                <div class="regilist">
+                    <li class="usernameLi">
+                        <label for="username">账户名:</label>
+                        <input type="text" id="username" placeholder="手机号/邮箱"/>
+                        <div class="usernametest test"></div>
+                    </li>
+                    <li class="passwordLi">
+                        <label for="password">密码:</label>
+                        <input type="password" id="password" placeholder="请输入6~20个字符"/>
+                        <div class="passwordtest test"></div>
+                        <div class="passwordQD clearfixed">
+                            <span>低</span>
+                            <span>中</span>
+                            <span>高</span>
+                        </div>
+                    </li>
+                    <li class="passwordLi">
+                        <label for="password2">确认密码:</label>
+                        <input type="password" id="password2"/>
+                        <div class="passwordtest test">请输入</div>
+                    </li>
+                    <li class="vCodeLi">
+                        <label for="vCode1">验证码:</label>                        
+                        <span class="vCodeshow"></span>
+                        <input type="text" id="vCode1"/>
+                        <div class="vCodetest test">请输入</div>
+                    </li>
+                    <li class="phoneCodeLi">
+                        <label for="phoneCode1">短信验证码:</label>                      
+                        <span class="phoneCodeshow">获取验证码</span>
+                        <input type="text" id="phoneCode1"/>
+                        <div class="phoneCodetest test">请输入</div>
+                    </li>
+                    <div class="registbtn">立即注册</div>
+                </div>
+                <p class="uselist">点击立即注册即表示同意魅力惠<a href="#">使用条款</a></p>
+                <p class="getemail"><i class="active"></i>您将收到魅力惠每日最新上线邮件</p>
+                <div class="erwm">
+                    <img src="../img/imges_saomiao.jpg"/>
+                    <div class="erwm_right">
+                        <p>扫描二维码或发送短信</p>
+                        <p>“MLH”到“12114”</p>
+                        <p>下载APP尊享独家优惠</p>
+                    </div>
+                </div>
+            </div>
+            <div class="login">
+                <div class="top clearfixed">
+                    <h2>会员登录</h2>
+                    <p>没有账号？<a href="user.html?type=register">免费注册</a></p>                    
+                </div>
+                <div class="loginlist">
+                    <li class="usernameLi">
+                        <label for="username">账户名:</label>
+                        <input type="text" id="username" placeholder="已验证手机号/邮箱"/>
+                        <div class="usernametest test">请输入</div>
+                    </li>
+                    <li class="passwordLi">
+                        <label for="password">密码:</label>
+                        <input type="password" id="password"/>
+                        <div class="passwordtest test">请输入</div>
+                    </li>
+                    <div class="loginbtn">会员登录</div>
+                    <div class="last clearfixed">
+                        <p><i class="loginmdl active"></i>下次自动登录</p>
+                        <a href="#">忘记密码</a>
+                    </div>
+                    <div class="joinlogin">
+                        <span>联名登录:</span>
+                        <a href="#" class="weibo"></a>
+                        <a href="#" class="zhifubao"></a>
+                    </div>
+                    <div class="erwm">
+                        <img src="../img/imges_saomiao.jpg"/>
+                        <div class="erwm_right">
+                            <p>扫描二维码或发送短信</p>
+                            <p>“MLH”到“12114”</p>
+                            <p>下载APP尊享独家优惠</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="container">
+            <ul class="clearfixed">
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <p>100%正品保证</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <p>满688免运费</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <p>7天无条件退货</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <p>超值折扣</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <p>9点限时闪购</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <p>400-664-6698</p>
+                    </a>
+                </li>
+            </ul>
+            <p class="lastP">COPYRIGHT©2016 杭州魅俪信息技术有限公司版权所有<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>浙ICP备16004860号-1</p>
+        </div>
+    </footer> 
+</body>
+</html>

@@ -1,5 +1,5 @@
 require(['config'],function(){
-    require(['jqurey'],function(){
+    require(['jquery'],function(){
         //头部手机版二维码
         $('.top_right span').eq(1).hover(function(){
             $('.topCode').stop().fadeIn('slow');
