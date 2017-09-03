@@ -15,7 +15,8 @@ var browserSync = require('browser-sync');
 gulp.task('server',function(){
     browserSync({
         // 代理服务器
-        proxy:'http://localhost/prrProject',
+        // proxy:'http://localhost/prrProject',
+        proxy:'http://localhost/philly',
 
         // 监听文件修改，自动刷新浏览器
         files:['./src/**/*.html','./src/css/*.css','./src/api/*.php','./src/js/*.js']

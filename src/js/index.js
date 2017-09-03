@@ -56,12 +56,9 @@ require(['config'],function(){
             $headlink.eq(1).attr('href','html/user.html?type=login')
             //获取当前时间大图轮换
             var now = new Date();
-            var day = now.getDate();
-            if(day%2===0){
-                $('#banner').find('img').attr('src',"img/banner1.jpg");
-            }else{
-                $('#banner').find('img').attr('src',"img/banner2.jpg");
-            }
+            var idx = now.getDay();
+            var bannerurl = 'img/banner'+idx+'.jpg';
+            $('#banner').find('img').attr('src',bannerurl);
             // 品牌活动列表图片hover事件
             var $imgs = $('#mains ul.clearfixed li .imgBox');
             $imgs.hover(function(){

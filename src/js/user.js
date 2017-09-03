@@ -34,30 +34,43 @@ require(['config'],function(){
                     console.log(username);
                     var reg1 =/^1[34578]\d{9}$/;
                     var reg2 =/^[\w\-\.]+@[\da-z\-]+(\.[a-z]{2,}){1,2}$/i;
+
                     if(reg1.test(username)){
                         nametype = 'phone';
                         $('#username').siblings('.test').text('');
                         $('.vCodeLi').hide().siblings('.phoneCodeLi').show();
+                        $('.registbtn').css({'background-color':'#db2725'});
                     }else if(reg2.test(username)){
                         nametype = 'email';
                         $('#username').siblings('.test').text('');
                         $('.phoneCodeLi').hide().siblings('.vCodeLi').show();
+                        $('.registbtn').css({'background-color':'#db2725'});
                     }else{
                         $('#username').siblings('.test').text('请输入正确的手机号或者邮箱');
+                        $('.registbtn').css({'background-color':'#999'});
                     }
                 })
                 //验证密码是否符合规范
                 //设置输入框上限
                 $('#password').attr({maxlength:"19"});
+                $('.passwordQD').hide();
                 $('#password').on('input',function(){
                     var password = $('#password').val();
+                    if(password==''){
+                        $('.passwordQD').hide();
+                    }else{
+                        $('.passwordQD').show();
+                    }                                       
                     var reg1 = /^[^><\s]{6,19}$/;
                     if(password.length<6){
                         $('#password').siblings('.test').text('密码长度不能少于6位');
+                        $('.registbtn').css({'background-color':'#999'});
                     }else if(password.length>=6 && reg1.test(password)){
                         $('#password').siblings('.test').text('');
+                        $('.registbtn').css({'background-color':'#db2725'});
                     }else{
                         $('#password').siblings('.test').text('密码不能包含非法字符');
+                        $('.registbtn').css({'background-color':'#999'});
                         return;
                     }
                     //根据输入的值判断密码强度
@@ -87,7 +100,39 @@ require(['config'],function(){
                         }
                     }
                 })
+                //确认密码失焦判断是否相同
+                $('#password2').blur(function(){
+                    var password2 = $('#password2').val();
+                    var password = $('#password').val();
+                    if(password2!=''&&password2==password){
+                        $('#password2').siblings('.test').text('');
+                        $('.registbtn').css({'background-color':'#db2725'});
+                    }else if(password2==''){
+                        $('#password2').siblings('.test').text('');
+                        $('.registbtn').css({'background-color':'#999'});
+                    }else{
+                        $('#password2').siblings('.test').text('两次输入密码不相同，请重新输入');
+                        $('.registbtn').css({'background-color':'#999'});
+                    }
+                })
+                //验证码失焦验证
+                $('#vCode1').blur(function(){
+                    var vCode = $('#vCode1').val().toLowerCase();
+                    var Code = $('.vCodeshow').text().toLowerCase();
+                    if(vCode!=Code){
+                        $('#vCode1').siblings('.test').text('验证码错误，请重新输入');
+                        $('.register .vCodeshow').text(com.vCode()).css({color:com.randomColor(),'text-align':'center','line-height':'28px'});
+                        $('.registbtn').css({'background-color':'#999'});
+                    }else{
+                        $('#vCode1').siblings('.test').text('');
+                        $('.registbtn').css({'background-color':'#db2725'});
+                    }
+                })
                 //注册按钮点击注册
+                function verify(){
+                    console.log(666);
+                }
+
             }
             // 根据传来的参数决定显示注册页面还是登录页面
             if(type=='login'){

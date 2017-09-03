@@ -1,7 +1,6 @@
 {
   "name": "project",
   "version": "0.0.1",
-  "description": "",
   "main": "gulpfile.js",
   "directories": {
     "doc": "doc"
@@ -10,7 +9,10 @@
     "browser-sync": "^2.18.13",
     "gulp-sass": "^3.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +25,6 @@
   "bugs": {
     "url": "https://github.com/phillyprr/project2/issues"
   },
-  "homepage": "https://github.com/phillyprr/project2#readme"
+  "homepage": "https://github.com/phillyprr/project2#readme",
+  "description": ""
 }

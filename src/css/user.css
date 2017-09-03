@@ -72,7 +72,7 @@ body { background: #dddddb; }
 
 .box .content .register .regilist .phoneCodeLi .phoneCodeshow { font-size: 12px; }
 
-.box .content .register .regilist .registbtn { width: 260px; height: 30px; background: #db2725; line-height: 30px; text-align: center; color: #fff; font-size: 14px; margin-left: 90px; cursor: pointer; }
+.box .content .register .regilist .registbtn { width: 260px; height: 30px; background: #db2725; line-height: 30px; text-align: center; color: #fff; font-size: 14px; margin-left: 90px; cursor: pointer; -webkit-user-select: none; }
 
 .box .content .register .uselist { margin-left: 90px; line-height: 30px; }
 
@@ -106,7 +106,7 @@ body { background: #dddddb; }
 
 .box .content .login .loginlist li .test { text-align: left; margin-left: 90px; color: red; }
 
-.box .content .login .loginlist .loginbtn { width: 260px; height: 30px; background: #db2725; line-height: 30px; text-align: center; color: #fff; font-size: 14px; margin-left: 90px; cursor: pointer; }
+.box .content .login .loginlist .loginbtn { width: 260px; height: 30px; background: #db2725; line-height: 30px; text-align: center; color: #fff; font-size: 14px; margin-left: 90px; cursor: pointer; -webkit-user-select: none; }
 
 .box .content .login .loginlist .last { margin-left: 90px; margin-bottom: 20px; margin-top: 12px; }
 
