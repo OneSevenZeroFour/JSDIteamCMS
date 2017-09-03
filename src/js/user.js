@@ -31,7 +31,6 @@ require(['config'],function(){
                 var nametype;
                 $('#username').blur(function(){
                     var username = $('#username').val();
-                    console.log(username);
                     var reg1 =/^1[34578]\d{9}$/;
                     var reg2 =/^[\w\-\.]+@[\da-z\-]+(\.[a-z]{2,}){1,2}$/i;
 
@@ -39,15 +38,15 @@ require(['config'],function(){
                         nametype = 'phone';
                         $('#username').siblings('.test').text('');
                         $('.vCodeLi').hide().siblings('.phoneCodeLi').show();
-                        $('.registbtn').css({'background-color':'#db2725'});
+                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
                     }else if(reg2.test(username)){
                         nametype = 'email';
                         $('#username').siblings('.test').text('');
                         $('.phoneCodeLi').hide().siblings('.vCodeLi').show();
-                        $('.registbtn').css({'background-color':'#db2725'});
+                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
                     }else{
                         $('#username').siblings('.test').text('请输入正确的手机号或者邮箱');
-                        $('.registbtn').css({'background-color':'#999'});
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }
                 })
                 //验证密码是否符合规范
@@ -64,13 +63,13 @@ require(['config'],function(){
                     var reg1 = /^[^><\s]{6,19}$/;
                     if(password.length<6){
                         $('#password').siblings('.test').text('密码长度不能少于6位');
-                        $('.registbtn').css({'background-color':'#999'});
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }else if(password.length>=6 && reg1.test(password)){
                         $('#password').siblings('.test').text('');
-                        $('.registbtn').css({'background-color':'#db2725'});
+                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
                     }else{
                         $('#password').siblings('.test').text('密码不能包含非法字符');
-                        $('.registbtn').css({'background-color':'#999'});
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                         return;
                     }
                     //根据输入的值判断密码强度
@@ -106,13 +105,23 @@ require(['config'],function(){
                     var password = $('#password').val();
                     if(password2!=''&&password2==password){
                         $('#password2').siblings('.test').text('');
-                        $('.registbtn').css({'background-color':'#db2725'});
+                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
                     }else if(password2==''){
                         $('#password2').siblings('.test').text('');
-                        $('.registbtn').css({'background-color':'#999'});
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }else{
                         $('#password2').siblings('.test').text('两次输入密码不相同，请重新输入');
-                        $('.registbtn').css({'background-color':'#999'});
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
+                    }
+                })
+                //确认密码输入过程中验证
+                $('#password2').on('input',function(){
+                    var password2 = $('#password2').val();
+                    var password = $('#password').val();
+                    if(password2.length>=6&&password2==password){
+                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
+                    }else{
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }
                 })
                 //验证码失焦验证
@@ -122,16 +131,49 @@ require(['config'],function(){
                     if(vCode!=Code){
                         $('#vCode1').siblings('.test').text('验证码错误，请重新输入');
                         $('.register .vCodeshow').text(com.vCode()).css({color:com.randomColor(),'text-align':'center','line-height':'28px'});
-                        $('.registbtn').css({'background-color':'#999'});
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }else{
                         $('#vCode1').siblings('.test').text('');
-                        $('.registbtn').css({'background-color':'#db2725'});
+                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
                     }
                 })
+                //验证码输入过程验证
+                $('#vCode1').on('input',function(){
+                    var vCode = $('#vCode1').val().toLowerCase();
+                    var Code = $('.vCodeshow').text().toLowerCase();
+                    if(vCode==Code){
+                        $('#vCode1').siblings('.test').text('');
+                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
+                    }else{
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
+                    }
+                })
+
                 //注册按钮点击注册
-                function verify(){
-                    console.log(666);
-                }
+                $('.registbtn').click(function verify(){
+                    this.focus();
+                    var vCode = $('#vCode1').val();
+                    var Code = $('.vCodeshow').text().toLowerCase();
+                    var password2 = $('#password2').val();
+                    var password = $('#password').val();
+                    var username = $('#username').val();
+                    if(vCode!=''&&password.length>=6&&password2==password&&username!=''){
+                        console.log(666);
+                    }else if(username==''){
+                        $('#username').siblings('.test').text('用户名不能为空');
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
+                    }else if(password==''){
+                        $('#password').siblings('.test').text('密码不能为空');
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
+                    }else if(password2==''){
+                        $('#password2').siblings('.test').text('请确认两次密码相同');
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
+                    }else if(vCode==''||vCode!=Code){
+                        $('#vCode1').siblings('.test').text('验证码错误，请重新输入');
+                        $('.register .vCodeshow').text(com.vCode()).css({color:com.randomColor(),'text-align':'center','line-height':'28px'});
+                        $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
+                    }
+                })
 
             }
             // 根据传来的参数决定显示注册页面还是登录页面
