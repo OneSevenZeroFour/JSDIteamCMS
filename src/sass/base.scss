@@ -24,11 +24,12 @@ a{color:#000;text-decoration:none;}
         span{
             display:block;float:left;line-height:30px;
             a{
-                padding:0 20px;border-right:1px solid #000;
+                padding:0 20px;border-right:1px solid #000;cursor:pointer;
                 &:hover{color:red;}
             }
         }
         .top_left{
+            display:none;
             img{display:block;float:left;width:20px;height:20px;margin-top:3px;}           
             span:nth-child(2){                
                 a{color:red;padding-left:0;}
@@ -37,10 +38,84 @@ a{color:#000;text-decoration:none;}
                 a{border-right:0 none;}
             }
         }
+        .top_leftlogin{
+            display:none;
+            .ledger{
+                float:left;position:relative;cursor:pointer;
+                span:first-child{color:$normalColor;}
+                .ledgerlist{
+                    width: 221px;height:163px;overflow: hidden;box-shadow: 0 2px 4px #999;background-color: #fff;position: absolute;left: -23px;top: 30px;z-index: 99;border: 1px solid #e7e7e7;
+                    p{
+                        line-height:16px;padding-left:5px;border-bottom:1px solid #e7e7e7;
+                        .nameIn{color:$normalColor;margin-left:10px;}
+                    }
+                    li{
+                        float:left;border-right:1px solid #e7e7e7;border-bottom:1px solid #e7e7e7;
+                        &:nth-child(1){
+                            a{
+                                background:url("/css/img/icon_order.gif") no-repeat 28px 15px;
+                            }
+                            a:hover{
+                                background:url("/css/img/icon_order_hover.gif") no-repeat 28px 15px;
+                            }
+                        }
+                        &:nth-child(2){
+                            a{
+                                background:url("/css/img/icon_comment.gif") no-repeat 32px 15px;
+                            }
+                            a:hover{
+                                background:url("/css/img/icon_comment_hover.gif") no-repeat 32px 15px;
+                            }
+                        }
+                        &:nth-child(3){
+                            border-right:0 none;
+                            a{
+                                background:url("/css/img/icon_coupon.gif") no-repeat 26px 15px;
+                            }
+                            a:hover{
+                                background:url("/css/img/icon_coupon_hover.gif") no-repeat 26px 15px;
+                            }
+                        }
+                        &:nth-child(4){
+                            a{
+                                background:url("/css/img/icon_information.gif") no-repeat 28px 15px;
+                            }
+                            a:hover{
+                                background:url("/css/img/icon_information_hover.gif") no-repeat 28px 15px;
+                            }
+                        }
+                        &:nth-child(5){
+                            a{
+                                background:url("/css/img/icon_address.gif") no-repeat 28px 15px;
+                            }
+                            a:hover{
+                                background:url("/css/img/icon_address_hover.gif") no-repeat 28px 15px;
+                            }
+                        }
+                        &:nth-child(6){
+                            border-right:0 none;
+                            a{
+                                background:url("/css/img/icon_password.gif") no-repeat 30px 15px;
+                            }
+                            a:hover{
+                                background:url("/css/img/icon_password_hover.gif") no-repeat 30px 15px;
+                            }
+                        }
+                        a{
+                            display:block;width:73px;height:73px;text-align:center;line-height:110px;
+                        }
+                        a:hover{color:$normalColor;}
+                    }
+                }
+            }
+            span:last-child{
+                a{border-right:0 none;}
+            }
+        }
         .top_right{
             height:30px;position:relative;
             span:nth-child(3){
-                a{border-right:0 none;margin-left:20px;margin-top:3px;padding:0;display:block;width:25px;height:23px;background:url("../img/set.fw.png")}
+                a{border-right:0 none;margin-left:20px;margin-top:3px;padding:0;display:block;width:25px;height:23px;background:url("/img/set.fw.png")}
             }
             .topCode{
                 display:block;position:absolute;left:85px;top:30px;width:100px;height:120px;box-shadow: 0 2px 4px #999;z-index:2;display:none;background:#fff;
@@ -51,7 +126,7 @@ a{color:#000;text-decoration:none;}
         }
     }
     .headLogo{
-        a{display:inline-block;width:200px;height:90px;background:url("../img/set.fw.png") 0 -80px;}
+        a{display:inline-block;width:200px;height:90px;background:url("/img/set.fw.png") 0 -80px;}
         img{display:inline-block;margin-bottom:16px;}
     }
     .headNav{
@@ -76,6 +151,7 @@ a{color:#000;text-decoration:none;}
                             li:last-child{margin-bottom:10px;}
                         }
                         a{color:#000;display:block;float:right;font-size:$fontSize;height:14px;}
+                        a:hover{color:red;}
                     }
                     .lastmenu{
                         border-right:0 none;
@@ -99,7 +175,7 @@ a{color:#000;text-decoration:none;}
             float:left;
             a{
                 display:block;width:165px;height:60px;border-right:1px solid #615e5e;text-align:center;font-size:$fontSize1;position:relative;
-                span{display:block;width:60px;height:40px;background-image:url("../img/set.fw.png");
+                span{display:block;width:60px;height:40px;background-image:url("/img/set.fw.png");
                 margin-left:52px;}
                 p{position:absolute;left:0;bottom:7px;width:100%;text-align:center;}
             }
@@ -117,6 +193,6 @@ a{color:#000;text-decoration:none;}
         line-height:50px;
     }
     .footerlastPic{
-        display:block;width:35px;height:36px;position:absolute;left:50%;margin-left:-18px;bottom:45px;background:url("img/icon_badge.png");
+        display:block;width:35px;height:36px;position:absolute;left:50%;margin-left:-18px;bottom:45px;background:url("/css/img/icon_badge.png");
     }
 }

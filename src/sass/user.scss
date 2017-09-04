@@ -77,7 +77,7 @@ body{background:#dddddb;}
                     }
                 }
                 .registbtn{
-                    width:260px;height:30px;background:#db2725;line-height:30px;text-align:center;color:#fff;font-size:$fontSize1;margin-left:90px;cursor:pointer;-webkit-user-select:none;border:none;
+                    width:260px;height:30px;background:$normalColor;line-height:30px;text-align:center;color:#fff;font-size:$fontSize1;margin-left:90px;cursor:pointer;-webkit-user-select:none;border:none;
                     &:focus{outline:none;}
                 }
             }
@@ -107,12 +107,12 @@ body{background:#dddddb;}
                 width:350px;margin-top:10px;
                 li{
                     text-align:right;margin-bottom:10px;
-                    input{width:250px;height:28px;border:1px solid #999;color:#999;padding-left:8px;margin-left:20px;}
+                    input{width:250px;height:28px;border:1px solid #999;color:#333;padding-left:8px;margin-left:20px;}
                     input:focus{outline:none;}
                     .test{text-align:left;margin-left:90px;color:red;}
                 }
                 .loginbtn{
-                    width:260px;height:30px;background:#db2725;line-height:30px;text-align:center;color:#fff;font-size:$fontSize1;margin-left:90px;cursor:pointer;-webkit-user-select:none;
+                    width:260px;height:30px;background:$normalColor;line-height:30px;text-align:center;color:#fff;font-size:$fontSize1;margin-left:90px;cursor:pointer;-webkit-user-select:none;
                 }
                 .last{
                     margin-left:90px;margin-bottom:20px;margin-top:12px;

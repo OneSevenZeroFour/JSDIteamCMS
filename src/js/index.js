@@ -1,8 +1,9 @@
 require(['config'],function(){
     require(['jquery'],function(){
         //加载公共头部和尾部html
-        $('#header').load('html/header.html');
-        $('#footer').load('html/footer.html');
+        $('#header').load('/html/header.html');
+        $('#footer').load('/html/footer.html');
+
         //底部每日活动更新
         //获取当前星期几
         //创建tab标签页，根据当前时间决定写入顺序
@@ -50,15 +51,50 @@ require(['config'],function(){
         })
         //会优先加载公共Js，然后再加载当前js，要在加载公共JS之前优先导入公共的头部尾部html页面，以免加载完头部尾部没有动画效果
         require(['common','base'],function(com){
+            //nav导航
+            var normalidx = 0;
+            $('.menu_link').removeClass('active').eq(normalidx).addClass('active');
+            $('.navList>li').eq(normalidx).siblings('li').hover(function(){
+                var idx=$(this).index();
+                $('.menu_link').removeClass('active').eq(idx).addClass('active');
+                $('.menu_link').eq(normalidx).addClass('active');
+                if(idx!=0){
+                    $('.navmenu').hide().eq(idx-1).show();
+                }                      
+            },function(){
+                var idx=$(this).index();
+                $('.menu_link').eq(idx).removeClass('active');
+                if(idx!=0){
+                    $('.navmenu').eq(idx-1).stop().hide();
+                }             
+            })
+            $('.navList>li').eq(normalidx).hover(function(){
+                var idx=$(this).index();
+                $('.menu_link').removeClass('active').eq(idx).addClass('active');
+                if(idx!=0){
+                    $('.navmenu').hide().eq(idx-1).show();
+                } 
+            },function(){
+                var idx=$(this).index();
+                if(idx!=0){
+                    $('.navmenu').eq(idx-1).stop().hide();
+                } 
+            })
             //头部注册登录页面路径设置
             var $headlink = $('#header .headTop .top_left span a');
-            $headlink.eq(0).attr('href','html/user.html?type=register');
-            $headlink.eq(1).attr('href','html/user.html?type=login')
+            $headlink.eq(0).attr('href','/html/user.html?type=register');
+            $headlink.eq(1).attr('href','/html/user.html?type=login');
             //获取当前时间大图轮换
             var now = new Date();
             var idx = now.getDay();
+            if(idx==0||idx==4){
+                var linkurl = '/html/men.html';
+            }else{
+                var linkurl = '/html/women.html';
+            }
             var bannerurl = 'img/banner'+idx+'.jpg';
             $('#banner').find('img').attr('src',bannerurl);
+            $('.bannerLink').attr('href',linkurl);
             // 品牌活动列表图片hover事件
             var $imgs = $('#mains ul.clearfixed li .imgBox');
             $imgs.hover(function(){
@@ -143,6 +179,30 @@ require(['config'],function(){
                 $('body,html').stop(true,false);
             })
         })
-
+        //给每一个类型活动图片绑定链接
+        // 女士活动
+        $('.womenlist ul li a').attr('href','/html/goodslist.html?type=women');
+        $('.womenlist .Inlink a').attr('href','/html/women.html');
+        $('.womenlist .lastlink a').attr('href','/html/women.html');
+        //男士
+        $('.menlist ul li a').attr('href','/html/goodslist.html?type=men');
+        $('.menlist .Inlink a').attr('href','/html/men.html');
+        $('.menlist .lastlink a').attr('href','/html/men.html');
+        //美妆
+        $('.beautylist ul li a').attr('href','/html/goodslist.html?type=beauty');
+        $('.beautylist .Inlink a').attr('href','/html/beauty.html');
+        $('.beautylist .lastlink a').attr('href','/html/beauty.html');
+        //家居
+        $('.houselist ul li a').attr('href','/html/goodslist.html?type=house');
+        $('.houselist .Inlink a').attr('href','/html/house.html');
+        $('.houselist .lastlink a').attr('href','/html/house.html');
+        //婴童
+        $('.babylist ul li a').attr('href','/html/goodslist.html?type=baby');
+        $('.babylist .Inlink a').attr('href','/html/baby.html');
+        $('.babylist .lastlink a').attr('href','/html/baby.html');
+        //海外
+        $('.oversealist ul li a').attr('href','/html/goodslist.html?type=outsea');
+        $('.oversealist .lastlink a').attr('href','/html/outsea.html');
+        
     })
 })

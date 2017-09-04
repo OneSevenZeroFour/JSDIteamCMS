@@ -34,7 +34,7 @@
         .lastlink{
             text-align:right;padding-right:25px;
             a{font-size:$fontSize;}
-            a:hover{color:#db2726;}
+            a:hover{color:$normalColor;}
         }
         .eventlink{
             width:320px;height:484px;float:left;position:relative;background:url("img/home_silo_banner.jpg");margin-right:20px;margin-bottom:20px;
@@ -45,7 +45,7 @@
                 .Inlist{
                     width:217px;margin:8px auto;padding:6px 0;border-top:1px solid #000;border-bottom:1px solid #000;line-height:26px;
                     a{font-size:$fontSize1;margin:0 5px;}
-                    a:hover{color:#db2726;}
+                    a:hover{color:$normalColor;}
                     .Inlink{
                         a{font-size:$fontSize;}
                     }
@@ -135,14 +135,14 @@
                                 line-height:18px;
                             }
                             p:last-child{
-                                font-size:$fontSize;line-height:46px;color:#db2726;
+                                font-size:$fontSize;line-height:46px;color:$normalColor;
                                 span{font-size:20px;display:inline-block;width:auto;float:left;}
                             }
                         }
                         .eventcover{
                             width:100%;height:100%;position:absolute;left:0;top:0;background:rgba(0,0,0,.7);display:none;
                             .eventcenter{
-                                display:inline-block;width:100px;height:20px;background:#db2726;position:absolute;left:50%;top:50%;margin-left:-60px;margin-top:-15px;padding:5px 10px;
+                                display:inline-block;width:100px;height:20px;background:$normalColor;position:absolute;left:50%;top:50%;margin-left:-60px;margin-top:-15px;padding:5px 10px;
                                 a{font-size:$fontSize1;color:#fff;}
                                 a:hover{text-decoration:underline;}
                                 a:first-child{padding-right:18px;border-right:2px solid #fff;}

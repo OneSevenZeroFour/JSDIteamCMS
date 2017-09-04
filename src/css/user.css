@@ -102,7 +102,7 @@ body { background: #dddddb; }
 
 .box .content .login .loginlist li { text-align: right; margin-bottom: 10px; }
 
-.box .content .login .loginlist li input { width: 250px; height: 28px; border: 1px solid #999; color: #999; padding-left: 8px; margin-left: 20px; }
+.box .content .login .loginlist li input { width: 250px; height: 28px; border: 1px solid #999; color: #333; padding-left: 8px; margin-left: 20px; }
 
 .box .content .login .loginlist li input:focus { outline: none; }
 

@@ -35,7 +35,7 @@
 
 #content #mains .lastlink a { font-size: 12px; }
 
-#content #mains .lastlink a:hover { color: #db2726; }
+#content #mains .lastlink a:hover { color: #db2725; }
 
 #content #mains .eventlink { width: 320px; height: 484px; float: left; position: relative; background: url("img/home_silo_banner.jpg"); margin-right: 20px; margin-bottom: 20px; }
 
@@ -49,7 +49,7 @@
 
 #content #mains .eventlink .eventlinkbox .Inlist a { font-size: 14px; margin: 0 5px; }
 
-#content #mains .eventlink .eventlinkbox .Inlist a:hover { color: #db2726; }
+#content #mains .eventlink .eventlinkbox .Inlist a:hover { color: #db2725; }
 
 #content #mains .eventlink .eventlinkbox .Inlist .Inlink a { font-size: 12px; }
 
@@ -117,13 +117,13 @@
 
 #content #mains .neweventlist .weekevents .weekevent li .eventright p { line-height: 18px; }
 
-#content #mains .neweventlist .weekevents .weekevent li .eventright p:last-child { font-size: 12px; line-height: 46px; color: #db2726; }
+#content #mains .neweventlist .weekevents .weekevent li .eventright p:last-child { font-size: 12px; line-height: 46px; color: #db2725; }
 
 #content #mains .neweventlist .weekevents .weekevent li .eventright p:last-child span { font-size: 20px; display: inline-block; width: auto; float: left; }
 
 #content #mains .neweventlist .weekevents .weekevent li .eventcover { width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: rgba(0, 0, 0, 0.7); display: none; }
 
-#content #mains .neweventlist .weekevents .weekevent li .eventcover .eventcenter { display: inline-block; width: 100px; height: 20px; background: #db2726; position: absolute; left: 50%; top: 50%; margin-left: -60px; margin-top: -15px; padding: 5px 10px; }
+#content #mains .neweventlist .weekevents .weekevent li .eventcover .eventcenter { display: inline-block; width: 100px; height: 20px; background: #db2725; position: absolute; left: 50%; top: 50%; margin-left: -60px; margin-top: -15px; padding: 5px 10px; }
 
 #content #mains .neweventlist .weekevents .weekevent li .eventcover .eventcenter a { font-size: 14px; color: #fff; }
 

@@ -12,6 +12,31 @@ require(['config'],function(){
                 $loginmdl.click(function(){console.log(this);
                     $(this).toggleClass('active');
                 })
+                $('.loginbtn').click(function(){
+                    var username = $('#username1').val();
+                    var password = $('#password3').val();
+                    $.ajax({
+                        url:"../api/login.php",
+                        data:{username:username,password:password},
+                        success:function(res){
+                            if(res=='yes'){
+                                $('#password3').siblings('.test').text('');
+                                if($loginmdl.hasClass('active')){
+                                    var now = new Date();
+                                    now.setDate(now.getDate()+7);
+                                    com.Cookie.set('prusername',username,now,'/');
+                                }else{
+                                    com.Cookie.set('prusername',username,'','/');
+                                }                               
+                                setTimeout(function(){
+                                    window.location.href="../index.html";
+                                },1000);
+                            }else if(res=="no"){
+                                $('#password3').siblings('.test').text('用户名或者密码错误');
+                            }
+                        }
+                    })
+                })
             }
             //用户注册页面
             function userRegister(){
@@ -28,6 +53,25 @@ require(['config'],function(){
                     $(this).text(com.vCode()).css({color:com.randomColor()});;
                 })
                 //验证是否是手机号或者邮箱
+                function testname(name,nametype){
+                    $.ajax({
+                            url:"../api/register.php",
+                            data:{username1:name},
+                            success:function(res){console.log(res)
+                                if(res=='yes'){
+                                    $('#username').siblings('.test').text('恭喜您，该用户名可以使用').css({color:'#58bc58'});
+                                    $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
+                                }else if(res=='no'){
+                                    if(nametype=='phone'){
+                                        $('#username').siblings('.test').text('该手机号已被占用').css({color:'#db2725'});
+                                    }else if(nametype=='email'){
+                                        $('#username').siblings('.test').text('该邮箱已经存在').css({color:'#db2725'});
+                                    }
+                                    $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
+                                }
+                            }
+                        })
+                }
                 var nametype;
                 $('#username').blur(function(){
                     var username = $('#username').val();
@@ -36,16 +80,14 @@ require(['config'],function(){
 
                     if(reg1.test(username)){
                         nametype = 'phone';
-                        $('#username').siblings('.test').text('');
-                        $('.vCodeLi').hide().siblings('.phoneCodeLi').show();
-                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
+                        testname(username,nametype);
+                        // $('.vCodeLi').hide().siblings('.phoneCodeLi').show();
                     }else if(reg2.test(username)){
                         nametype = 'email';
-                        $('#username').siblings('.test').text('');
+                        testname(username,nametype);
                         $('.phoneCodeLi').hide().siblings('.vCodeLi').show();
-                        $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);
                     }else{
-                        $('#username').siblings('.test').text('请输入正确的手机号或者邮箱');
+                        $('#username').siblings('.test').text('请输入正确的手机号或者邮箱').css({color:'#db2725'});
                         $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }
                 })
@@ -158,9 +200,22 @@ require(['config'],function(){
                     var password = $('#password').val();
                     var username = $('#username').val();
                     if(vCode!=''&&password.length>=6&&password2==password&&username!=''){
-                        console.log(666);
+                        //验证通过后传入数据到后台接口
+                        //写入cookie转到首页
+                        $.ajax({
+                            url:"../api/register.php",
+                            data:{username:username,password:password},
+                            success:function(res){
+                                if(res=='yes'){
+                                    com.Cookie.set('prusername',username,'','/');
+                                    setTimeout(function(){
+                                        window.location.href="../index.html";
+                                    },1000);
+                                }
+                            }
+                        })
                     }else if(username==''){
-                        $('#username').siblings('.test').text('用户名不能为空');
+                        $('#username').siblings('.test').text('用户名不能为空').css({color:'#db2725'});
                         $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }else if(password==''){
                         $('#password').siblings('.test').text('密码不能为空');
@@ -174,7 +229,6 @@ require(['config'],function(){
                         $('.registbtn').css({'background-color':'#999'}).attr('disabled',true);
                     }
                 })
-
             }
             // 根据传来的参数决定显示注册页面还是登录页面
             if(type=='login'){
