@@ -57,7 +57,7 @@ require(['config'],function(){
                     $.ajax({
                             url:"../api/register.php",
                             data:{username1:name},
-                            success:function(res){console.log(res)
+                            success:function(res){
                                 if(res=='yes'){
                                     $('#username').siblings('.test').text('恭喜您，该用户名可以使用').css({color:'#58bc58'});
                                     $('.registbtn').css({'background-color':'#db2725'}).attr('disabled',false);

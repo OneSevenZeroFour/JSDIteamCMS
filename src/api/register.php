@@ -68,5 +68,6 @@
                 echo "yes";
             }
         }
-    }    
+    }
+    $conn->close();   
 ?>

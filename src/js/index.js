@@ -4,7 +4,7 @@ require(['config'],function(){
         $('#header').load('/html/header.html');
         $('#footer').load('/html/footer.html');
 
-        //底部每日活动更新
+         //底部每日活动更新
         //获取当前星期几
         //创建tab标签页，根据当前时间决定写入顺序
         function weekinput(){
@@ -13,11 +13,11 @@ require(['config'],function(){
             var week = now.getDay();
             var idx = week+2;
             for(var i=0;i<5;i++){
-                if(idx>6){
-                    idx = week-5;
+                if(idx>=7){
+                    idx = idx-7;
                 }
                 $('.weeklist').append($('<span/>').text(weeks[idx]));
-                idx++;
+                idx=week+3+i;
             }
         }
         weekinput();

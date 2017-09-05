@@ -18,11 +18,11 @@ require(['config'],function(){
             var week = now.getDay();
             var idx = week+2;
             for(var i=0;i<5;i++){
-                if(idx>6){
-                    idx = week-5;
+                if(idx>=7){
+                    idx = idx-7;
                 }
                 $('.weeklist').append($('<span/>').text(weeks[idx]));
-                idx++;
+                idx=week+3+i;
             }
         }
         weekinput();
