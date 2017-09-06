@@ -56,7 +56,7 @@
 
 #mains .choice .clearall { color: #999; cursor: pointer; -webkit-user-select: none; }
 
-#mains .selectlist { border: 1px solid #ccc; padding: 17px; position: relative; margin-bottom: 20px; }
+#mains .selectlist { border: 1px solid #ccc; padding: 17px; position: relative; }
 
 #mains .selectlist div { width: 60px; color: #000; padding-top: 4px; position: absolute; left: 17px; top: 17px; }
 
@@ -70,15 +70,15 @@
 
 #mains .selectlist ul li.selected span { background: url("/img/filter_check.gif") no-repeat 0 -24px; }
 
-#mains .goodssearch { width: 1000px; height: 30px; margin: 0 auto; margin-bottom: 15px; }
+#mains .goodssearch { width: 1000px; height: 30px; margin: 0 auto; padding-bottom: 15px; padding-top: 20px; background: #fff; }
 
-#mains .goodssearch .defaultSort { float: left; width: 98px; height: 28px; color: #333; font-size: 12px; text-align: center; line-height: 28px; border: 1px solid #ccc; cursor: pointer; margin-right: 10px; -webkit-user-select: none; }
+#mains .goodssearch .defaultSort { float: left; width: 98px; height: 28px; color: #000; font-size: 12px; text-align: center; line-height: 28px; border: 1px solid #ccc; cursor: pointer; margin-right: 10px; -webkit-user-select: none; }
 
 #mains .goodssearch .defaultSort:hover { color: #db2725; }
 
 #mains .goodssearch .defaultSort.selected { background: #f2f2f2; }
 
-#mains .goodssearch .priceSort { float: left; width: 98px; height: 28px; color: #333; font-size: 12px; text-indent: 26px; line-height: 28px; border: 1px solid #ccc; cursor: pointer; background: url("/img/sorter_bg.gif") no-repeat -1px -1px; -webkit-user-select: none; }
+#mains .goodssearch .priceSort { float: left; width: 98px; height: 28px; color: #000; font-size: 12px; text-indent: 26px; line-height: 28px; border: 1px solid #ccc; cursor: pointer; background: url("/img/sorter_bg.gif") no-repeat -1px -1px; -webkit-user-select: none; }
 
 #mains .goodssearch .priceSort:hover { color: #db2725; }
 
@@ -103,6 +103,8 @@
 #mains .goodssearch .searchRight .nextpage { background-position: 0 -40px; }
 
 #mains .goodssearch .searchRight .nextpage.selected { background-position: -40px -40px; }
+
+#mains .goodssearch.totop { position: fixed; top: 42px; z-index: 99; }
 
 #mains .goodslist { width: 1020px; }
 
@@ -134,12 +136,36 @@
 
 #mains .goodslist ul li .showimgs .top span:hover { border: 1px solid #000; }
 
-#mains .goodslist ul li .showimgs .top .contentcover { position: absolute; bottom: 0; left: 0; width: 140px; height: 58px; border: 1px solid #ccc; background: #fff; font-size: 14px; padding: 6px 10px; z-index: 999; }
+#mains .goodslist ul li .showimgs .top .contentcover { position: absolute; bottom: 0; left: 0; width: 140px; height: 58px; border: 1px solid #ccc; background: #fff; font-size: 14px; padding: 6px 10px; z-index: 88; }
 
 #mains .goodslist ul li .showimgs .top .contentcover::before { content: ''; display: block; width: 19px; height: 12px; position: absolute; top: -11px; left: 72px; background: url("/img/icon_arrows_top1.png"); }
 
 #mains .goodslist ul li .showimgs .imgslist { background: #fff; padding: 8px; }
 
-#mains .goodslist ul li .showimgs .imgslist img { display: block; float: left; width: 48px; height: 65px; border: 1px solid #ccc; margin-right: 8px; }
+#mains .goodslist ul li .showimgs .imgslist img { display: block; float: left; width: 48px; height: 65px; border: 1px solid #ccc; margin-right: 4px; }
 
 #mains .goodslist ul li .showimgs .imgslist img:hover { border: 1px solid #000; }
+
+#mains .searchfoot { padding-left: 250px; height: 24px; cursor: pointer; margin-bottom: 40px; }
+
+#mains .searchfoot button { display: block; float: left; width: 52px; height: 22px; border: 1px solid #e7e7e7; color: #999; background: #fff; margin-right: 8px; }
+
+#mains .searchfoot button:focus { outline: none; }
+
+#mains .searchfoot button.selected { color: #000; }
+
+#mains .searchfoot button.selected:hover { border: 1px solid #000; }
+
+#mains .searchfoot .pagebox { float: left; }
+
+#mains .searchfoot .pagebox span { display: block; float: left; width: 22px; height: 22px; text-align: center; line-height: 22px; font-size: 12px; border: 1px solid #e7e7e7; margin-right: 5px; }
+
+#mains .searchfoot .pagebox span.selected { background: #000; color: #fff; border: 1px solid #000; }
+
+#mains .searchfoot span { display: block; float: left; line-height: 22px; }
+
+#mains .searchfoot input { display: block; float: left; width: 52px; height: 19px; text-align: center; line-height: 22px; color: #000; margin: 0 8px; }
+
+#mains .searchfoot input:focus { outline: none; }
+
+#mains .searchfoot .pagebtnspan { width: 40px; height: 22px; text-align: center; background: #000; color: #fff; }

@@ -28,9 +28,13 @@ require(['config'],function(){
                                 }else{
                                     com.Cookie.set('prusername',username,'','/');
                                 }                               
-                                setTimeout(function(){
-                                    window.location.href="../index.html";
-                                },1000);
+                                var href = com.Cookie.get('hoshref');
+                                var typelink = com.Cookie.get('typelink');
+                                if(typelink==''||typelink=='undefined'){
+                                    window.location.href=href;
+                                }else{
+                                    window.location.href=href+'='+typelink;
+                                }                               
                             }else if(res=="no"){
                                 $('#password3').siblings('.test').text('用户名或者密码错误');
                             }
@@ -209,7 +213,13 @@ require(['config'],function(){
                                 if(res=='yes'){
                                     com.Cookie.set('prusername',username,'','/');
                                     setTimeout(function(){
-                                        window.location.href="../index.html";
+                                        var href = com.Cookie.get('hoshref');
+                                        var typelink = com.Cookie.get('typelink');
+                                        if(typelink==''||typelink=='undefined'){
+                                            window.location.href=href;
+                                        }else{
+                                            window.location.href=href+'='+typelink;
+                                        }                                     
                                     },1000);
                                 }
                             }

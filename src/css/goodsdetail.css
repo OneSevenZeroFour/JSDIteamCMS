@@ -1,0 +1,39 @@
+#mains .mainTop { height: 18px; margin-top: 20px; margin-bottom: 20px; width: 1000px; }
+
+#mains .mainTop a:hover { color: #db2725; }
+
+#mains .mainTop ul { float: left; }
+
+#mains .mainTop ul li { float: left; }
+
+#mains .mainTop ul li a { color: #666; }
+
+#mains .mainTop ul li.gt { width: 30px; height: 16px; text-align: center; font-size: 14px; line-height: 16px; }
+
+#mains .mainTop ul li:last-child a { color: #000; font-size: 14px; }
+
+#mains .mainTop ul li:last-child a:hover { color: #000; }
+
+#mains .detail .detailLeft { float: left; position: relative; }
+
+#mains .detail .detailLeft .mainbox { width: 360px; height: 480px; position: relative; }
+
+#mains .detail .detailLeft .mainbox .mainImg { display: block; width: 360px; height: 480px; }
+
+#mains .detail .detailLeft .imgsbox { margin-top: 15px; }
+
+#mains .detail .detailLeft .imgsbox img { display: block; float: left; width: 81px; height: 108px; margin-right: 10px; border: 1px solid #fff; cursor: pointer; }
+
+#mains .detail .detailLeft .imgsbox img.active { border: 1px solid #000; }
+
+#mains .detail .detailLeft i { display: block; width: 23px; height: 42px; position: absolute; top: 219px; z-index: 10; cursor: pointer; }
+
+#mains .detail .detailLeft i.prevbtn { left: 0; background: url("/img/bigimg_prev.png"); }
+
+#mains .detail .detailLeft i.nextbtn { right: 0px; background: url("/img/bigimg_next.png"); }
+
+#mains .detail .detailLeft .zoom { position: absolute; width: 360px; height: 480px; overflow: hidden; top: 0; left: 380px; }
+
+#mains .detail .detailLeft .zoom img { display: block; position: absolute; width: 720px; height: 960px; }
+
+#mains .detail .detailLeft .cover { position: absolute; left: 0; top: 0; width: 180px; height: 240px; background: #ccc; opacity: .5; }

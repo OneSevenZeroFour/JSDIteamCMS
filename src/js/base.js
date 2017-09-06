@@ -37,6 +37,15 @@ require(['config'],function(){
             }
         })
 
+        //头部登录注册点击记录当前页面
+        //登录注册成功后跳回
+        $('.headTop .top_left a').click(function(){
+            // 当前页面路径
+            var href = location.href;
+            com.Cookie.set('hoshref',href,'','/');
+            var typelink = location.search.slice(1).split('=')[1];
+            com.Cookie.set('typelink',typelink,'','/');
+        })
 
         //底部每个li图片位置
         var $spans = $('#footer ul li a span');

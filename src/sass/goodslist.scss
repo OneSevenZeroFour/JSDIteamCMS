@@ -62,7 +62,7 @@
         .clearall{color:#999;cursor:pointer;-webkit-user-select:none;}
     }
     .selectlist{
-        border:1px solid #ccc;padding:17px;position:relative;margin-bottom:20px;
+        border:1px solid #ccc;padding:17px;position:relative;
         div{width:60px;color:#000;padding-top:4px;position:absolute;left:17px;top:17px;}
         ul{
                 margin-left:60px;
@@ -79,16 +79,16 @@
         }
     }
     .goodssearch{
-        width:1000px;height:30px;margin:0 auto;margin-bottom:15px;
+        width:1000px;height:30px;margin:0 auto;padding-bottom:15px;padding-top:20px;background:#fff;
         .defaultSort{
-            float:left;width:98px;height:28px;color:#333;font-size:$fontSize;text-align:center;line-height:28px;border:1px solid #ccc;cursor:pointer;margin-right:10px;-webkit-user-select:none;
+            float:left;width:98px;height:28px;color:#000;font-size:$fontSize;text-align:center;line-height:28px;border:1px solid #ccc;cursor:pointer;margin-right:10px;-webkit-user-select:none;
             &:hover{color:$normalColor;}
         }
         .defaultSort.selected{
             background:#f2f2f2;
         }
         .priceSort{
-            float:left;width:98px;height:28px;color:#333;font-size:$fontSize;text-indent:26px;line-height:28px;border:1px solid #ccc;cursor:pointer;background:url("/img/sorter_bg.gif") no-repeat -1px -1px;-webkit-user-select:none;
+            float:left;width:98px;height:28px;color:#000;font-size:$fontSize;text-indent:26px;line-height:28px;border:1px solid #ccc;cursor:pointer;background:url("/img/sorter_bg.gif") no-repeat -1px -1px;-webkit-user-select:none;
             &:hover{color:$normalColor;}
         }
         .priceSort.up{background:url("/img/sorter_bg.gif") no-repeat -219px -1px;}
@@ -109,6 +109,9 @@
             .nextpage{background-position:0 -40px;}
             .nextpage.selected{background-position:-40px -40px;}
         }
+    }
+    .goodssearch.totop{
+        position:fixed;top:42px;z-index:99;
     }
     .goodslist{
         width:1020px;
@@ -137,7 +140,7 @@
                             &:hover{border:1px solid #000;}
                         }
                         .contentcover{
-                            position:absolute;bottom:0;left:0;width:140px;height:58px;border:1px solid #ccc;background:#fff;font-size:$fontSize1;padding:6px 10px;z-index:999;
+                            position:absolute;bottom:0;left:0;width:140px;height:58px;border:1px solid #ccc;background:#fff;font-size:$fontSize1;padding:6px 10px;z-index:88;
                         }
                         .contentcover::before{
                             content:'';display:block;width:19px;height:12px;position:absolute;top:-11px;left:72px;background:url("/img/icon_arrows_top1.png");
@@ -145,11 +148,31 @@
                     }
                     .imgslist{
                         background:#fff;padding:8px;
-                        img{display:block;float:left;width:48px;height:65px;border:1px solid #ccc;margin-right:8px;}
+                        img{display:block;float:left;width:48px;height:65px;border:1px solid #ccc;margin-right:4px;}
                         img:hover{border:1px solid #000;}                        
                     }
                 }
             }
         }
+    }
+    .searchfoot{
+        padding-left:250px;height:24px;cursor:pointer;margin-bottom:40px;
+        button{
+            display:block;float:left;width:52px;height:22px;border:1px solid #e7e7e7;color:#999;background:#fff;margin-right:8px;
+            &:focus{outline:none;}
+        }
+        button.selected{color:#000;}
+        button.selected:hover{border:1px solid #000;}
+        .pagebox{
+            float:left;
+            span{display:block;float:left;width:22px;height:22px;text-align:center;line-height:22px;font-size:$fontSize;border:1px solid #e7e7e7;margin-right:5px;}
+            span.selected{background:#000;color:#fff;border:1px solid #000;}
+        }
+        span{display:block;float:left;line-height:22px;}
+        input{
+            display:block;float:left;width:52px;height:19px;text-align:center;line-height:22px;color:#000;margin:0 8px;
+            &:focus{outline:none;}
+        }
+        .pagebtnspan{width:40px;height:22px;text-align:center;background:#000;color:#fff;}
     }
 }
