@@ -204,7 +204,7 @@ require(['config'],function(){
                                 }
                                 
                                 return `<li data-id="${item.goodid}" class="${liclass}${liclass2}">
-                                <a href="/html/goodsdetail.html?id=${item.goodid}">
+                                <a href="/html/goodsdetail.html?id=${item.goodid}" target="_blank">
                                     <div class="protect">
                                         <p class="onlyqty">仅剩<span>${item.inventory}</span>件</p>
                                         <p class="hotgood">买手推荐</p>

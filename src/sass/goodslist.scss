@@ -101,7 +101,7 @@
                 .atpage{margin:0 8px;}
             }            
             button{
-                width:28px;height:28px;border:1px solid #e7e7e7;background-image:url("/img/pager.gif");margin-bottom:-1px;float:left;
+                width:28px;height:28px;border:1px solid #e7e7e7;background-image:url("/img/pager.gif");margin-bottom:-1px;float:left;cursor:pointer;
             }
             button:focus{outline:none;}
             .prevpage{margin-right:5px;}

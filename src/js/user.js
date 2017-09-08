@@ -12,7 +12,18 @@ require(['config'],function(){
                 $loginmdl.click(function(){console.log(this);
                     $(this).toggleClass('active');
                 })
-                $('.loginbtn').click(function(){
+                $('.loginbtn').click(testuserlogin);
+                $('#username1').keyup(function(event){
+                    if(event.keyCode==13){
+                        testuserlogin();
+                    }
+                })
+                $('#password3').keyup(function(event){
+                    if(event.keyCode==13){
+                        testuserlogin();
+                    }
+                })
+                function testuserlogin(){
                     var username = $('#username1').val();
                     var password = $('#password3').val();
                     $.ajax({
@@ -40,7 +51,7 @@ require(['config'],function(){
                             }
                         }
                     })
-                })
+                }
             }
             //用户注册页面
             function userRegister(){

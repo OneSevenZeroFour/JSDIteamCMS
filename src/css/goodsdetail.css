@@ -14,15 +14,17 @@
 
 #mains .mainTop ul li:last-child a:hover { color: #000; }
 
-#mains .detail .detailLeft { float: left; position: relative; }
+#mains .detail { padding-bottom: 30px; border-bottom: 1px solid #ccc; }
+
+#mains .detail .detailLeft { float: left; position: relative; margin-right: 28px; }
 
 #mains .detail .detailLeft .mainbox { width: 360px; height: 480px; position: relative; }
 
-#mains .detail .detailLeft .mainbox .mainImg { display: block; width: 360px; height: 480px; }
+#mains .detail .detailLeft .mainbox .mainImg { display: block; width: 360px; height: 480px; -webkit-user-select: none; }
 
 #mains .detail .detailLeft .imgsbox { margin-top: 15px; }
 
-#mains .detail .detailLeft .imgsbox img { display: block; float: left; width: 81px; height: 108px; margin-right: 10px; border: 1px solid #fff; cursor: pointer; }
+#mains .detail .detailLeft .imgsbox img { display: block; float: left; width: 81px; height: 108px; margin-right: 10px; border: 1px solid #fff; cursor: pointer; -webkit-user-select: none; }
 
 #mains .detail .detailLeft .imgsbox img.active { border: 1px solid #000; }
 
@@ -32,8 +34,162 @@
 
 #mains .detail .detailLeft i.nextbtn { right: 0px; background: url("/img/bigimg_next.png"); }
 
-#mains .detail .detailLeft .zoom { position: absolute; width: 360px; height: 480px; overflow: hidden; top: 0; left: 380px; }
+#mains .detail .detailLeft .zoom { position: absolute; width: 360px; height: 480px; overflow: hidden; top: 0; left: 380px; border: 1px solid #ddd; background: #fff; z-index: 88; }
 
 #mains .detail .detailLeft .zoom img { display: block; position: absolute; width: 720px; height: 960px; }
 
 #mains .detail .detailLeft .cover { position: absolute; left: 0; top: 0; width: 180px; height: 240px; background: #ccc; opacity: .5; }
+
+#mains .detail .detailRight { float: left; position: relative; width: 580px; padding: 10px; }
+
+#mains .detail .detailRight h2 { font-size: 28px; line-height: 32px; letter-spacing: 1px; color: #000; }
+
+#mains .detail .detailRight .title { font-size: 16px; font-weight: 400; color: #929292; line-height: 20px; margin-bottom: 20px; }
+
+#mains .detail .detailRight .share { position: absolute; right: 10px; top: 12px; color: #929292; padding-left: 30px; background: url("/img/share_weibo.png") no-repeat; line-height: 20px; }
+
+#mains .detail .detailRight .pricebox { line-height: 30px; overflow: hidden; }
+
+#mains .detail .detailRight .pricebox span { float: left; }
+
+#mains .detail .detailRight .pricebox .sale { font-size: 28px; font-weight: bold; color: #dd2828; }
+
+#mains .detail .detailRight .pricebox .price del { font-size: 18px; color: #929292; margin-left: 10px; }
+
+#mains .detail .detailRight .pricebox span:nth-child(3) { float: right; font-size: 14px; line-height: 36px; }
+
+#mains .detail .detailRight .pricebox .goodzk { float: right; font-size: 20px; }
+
+#mains .detail .detailRight .state { width: 462px; height: 20px; padding: 10px; margin-top: 20px; margin-bottom: 30px; display: block; padding-left: 60px; background: #eee; font-size: 14px; line-height: 20px; position: relative; }
+
+#mains .detail .detailRight .state i { position: absolute; width: 18px; height: 22px; background: url("/img/icon_sales.png"); left: 25px; top: 6px; }
+
+#mains .detail .detailRight .colorbox .goodcolor { font-size: 14px; color: #929292; }
+
+#mains .detail .detailRight .colorbox .goodcolor span { margin-left: 10px; color: #000; font-size: 14px; font-weight: bold; }
+
+#mains .detail .detailRight .colorbox .colorpic { border: 1px solid #ccc; width: 58px; margin-top: 10px; margin-bottom: 20px; }
+
+#mains .detail .detailRight .colorbox .colorpic img { display: block; width: 58px; }
+
+#mains .detail .detailRight .colorbox .colorpic span { display: block; width: 58px; height: 14px; background: #000; color: #fff; text-align: center; line-height: 14px; }
+
+#mains .detail .detailRight .sizebox p { font-size: 14px; color: #929292; line-height: 34px; }
+
+#mains .detail .detailRight .sizebox p:first-child span { color: #db2725; font-size: 12px; margin-left: 20px; }
+
+#mains .detail .detailRight .sizebox .size span { display: block; float: left; margin-right: 10px; width: 68px; height: 34px; background: #eee; color: #000; text-align: center; line-height: 34px; font-size: 14px; cursor: pointer; -webkit-user-select: none; }
+
+#mains .detail .detailRight .sizebox .size span.active { background: #000; color: #fff; }
+
+#mains .detail .detailRight .sizebox .size span.selected { background: #000; color: #fff; }
+
+#mains .detail .detailRight .sizebox .contentcover { position: absolute; bottom: 0; left: 0; width: 130px; height: 42px; border: 1px solid #ccc; background: #fff; padding: 6px; z-index: 88; }
+
+#mains .detail .detailRight .sizebox .contentcover p { font-size: 12px; line-height: 20px; }
+
+#mains .detail .detailRight .sizebox .contentcover p b { color: #000; margin: 0 5px; }
+
+#mains .detail .detailRight .sizebox .contentcover::before { content: ''; display: block; width: 19px; height: 12px; position: absolute; top: -11px; left: 62px; background: url("/img/icon_arrows_top1.png"); }
+
+#mains .detail .detailRight .qtybox { margin-top: 15px; }
+
+#mains .detail .detailRight .qtybox p { font-size: 14px; color: #929292; line-height: 34px; }
+
+#mains .detail .detailRight .qtybox .qtychange button { display: block; float: left; width: 34px; height: 34px; border: 0 none; font-size: 24px; text-align: center; line-height: 34px; cursor: pointer; background: #eee; }
+
+#mains .detail .detailRight .qtybox .qtychange button:focus { outline: none; }
+
+#mains .detail .detailRight .qtybox .qtychange button.disab { color: #ccc; }
+
+#mains .detail .detailRight .qtybox .qtychange span { display: block; padding: 0 15px; height: 34px; text-align: center; line-height: 34px; float: left; font-size: 16px; color: #000; }
+
+#mains .detail .detailRight .qtybox .qtychange b { float: left; font-size: 12px; color: #db2725; margin-left: 30px; line-height: 34px; }
+
+#mains .detail .detailRight .outtime { margin: 10px 0; }
+
+#mains .detail .detailRight .outtime p { font-size: 14px; color: #929292; line-height: 34px; }
+
+#mains .detail .detailRight .outtime p span { color: #000; font-size: 14px; font-weight: bold; letter-spacing: .5px; margin-left: 10px; }
+
+#mains .detail .detailRight .buybox a { display: block; cursor: pointer; width: 230px; height: 44px; line-height: 44px; float: left; font-size: 16px; font-weight: bold; color: #fff; -webkit-user-select: none; }
+
+#mains .detail .detailRight .buybox .tocarlist { text-indent: 92px; background: #000; margin-right: 20px; position: relative; }
+
+#mains .detail .detailRight .buybox .tocarlist i { display: block; width: 22px; height: 22px; position: absolute; left: 54px; top: 9px; background: url("/img/icon_buy.png"); }
+
+#mains .detail .detailRight .buybox .topay { text-align: center; background: #db2725; }
+
+#mains .detail .detailRight .lasttime { height: 52px; margin-top: 30px; }
+
+#mains .detail .detailRight .lasttime .timeleft { width: 60px; float: left; margin-right: 20px; }
+
+#mains .detail .detailRight .lasttime .timeleft p:first-child { font-size: 13px; color: #000; font-weight: bold; line-height: 20px; letter-spacing: 1px; padding-top: 10px; }
+
+#mains .detail .detailRight .lasttime .timeleft p:last-child { font-size: 12px; color: #929292; letter-spacing: 2px; }
+
+#mains .detail .detailRight .lasttime .countDown span { display: block; float: left; }
+
+#mains .detail .detailRight .lasttime .countDown .count { width: 44px; height: 50px; border: 1px solid #ccc; text-align: center; line-height: 50px; position: relative; }
+
+#mains .detail .detailRight .lasttime .countDown .count b { font-size: 30px; }
+
+#mains .detail .detailRight .lasttime .countDown .count i { width: 44px; height: 1px; background: #fff; display: block; position: absolute; left: 0; top: 25px; }
+
+#mains .detail .detailRight .lasttime .countDown .lit { padding: 0 5px; line-height: 52px; color: #929292; }
+
+#mains .detail .detailRight .promisebox { padding-top: 30px; }
+
+#mains .detail .detailRight .promisebox span { padding-left: 26px; line-height: 20px; font-size: 14px; color: #000; margin-right: 20px; }
+
+#mains .detail .detailRight .promisebox span:first-child { background: url("/img/icon_real100.png") no-repeat; }
+
+#mains .detail .detailRight .promisebox span:last-child { background: url("/img/icon_7daysrma.png") no-repeat; }
+
+#mains .detailmsg .product h3 { font-size: 32px; line-height: 34px; color: #000; text-align: center; padding-top: 50px; letter-spacing: 2px; }
+
+#mains .detailmsg .product .msg { text-align: center; font-size: 14px; color: #000; line-height: 30px; }
+
+#mains .detailmsg .product p { font-size: 14px; color: #929292; line-height: 24px; text-indent: 2em; }
+
+#mains .detailmsg .allmsg { height: 400px; border: 1px solid #ccc; margin-top: 30px; padding: 20px; margin-bottom: 50px; }
+
+#mains .detailmsg .allmsg .msgleft { float: left; width: 628px; margin-right: 20px; border: 1px solid #000; }
+
+#mains .detailmsg .allmsg .msgleft div { width: 314px; height: 355px; float: left; }
+
+#mains .detailmsg .allmsg .msgleft .msgtitle li { width: 314px; height: 49px; border-bottom: 2px solid #fff; text-align: center; line-height: 49px; color: #fff; font-size: 14px; background: #000; }
+
+#mains .detailmsg .allmsg .msgleft .msgtitle li:last-child { border-bottom: 0 none; }
+
+#mains .detailmsg .allmsg .msgleft .msglist li { width: 315px; height: 49px; border-bottom: 2px solid #000; text-align: center; line-height: 49px; color: #000; font-size: 14px; overflow: hidden; }
+
+#mains .detailmsg .allmsg .msgleft .msglist li:last-child { border-bottom: 0 none; }
+
+#mains .detailmsg .allmsg img { display: block; float: left; width: 300px; }
+
+#mains .detailmsg .goodsshowPic img { display: block; margin: 20px auto; }
+
+#mains .detailmsg .moregoods { padding-bottom: 100px; }
+
+#mains .detailmsg .moregoods h4 { font-size: 32px; line-height: 34px; color: #000; text-align: center; padding-top: 50px; letter-spacing: 1px; }
+
+#mains .detailmsg .moregoods .msg { text-align: center; font-size: 14px; color: #000; line-height: 30px; }
+
+#mains .detailmsg .moregoods ul { margin-top: 10px; }
+
+#mains .detailmsg .moregoods ul li { width: 230px; float: left; padding-right: 20px; }
+
+#mains .detailmsg .moregoods ul li a { display: block; width: 230px; position: relative; }
+
+#mains .detailmsg .moregoods ul li a img { display: block; width: 230px; }
+
+#mains .detailmsg .moregoods ul li a p { font-size: 12px; color: #000; line-height: 20px; letter-spacing: .5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+#mains .detailmsg .moregoods ul li a .sale { font-size: 16px; font-weight: bold; color: #db2725; margin-right: 8px; }
+
+#mains .detailmsg .moregoods ul li a p:nth-child(2) { font-weight: bold; }
+
+#mains .detailmsg .moregoods ul li a .goodzk { position: absolute; right: 0; bottom: 0; font-weight: bold; letter-spacing: .5px; color: #000; font-size: 14px; }
+
+#mains .detailmsg .moregoods ul li :hover .goodzk { color: #db2725; }

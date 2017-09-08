@@ -17,6 +17,11 @@ ul,li{list-style:none;margin:0;padding:0;}
 a{color:#000;text-decoration:none;}
 .fl{float:left;}
 .fr{float:right;}
+::-webkit-scrollbar {width: 6px;height:6px;}
+::-webkit-scrollbar-track-piece{background-color: #eee;margin: -2px;}
+::-webkit-scrollbar-thumb{background: #000;min-height: 150px;min-width: 150px;border-radius: 10px;}
+::-webkit-scrollbar-thumb:vertical:hover{background: red;}
+::-webkit-scrollbar-thumb:horizontal:hover{background: red;}
 
 #header{
     .headTop{
@@ -131,7 +136,8 @@ a{color:#000;text-decoration:none;}
     }
     .headNav{
         height:42px;background:#000;width:100%;
-        ul{
+        .navList{
+            float:left;
             li{
                 float:left;width:80px;position:relative;
                 a{font-size:$fontSize1;color:#fff;display:block;line-height:42px;z-index:1;}
@@ -160,6 +166,41 @@ a{color:#000;text-decoration:none;}
                 .lastnavmenu{
                     width:314px;
                 }
+            }
+        }
+        .carList{
+            float:right;position:relative;padding-left:60px;
+            .carqty{background:url("/img/carlist222.png") no-repeat;font-size:10px;color:#fff;display:block;width:23px;height:22px;position:absolute;left:10px;top:7px;line-height:26px;text-align:center;cursor:pointer;}
+            .cartotal{font-size:$fontSize1;color:#fff;line-height:42px;padding-left:15px;border-left:2px solid #fff;}
+            .listtable{
+                position:absolute;right:0;top:42px;border:1px solid #ccc;width:240px;border-top:0 none;padding:15px 0 15px 20px;z-index:98;background:#fff;max-height:360px;min-height:60px;height:auto;
+                ul{
+                    background:#fff;max-height:300px;overflow-y:auto;
+                    
+                    li{
+                        position:relative;border-bottom:1px solid #ddd;padding-bottom:10px;margin-top:5px;background:#fff;height:69px;
+                        .imglink{
+                            display:block;float:left;margin-right:10px;border:1px solid #ddd;
+                            img{display:block;width:50px;}
+                        }
+                        p{
+                            line-height:22px;overflow:hidden;width:130px;white-space:nowrap;text-overflow:ellipsis;
+                            .listqty{padding-right:3px;}
+                            .listsale{padding-left:3px;}
+                        }
+                        a:hover{color:$normalColor;}
+                        .removebtn{
+                            position:absolute;right:24px;bottom:10px;cursor:pointer;
+                            &:hover{color:$normalColor;}
+                        }
+                    }
+                    
+                }
+                .carlisttotal{
+                    padding:10px;text-align:right;
+                }
+                .paybtn{display:block;width:100px;height:28px;color:#fff;background:$normalColor;text-align:center;line-height:28px;margin-left:67px;cursor:pointer;}
+                .covercarlist{width:250px;height:80px;background:#fff;line-height:60px;text-align:center;z-index:-99;position:absolute;left:0;top:0;}
             }
         }
     }

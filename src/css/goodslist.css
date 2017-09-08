@@ -92,7 +92,7 @@
 
 #mains .goodssearch .searchRight span.left .atpage { margin: 0 8px; }
 
-#mains .goodssearch .searchRight button { width: 28px; height: 28px; border: 1px solid #e7e7e7; background-image: url("/img/pager.gif"); margin-bottom: -1px; float: left; }
+#mains .goodssearch .searchRight button { width: 28px; height: 28px; border: 1px solid #e7e7e7; background-image: url("/img/pager.gif"); margin-bottom: -1px; float: left; cursor: pointer; }
 
 #mains .goodssearch .searchRight button:focus { outline: none; }
 
