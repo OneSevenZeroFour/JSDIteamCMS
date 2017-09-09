@@ -14,6 +14,7 @@ require(['config'],function(){
             $('.top_leftlogin').hide();
             $('.carList .carqty').text('');
             $('.carList .cartotal').text('0');
+            $('.covercarlist').text('您还没有登录');
             $('.listtable .covercarlist').css({'z-index':1000});
         }else if(nameIn!=''){
             $('.top_left').hide();
@@ -29,9 +30,198 @@ require(['config'],function(){
                 com.Cookie.remove('prusername');
                 window.location.reload();
             })
-            getcarlistmsg();           
+            $('.covercarlist').text('购物袋暂时没有商品');
+            getcarlistmsg();
+            if($('.qingdan').length==1){
+                cartlistgetmsg();
+            }     
         }
-        // 读取用户购物车并写入
+        var obj3={women:'SERGIO ROSSI',men:'VERSACE COLLECTION & VERSACE',beauty:'LOUIS VUITTON',house:'MASADA & HARIO',baby:'ORANGE TOYS',outsea:'MOROCCAOIL & LEONOR GREYL'};
+        // 读取用户购物车并写入购物车页面
+        function cartlistgetmsg(){
+            $.ajax({
+                url:'../api/carlist.php',
+                data:{usename:nameIn},
+                success:function(res1){
+                    if(res1==''||res1==null){
+                        $('.qingdan').html('您的购物车还没有商品，快去选购吧！');
+                        return;
+                    }else{
+                        $('.qingdan').html('');
+                        var carlistarr = res1.split('-');
+                        console.log(carlistarr);
+                        carlistarr.forEach(function(item){
+                            var eachlist = item.split('/');
+                            $.ajax({
+                                url:'../api/goodsdetail.php',
+                                data:{goodid:eachlist[0]},
+                                success:function(res){
+                                    var resobj = JSON.parse(res);
+                                    var gooddetail=resobj['data'][0];
+                                    var mainImg = '/img/'+gooddetail['goodid']+'link(1).jpg';
+                                    var imglinkto = '/html/goodsdetail.html?id='+gooddetail['goodid'];
+                                    // 生成ul并写入购物车清单
+                                    var $ul = $('<ul/>');
+                                    $ul.addClass('sevenli').addClass('clearfixed');
+                                    var $li1 = $('<li/>');
+                                    $li1.append($('<i/>').addClass('checkbtn'));
+                                    var $img = $('<a/>').attr('href',imglinkto).append($('<img/>').attr('src',mainImg));
+                                    $li1.append($img);
+                                    $ul.append($li1);
+                                    var $li2 = $('<li/>');
+                                    var $atext = obj3[gooddetail['type']];
+                                    $li2.append($('<a/>').attr('href',imglinkto).text($atext));
+                                    $li2.append($('<a/>').attr('href',imglinkto).text(gooddetail['goodtitle']));
+                                    var $li2p = $('<p/>').text('颜色:').append($('<span/>').text(gooddetail['color']));
+                                    $li2p.append($('<span/>').text(eachlist[1]));
+                                    $li2.append($li2p);
+                                    $ul.append($li2);
+                                    var $li3 = $('<li/>').text('￥'+gooddetail['sale']);
+                                    $ul.append($li3);
+                                    var $li4 = $('<li/>');
+                                    if(eachlist[2]<=1){
+                                        $li4.append($('<button/>').addClass('cartlesbtn').addClass('disuse').attr('disabled',true).text('-'));
+                                    }else{
+                                        $li4.append($('<button/>').addClass('cartlesbtn').text('-'));
+                                    }                                       
+                                    $li4.append($('<span/>').addClass('cartqty').text(eachlist[2]));
+                                    if(eachlist[2]>=gooddetail['inventory']){
+                                        $li4.append($('<button/>').addClass('cartaddbtn').addClass('disuse').attr('disabled',true).text('+'));
+                                    }else{
+                                        $li4.append($('<button/>').addClass('cartaddbtn').text('+'));
+                                    }                                     
+                                    $li4.append($('<span/>').addClass('warning'));
+                                    if(eachlist[2]>=gooddetail['inventory']){
+                                        $li4.find('.cartaddbtn').addClass('disuse').attr('disabled',true);
+                                        $li4.find('.warning').text('库存紧张');
+                                    }
+                                    $ul.append($li4);
+                                    var youhui = Number(gooddetail['price'])-Number(gooddetail['sale']);
+                                    var $li5 = $('<li/>').text('￥'+youhui*Number(eachlist[2]));
+                                    $ul.append($li5);
+                                    var $li6 = $('<li/>').text('￥'+Number(gooddetail['sale'])*Number(eachlist[2]));
+                                    $ul.append($li6);
+                                    var $li7 = $('<li/>');
+                                    $li7.append($('<span/>').addClass('removecart').text('删除'));
+                                    $ul.append($li7);
+                                    var $box = $('<div/>').addClass('lesbox');
+                                    $box.append($('<p/>').text('您确定要删除该商品吗？'));
+                                    $box.append($('<span/>').addClass('noles').text('取消'));
+                                    $box.append($('<span/>').addClass('yesles').text('确定'));
+                                    $box.hide();
+                                    $ul.append($box);
+                                    $ul.data('goodid',gooddetail['goodid']);
+                                    $ul.data('kucun',gooddetail['inventory']);
+                                    $ul.data('youhui',youhui);
+                                    $ul.data('sale',gooddetail['sale']);
+
+                                    $ul.data('totaleg',carlistarr.length);
+                                    $('.qingdan').append($ul);
+                                    if($('.allcheck').hasClass('selected')){
+                                        $('.checkbtn').addClass('selected');
+                                    }
+
+                                    // 绑定事件
+                                    $li7.find('.removecart').click(function(){
+                                        $(this).parent().siblings('.lesbox').show();
+                                    })
+                                    $ul.find('.lesbox .noles').click(function(){
+                                        $(this).parent().hide();
+                                    })
+                                    $ul.find('.lesbox .yesles').click(function(){
+                                        $(this).parents('ul').remove();
+                                        cartqdles();
+                                    })
+                                    $li1.find('.checkbtn').click(function(){                                       
+                                        if($(this).hasClass('selected')){
+                                            $(this).removeClass('selected');
+                                            $('.allcheck').removeClass('selected');
+                                            if($('.checkbtn.selected').length==0){
+                                                $('.cartfoot div:nth-child(4)').removeClass('selected');
+                                                $('.cartfoot div:nth-child(2) span').text('0');
+                                                $('.cartfoot div:last-child span').text('0.00');
+                                                $('.cartfoot div:nth-child(4)').removeClass('selected');
+                                            }else{
+                                                var total = $(this).parent().siblings('li:nth-child(6)').text().slice(1);
+                                                var attopay = $('.cartfoot div:last-child span').text().slice(1);
+                                                var nowtotal = Number(attopay)-Number(total);
+                                                $('.cartfoot div:last-child span').text('￥'+nowtotal);
+                                                $('.cartfoot div:nth-child(2) span').text($('.checkbtn.selected').length);
+                                            }
+                                        }else{
+                                            $(this).addClass('selected');
+                                            var totaleg = $(this).parents('ul').data('totaleg');
+                                            if($('.checkbtn.selected').length==totaleg){
+                                                $('.allcheck').addClass('selected');
+
+                                                $('.cartfoot div:nth-child(2) span').text($('.checkbtn').length-2);
+                                                $('.cartfoot div:last-child span').text($('.headNav .carList .cartotal').text());
+                                            }else{
+                                                var total = $(this).parent().siblings('li:nth-child(6)').text().slice(1);
+                                                var attopay = $('.cartfoot div:last-child span').text().slice(1);
+                                                console.log(total,attopay);
+                                                var nowtotal = Number(attopay)+Number(total);
+                                                $('.cartfoot div:last-child span').text('￥'+nowtotal);
+                                                $('.cartfoot div:nth-child(2) span').text($('.checkbtn.selected').length);
+                                            }
+                                            $('.cartfoot div:nth-child(4)').addClass('selected');                                         
+                                        }
+                                    })
+                                    $li4.find('button').click(function(){
+                                        var qty = Number($li4.find('.cartqty').text());
+                                        if($(this).hasClass('cartlesbtn')){
+                                            $(this).siblings('.cartqty').text(qty-1);
+                                            var sale = $(this).parents('ul').data('sale');
+                                            var kucun = $(this).parents('ul').data('kucun');
+                                            var youhui =$(this).parents('ul').data('youhui');
+                                            $(this).parents('li').siblings('li:nth-child(5)').text('￥'+(qty-1)*youhui);
+                                            $(this).parents('li').siblings('li:nth-child(6)').text('￥'+(qty-1)*sale);
+                                            cartqdles1();
+                                            $(this).siblings('.warning').text('');
+                                            if(qty<=2){
+                                                $(this).addClass('disuse').attr('disabled',true)
+                                            }else{
+                                                $(this).removeClass('disuse').attr('disabled',false);
+                                                $(this).siblings('.cartaddbtn').removeClass('disuse').attr('disabled',false);
+                                            }
+                                        }else if($(this).hasClass('cartaddbtn')){
+                                            $(this).siblings('.cartqty').text(qty+1);
+                                            var sale = $(this).parents('ul').data('sale');
+                                            var kucun = $(this).parents('ul').data('kucun');
+                                            var youhui =$(this).parents('ul').data('youhui');
+                                            $(this).parents('li').siblings('li:nth-child(5)').text('￥'+(qty+1)*youhui);
+                                            $(this).parents('li').siblings('li:nth-child(6)').text('￥'+(qty+1)*sale);
+                                            cartqdles1();
+                                            if(qty>=kucun-1){
+                                                $(this).addClass('disuse').attr('disabled',true);
+                                                $(this).siblings('.warning').text('库存紧张');
+                                            }else{
+                                                $(this).removeClass('disuse').attr('disabled',false);
+                                                $(this).siblings('.cartlesbtn').removeClass('disuse').attr('disabled',false);
+                                            }
+                                        }
+                                    })
+
+                                }
+                            })
+                        })
+                    }                  
+                }
+            })
+        }
+        if($('.clearqd').length==1){
+            $('.clearqd .yesclear').click(function(){
+                carlistchangeajax('clear');
+                $('.listtable ul').html('');
+                $('.qingdan').html('您的购物车还没有商品，快去选购吧！');
+                $('.clearqd').hide();
+                $('.allcheck').removeClass('selected');
+                $('.cartfoot div:nth-child(2) span').text('0');
+                $('.cartfoot div:last-child span').text('0.00');
+                $('.cartfoot div:nth-child(4)').removeClass('selected');
+            })
+        }
+        // 读取用户购物车并写入导航栏
         function getcarlistmsg(){
             $.ajax({
                 url:'../api/carlist.php',
@@ -86,6 +276,18 @@ require(['config'],function(){
                                             if(i==carlistarr.length-1){
                                                 $('.carlisttotal span').text(totaltopay);
                                                 $('.carList .cartotal').text('￥'+totaltopay);
+                                                if($('.checkbtn.selected').length>0){
+                                                    $('.cartfoot div:nth-child(2) span').text($('.checkbtn.selected').length);
+                                                    var totalbtn = $('.qingdan .checkbtn.selected').length;
+                                                    var totaltopay3 = 0;
+                                                    for(var i=0;i<totalbtn;i++){
+                                                        var thistopay3 = $('.qingdan .checkbtn.selected').eq(i).parent('li').siblings('li:nth-child(6)').text().slice(1);
+                                                        totaltopay3+=Number(thistopay3);
+                                                        if(i==totalbtn-1){
+                                                            $('.cartfoot div:last-child span').text('￥'+totaltopay3);
+                                                        }
+                                                    }                                                   
+                                                }
                                             }                                       
                                         }
                                         $('.listtable ul li .removebtn').click(function(){
@@ -111,10 +313,8 @@ require(['config'],function(){
                     }else{
                         var goodslist = res.split('-');
                         for(var i=0;i<goodslist.length;i++){
-                            var into = carlistmsg.split('/');
-                            console.log(into);                           
+                            var into = carlistmsg.split('/');                          
                             var oldto = goodslist[i].split('/');
-                            console.log(oldto);
                             if(into[0]==oldto[0]&&into[1]==oldto[1]){
                                 var thisgood = goodslist[i].split('/');
                                 var qty=Number(res.split('-')[i].split('/')[2])+Number(carlistmsg.split('/')[2]);
@@ -134,7 +334,7 @@ require(['config'],function(){
         }
         //读取当前数据并实时更新
         //并拼成特殊数据发送后台处理
-        //删除事件
+        //删除事件作用于头部购物车
         function carlistless(){
             if($('.listtable ul li').length==0){
                 $('.listtable .covercarlist').css({'z-index':1000,'opacity':1});
@@ -162,6 +362,61 @@ require(['config'],function(){
                 }
 
             }           
+        }
+        //删除事件作用于购物车页面
+        function cartqdles(){
+            if($('.qingdan ul').length==0){
+                carlistchangeajax('clear');
+                $('.listtable ul').html('');
+                $('.qingdan').html('您的购物车还没有商品，快去选购吧！');
+                $('.clearqd').hide();
+                $('.allcheck').removeClass('selected');
+                $('.cartfoot div:nth-child(2) span').text('0');
+                $('.cartfoot div:last-child span').text('0.00');
+                $('.cartfoot div:nth-child(4)').removeClass('selected');
+            }else{
+                var totaltopay1 = 0;
+                var carlistmsg1 = '';
+                for(var i=0;i<$('.qingdan ul').length;i++){
+                    var $ul = $('.qingdan ul').eq(i);
+                    var goodid = $ul.data('goodid');
+                    var goodsize = $ul.find('li:nth-child(2) p span:last-child').text();
+                    var qty = $ul.find('li:nth-child(4) .cartqty').text();
+                    var addmsg = goodid+'/'+goodsize+'/'+qty;
+                    carlistmsg1=carlistmsg1+addmsg+'-';
+                    totaltopay1+=Number($('.qingdan ul').eq(i).find('li:nth-child(6)').text().slice(1));
+                    if(i==$('.qingdan ul').length-1){                      
+                        carlistchangeajax(carlistmsg1.slice(0,-1));
+                    }                    
+                }
+            }
+        }
+        function cartqdles1(){
+            if($('.qingdan ul').length==0){
+                carlistchangeajax('clear');
+                $('.listtable ul').html('');
+                $('.qingdan').html('您的购物车还没有商品，快去选购吧！');
+                $('.clearqd').hide();
+                $('.allcheck').removeClass('selected');
+                $('.cartfoot div:nth-child(2) span').text('0');
+                $('.cartfoot div:last-child span').text('0.00');
+                $('.cartfoot div:nth-child(4)').removeClass('selected');
+            }else{
+                var totaltopay1 = 0;
+                var carlistmsg1 = '';
+                for(var i=0;i<$('.qingdan ul').length;i++){
+                    var $ul = $('.qingdan ul').eq(i);
+                    var goodid = $ul.data('goodid');
+                    var goodsize = $ul.find('li:nth-child(2) p span:last-child').text();
+                    var qty = $ul.find('li:nth-child(4) .cartqty').text();
+                    var addmsg = goodid+'/'+goodsize+'/'+qty;
+                    carlistmsg1=carlistmsg1+addmsg+'-';
+                    totaltopay1+=Number($('.qingdan ul').eq(i).find('li:nth-child(6)').text().slice(1));
+                    if(i==$('.qingdan ul').length-1){                       
+                        carlistchangeajax(carlistmsg1.slice(0,-1),'only');
+                    }                    
+                }
+            }
         }
         //添加事件
         function carlistadd(){
@@ -196,12 +451,15 @@ require(['config'],function(){
                 
             })
         }
-        function carlistchangeajax(carlistmsg){
+        function carlistchangeajax(carlistmsg,only){
             $.ajax({
                 url:"../api/carlist.php",
                 data:{usename:nameIn,carlistmsg:carlistmsg},
                 success:function(){
                     getcarlistmsg();
+                    if($('.clearqd').length==1&&only!='only'){                       
+                        cartlistgetmsg();
+                    }
                 }
             })
         }
