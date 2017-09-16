@@ -146,15 +146,15 @@ require(['config'],function(){
                             $('.searchfoot .pagebox span').eq(pageNo-1).addClass('selected');
                             $('.searchfoot .pagetotal').text("共"+totalpages+"页,到第");
                             var spanpage = pageNo+'/'+totalpages;
-                            if(pageNo==1&&totalpages==1){
+                            if(pageNo==1&&totalpages==pageNo){
                                 $('.searchRight button').attr('disabled',true);
                                 $('.searchfoot button').attr('disabled',true);
-                            }else if(pageNo==1&&totalpages>1){
+                            }else if(pageNo==1&&totalpages>pageNo){
                                 $('.searchRight .prevpage').attr('disabled',true).removeClass('selected').siblings('.nextpage').attr('disabled',false).addClass('selected');
                                 $('.searchfoot .prevpageto').attr('disabled',true).removeClass('selected').siblings('.nextpageto').attr('disabled',false).addClass('selected');
-                            }else if(pageNo>1&&totalpages!=pageNo){
-                                $('.searchRight button').attr('disabled',false);
-                                $('.searchfoot button').attr('disabled',false);
+                            }else if(pageNo>1&&pageNo<totalpages){
+                                $('.searchRight button').attr('disabled',false).addClass('selected');
+                                $('.searchfoot button').attr('disabled',false).addClass('selected');
                             }else if(pageNo>1&&totalpages==pageNo){
                                 $('.searchRight .nextpage').attr('disabled',true).removeClass('selected').siblings('.prevpage').attr('disabled',false).addClass('selected');
                                 $('.searchfoot .nextpageto').attr('disabled',true).removeClass('selected').siblings('.prevpageto').attr('disabled',false).addClass('selected');

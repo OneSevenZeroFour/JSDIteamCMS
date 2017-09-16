@@ -22,7 +22,7 @@ define(['jquery'],function(){
             return res;
         },
         vCode:function(){
-            var arr_char = '0123456789abcdefghijklmnopqrstuvwxyz'.split('');
+            var arr_char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
             var res = '';
             for(var i=0;i<4;i++){
