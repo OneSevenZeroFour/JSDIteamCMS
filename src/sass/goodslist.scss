@@ -1,0 +1,178 @@
+@import 'var';
+#mains{
+    .mainTop{
+        height:18px;margin-top:20px;margin-bottom:20px;width:1000px;
+        a:hover{color:$normalColor;}
+        ul{
+            float:left;
+            li{
+                float:left;
+                a{color:#666;}
+            }
+            li.gt{width:30px;height:16px;text-align:center;font-size:$fontSize1;line-height:16px;}
+            li:last-child{
+                a{color:#000;font-size:$fontSize1;}
+                a:hover{color:#000;}
+            }
+        }
+        .top_right{
+            float:right;
+            span:first-child{
+                display:block;float:left;width:80px;text-align:right;background:url("/img/icon_countdown.gif") no-repeat;color:#000;font-weight:bold;
+            }
+            span.lastTime{color:#666;letter-spacing:1px;}
+        }
+    }
+    h2{
+        padding-top:15px;padding-bottom:25px;border-top:1px solid #ccc;font-size:20px;color:#000;font-weight:normal;
+        span:first-child{font-size:20px;color:#000;font-weight:normal;}
+        span:last-child{font-size:16px;color:$normalColor;margin-left:15px;font-weight:bold;}
+    }
+    .postage{
+        width:995px;height:182px;background:#f2f2f2;margin-left:5px;position:relative;margin-bottom:20px;
+        .postagelist{
+            width:973px;background:#fff;border:1px solid #ccc;position:absolute;left:-5px;top:-5px;padding:10px;
+            ul{
+                margin-bottom:15px;
+                li{font-size:$fontSize;color:#000;line-height:30px;padding-left:30px;background:url("/img/icon_gift.gif") no-repeat 3px 6px;}
+            }
+            .story{
+                border-top:1px solid #ccc;padding-top:20px;padding-bottom:10px;
+                h3{color:#000;font-size:$fontSize1;line-height:22px;font-weight:normal;}
+                p{
+                    line-height:16px;
+                    i{font-style:normal;margin:0 3px;color:#000;}
+                }
+            }
+        }
+    }
+    .choice{
+        background:#f2f2f2;position:relative;padding:17px;padding-bottom:25px;
+        div{
+            width:80px;color:#000;position:absolute;left:17px;top:17px;
+        }
+        ul{
+            margin-left:80px;width:800px;float:left;
+            li{
+                float:left;height:14px;padding:3px 5px 7px 10px;background:#000;color:#fff;line-height:14px;cursor:pointer;margin-right:20px;margin-bottom:15px;
+                span:first-child{margin-left:4px;}
+                .btn{line-height:16px;margin-left:6px;font-size:$fontSize1;font-weight:bold;}
+            }
+        }
+        .clearall{color:#999;cursor:pointer;-webkit-user-select:none;}
+    }
+    .selectlist{
+        border:1px solid #ccc;padding:17px;position:relative;
+        div{width:60px;color:#000;padding-top:4px;position:absolute;left:17px;top:17px;}
+        ul{
+                margin-left:60px;
+            li{
+                float:left;width:165px;height:24px;line-height:24px;cursor:pointer;
+                span{display:block;float:left;width:12px;height:24px;margin-right:7px;background:url("/img/filter_check.gif") no-repeat 0 0;}
+            }
+            li:hover{
+                color:$normalColor;
+            }
+            li.selected{
+                span{background:url("/img/filter_check.gif") no-repeat 0 -24px;}
+            }
+        }
+    }
+    .goodssearch{
+        width:1000px;height:30px;margin:0 auto;padding-bottom:15px;padding-top:20px;background:#fff;
+        .defaultSort{
+            float:left;width:98px;height:28px;color:#000;font-size:$fontSize;text-align:center;line-height:28px;border:1px solid #ccc;cursor:pointer;margin-right:10px;-webkit-user-select:none;
+            &:hover{color:$normalColor;}
+        }
+        .defaultSort.selected{
+            background:#f2f2f2;
+        }
+        .priceSort{
+            float:left;width:98px;height:28px;color:#000;font-size:$fontSize;text-indent:26px;line-height:28px;border:1px solid #ccc;cursor:pointer;background:url("/img/sorter_bg.gif") no-repeat -1px -1px;-webkit-user-select:none;
+            &:hover{color:$normalColor;}
+        }
+        .priceSort.up{background:url("/img/sorter_bg.gif") no-repeat -219px -1px;}
+        .priceSort.down{background:url("/img/sorter_bg.gif") no-repeat -110px -1px;}
+
+        .searchRight{
+            float:right;
+            span.left{
+                float:left;display:block;line-height:30px;
+                .atpage{margin:0 8px;}
+            }            
+            button{
+                width:28px;height:28px;border:1px solid #e7e7e7;background-image:url("/img/pager.gif");margin-bottom:-1px;float:left;cursor:pointer;
+            }
+            button:focus{outline:none;}
+            .prevpage{margin-right:5px;}
+            .prevpage.selected{background-position:-40px 0;}
+            .nextpage{background-position:0 -40px;}
+            .nextpage.selected{background-position:-40px -40px;}
+        }
+    }
+    .goodssearch.totop{
+        position:fixed;top:42px;z-index:99;
+    }
+    .goodslist{
+        width:1020px;
+        ul{
+            li{
+                float:left;width:235px;height:397px;margin-bottom:20px;margin-right:20px;position:relative;
+                img{display:block;width:235px;height:313px;}
+                p{font-size:$fontSize;color:#000;line-height:20px;letter-spacing:.5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+                .sale{font-size:$fontSize1;color:$normalColor;margin-right:8px;}
+                .protect{
+                    position:absolute;left:0;top:8px;
+                    p{
+                        height:25px;width:80px;font-size:$fontSize;color:#fff;text-indent:10px;line-height:25px;
+                        span{padding:0 1px;}
+                    }
+                    .onlyqty{background:url("/img/label-red.png")}
+                    .hotgood{background:url("/img/label-black.png")}
+                }
+                .showimgs{
+                    position:absolute;left:0;bottom:0;width:235px;
+                    .imgslist{height:85px;}
+                    .top{
+                        background:rgba(156,156,156,.7);padding:10px;padding-bottom:20px;position:relative;
+                        span{
+                            display:block;float:left;width:40px;height:30px;background:#fff;border:1px solid #8e8e8e;line-height:30px;text-align:center;margin-right:5px;
+                            &:hover{border:1px solid #000;}
+                        }
+                        .contentcover{
+                            position:absolute;bottom:0;left:0;width:140px;height:58px;border:1px solid #ccc;background:#fff;font-size:$fontSize1;padding:6px 10px;z-index:88;
+                        }
+                        .contentcover::before{
+                            content:'';display:block;width:19px;height:12px;position:absolute;top:-11px;left:72px;background:url("/img/icon_arrows_top1.png");
+                        }
+                    }
+                    .imgslist{
+                        background:#fff;padding:8px;
+                        img{display:block;float:left;width:48px;height:65px;border:1px solid #ccc;margin-right:4px;}
+                        img:hover{border:1px solid #000;}                        
+                    }
+                }
+            }
+        }
+    }
+    .searchfoot{
+        padding-left:250px;height:24px;cursor:pointer;margin-bottom:40px;
+        button{
+            display:block;float:left;width:52px;height:22px;border:1px solid #e7e7e7;color:#999;background:#fff;margin-right:8px;cursor:pointer;
+            &:focus{outline:none;}
+        }
+        button.selected{color:#000;}
+        button.selected:hover{border:1px solid #000;}
+        .pagebox{
+            float:left;
+            span{display:block;float:left;width:22px;height:22px;text-align:center;line-height:22px;font-size:$fontSize;border:1px solid #e7e7e7;margin-right:5px;}
+            span.selected{background:#000;color:#fff;border:1px solid #000;}
+        }
+        span{display:block;float:left;line-height:22px;}
+        input{
+            display:block;float:left;width:52px;height:19px;text-align:center;line-height:22px;color:#000;margin:0 8px;
+            &:focus{outline:none;}
+        }
+        .pagebtnspan{width:40px;height:22px;text-align:center;background:#000;color:#fff;}
+    }
+}

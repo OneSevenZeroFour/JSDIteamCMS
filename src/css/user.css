@@ -1,0 +1,151 @@
+* { margin: 0; padding: 0; font-size: 12px; }
+
+.clearfixed::after { content: ''; overflow: hidden; display: block; clear: both; height: 0; visibility: hidden; }
+
+ul, li { list-style: none; margin: 0; padding: 0; }
+
+a { color: #000; text-decoration: none; }
+
+.fl { float: left; }
+
+.fr { float: right; }
+
+body { background: #dddddb; }
+
+.container { width: 1000px; min-width: 1000px; margin: 0 auto; background: #fff; }
+
+.box { background: url("../img/user1.jpg") no-repeat; }
+
+.box #header { width: 100%; padding-top: 30px; }
+
+.box #header a.logo { display: block; width: 369px; height: 36px; margin: 0 auto; }
+
+.box #header a.logo img { width: 100%; display: block; }
+
+.box .content { width: 1000px; height: 650px; }
+
+.box .content .erwm { padding-left: 90px; border-top: 1px solid #ccc; padding-top: 20px; }
+
+.box .content .erwm img { display: block; float: left; width: 99px; }
+
+.box .content .erwm .erwm_right { float: left; margin-left: 15px; text-align: center; padding-top: 16px; }
+
+.box .content .erwm .erwm_right p { line-height: 20px; }
+
+.box .content .red { color: red; }
+
+.box .content .register { float: right; margin-right: 150px; overflow: hidden; display: none; }
+
+.box .content .register .top { width: 260px; margin-bottom: 10px; margin-left: 90px; margin-top: 60px; }
+
+.box .content .register .top h2 { font-size: 16px; float: left; -webkit-user-select: none; }
+
+.box .content .register .top p { float: right; font-size: 12px; }
+
+.box .content .register .top p a { color: red; text-decoration: underline; font-size: 14px; }
+
+.box .content .register p.red { font-size: 12px; margin-left: 90px; }
+
+.box .content .register .regilist { width: 350px; margin-top: 10px; }
+
+.box .content .register .regilist li { text-align: right; margin-bottom: 4px; }
+
+.box .content .register .regilist li input { width: 250px; height: 28px; border: 1px solid #999; color: #333; padding-left: 8px; margin-left: 20px; }
+
+.box .content .register .regilist li input:focus { outline: none; }
+
+.box .content .register .regilist li .test { text-align: left; margin-left: 90px; color: red; line-height: 20px; }
+
+.box .content .register .regilist .passwordLi .passwordQD { margin-left: 90px; margin-top: 5px; }
+
+.box .content .register .regilist .passwordLi .passwordQD span { display: block; float: left; width: 86px; height: 15px; margin-right: 1px; background: #999; color: #fff; text-align: center; }
+
+.box .content .register .regilist .passwordLi .passwordQD span:last-child { margin-right: 0; }
+
+.box .content .register .regilist .passwordLi .passwordQD span.qd { background: #000; }
+
+.box .content .register .regilist .vCodeLi label, .box .content .register .regilist .phoneCodeLi label { line-height: 30px; }
+
+.box .content .register .regilist .vCodeLi input, .box .content .register .regilist .phoneCodeLi input { width: 108px; float: right; }
+
+.box .content .register .regilist .vCodeLi .vCodeshow, .box .content .register .regilist .phoneCodeLi .vCodeshow, .box .content .register .regilist .phoneCodeLi .phoneCodeshow { display: inline-block; width: 133px; height: 28px; border: 1px solid #999; float: right; margin-left: 7px; font-size: 16px; text-align: center; line-height: 28px; letter-spacing: 4px; -webkit-user-select: none; cursor: pointer; }
+
+.box .content .register .regilist .phoneCodeLi .phoneCodeshow { font-size: 12px; }
+
+.box .content .register .regilist .registbtn { width: 260px; height: 30px; background: #db2725; line-height: 30px; text-align: center; color: #fff; font-size: 14px; margin-left: 90px; cursor: pointer; -webkit-user-select: none; border: none; }
+
+.box .content .register .regilist .registbtn:focus { outline: none; }
+
+.box .content .register .uselist { margin-left: 90px; line-height: 30px; }
+
+.box .content .register .uselist a { text-decoration: underline; }
+
+.box .content .register .uselist a:hover { color: red; }
+
+.box .content .register .getemail { margin-left: 90px; line-height: 13px; margin-bottom: 20px; margin-top: 5px; }
+
+.box .content .register .getemail i { display: block; float: left; width: 12px; height: 12px; border: 1px solid #ccc; margin-right: 3px; }
+
+.box .content .register .getemail i.active { background: #000; }
+
+.box .content .login { float: right; margin-right: 150px; overflow: hidden; display: none; }
+
+.box .content .login .top { width: 260px; margin-bottom: 10px; margin-left: 90px; margin-top: 60px; }
+
+.box .content .login .top h2 { font-size: 16px; float: left; -webkit-user-select: none; }
+
+.box .content .login .top p { float: right; font-size: 12px; }
+
+.box .content .login .top p a { color: red; text-decoration: underline; font-size: 14px; }
+
+.box .content .login .loginlist { width: 350px; margin-top: 10px; }
+
+.box .content .login .loginlist li { text-align: right; margin-bottom: 10px; }
+
+.box .content .login .loginlist li input { width: 250px; height: 28px; border: 1px solid #999; color: #333; padding-left: 8px; margin-left: 20px; }
+
+.box .content .login .loginlist li input:focus { outline: none; }
+
+.box .content .login .loginlist li .test { text-align: left; margin-left: 90px; color: red; }
+
+.box .content .login .loginlist .loginbtn { width: 260px; height: 30px; background: #db2725; line-height: 30px; text-align: center; color: #fff; font-size: 14px; margin-left: 90px; cursor: pointer; -webkit-user-select: none; }
+
+.box .content .login .loginlist .last { margin-left: 90px; margin-bottom: 20px; margin-top: 12px; }
+
+.box .content .login .loginlist .last p { line-height: 13px; float: left; }
+
+.box .content .login .loginlist .last p i { display: block; float: left; width: 12px; height: 12px; border: 1px solid #ccc; margin-right: 3px; }
+
+.box .content .login .loginlist .last p i.active { background: #000; }
+
+.box .content .login .loginlist .last a { float: right; text-decoration: underline; }
+
+.box .content .login .loginlist .last a:hover { color: red; }
+
+.box .content .login .loginlist .joinlogin { padding-left: 13px; margin-bottom: 20px; }
+
+.box .content .login .loginlist .joinlogin span { margin-right: 20px; }
+
+.box .content .login .loginlist .joinlogin a.weibo { display: inline-block; width: 20px; height: 17px; background-image: url("../img/set.fw.png"); margin-right: 20px; background-position: 0 -250px; }
+
+.box .content .login .loginlist .joinlogin a.weibo:hover { background-position: -20px -250px; }
+
+.box .content .login .loginlist .joinlogin a.zhifubao { display: inline-block; width: 44px; height: 14px; background-image: url("../img/set.fw.png"); background-position: 0 -270px; }
+
+.box .content .login .loginlist .joinlogin a.zhifubao:hover { background-position: 0 -284px; }
+
+#footer { width: 100%; }
+
+#footer ul { margin-bottom: 25px; }
+
+#footer ul li { float: left; }
+
+#footer ul li a { display: block; width: 165px; height: 60px; border-right: 1px solid #615e5e; text-align: center; font-size: 14px; position: relative; }
+
+#footer ul li a span { display: block; width: 60px; height: 40px; background-image: url("../img/set.fw.png"); margin-left: 52px; }
+
+#footer ul li a p { position: absolute; left: 0; bottom: 7px; width: 100%; text-align: center; }
+
+#footer ul li:last-child a { border: 0 none; }
+
+#footer p.lastP { line-height: 50px; text-align: center; }
