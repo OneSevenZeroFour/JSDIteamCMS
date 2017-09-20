@@ -15,7 +15,7 @@ var browserSync = require('browser-sync');
 gulp.task('server',function(){
     browserSync({
         // 代理服务器
-        proxy:'http://localhost:10086',
+        proxy:'http://localhost:1234',
         // proxy:'http://localhost/philly',
         // 端口
         port:10000,
