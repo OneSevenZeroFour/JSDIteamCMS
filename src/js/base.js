@@ -1,5 +1,5 @@
 require(['config'],function(){
-    require(['common','jquery'],function(com){
+    require(['common','jquery','socket'],function(com,$,io){
         //头部手机版二维码
         $('.top_right span').eq(1).hover(function(){
             $('.topCode').stop().fadeIn('slow');
@@ -551,6 +551,154 @@ require(['config'],function(){
         //海外
         $('.navList>li').eq(6).find('.navmenu div:first-child').find('a').attr('href','/html/outsea.html');
         //列表页路径设置
+        
+      
+        //--------------LY 聊天窗口------------------------------  
+        var Chat = {
+            ele:$('.headTop'),
+            btn:$('.fr>span').eq(0).find('a'),
+            
+            //初始化
+            init:function(name){
+                //生成结构
+                var LY_chat = $('<div/>');
+                LY_chat.addClass('LY_chat');
+                LY_chat.html(`
+                        <div class="LY_chat_head"><h5>${name}</h5><span>&times;</span></div>
+                        <ul></ul>
+                        <textarea></textarea>
+                        <div class="LY_chat_btn">
+                            <a href="##">发送</a>
+                        </div>
+                    `);
+                this.ele.children().append(LY_chat);
+
+                //绑定点击显示
+                this.btn.on('click',()=>{
+                     this.show();
+                });
+
+                //绑定点击隐藏
+                LY_chat.find('.LY_chat_head>span').on('click',()=>{
+                    this.hide();
+                });
+
+                //绑定点击拖动
+                LY_chat.find('.LY_chat_head').on('mousedown',e=>{
+                    //记录鼠标按下时的位置
+                    var ox = e.clientX - LY_chat.offset().left;
+                    var oy = e.clientY - LY_chat.offset().top;
+                    this.drag(ox,oy);
+                    
+                    e.preventDefault();
+                    
+                })
+
+                //绑定鼠标弹起事件
+                $(document).on('mouseup',function(){
+                    document.onmousemove = null;
+                });
+
+                //跟后端连接
+                var socket = io("http://10.3.132.143:1111");
+
+                //绑定点击发送消息
+                LY_chat.on('click','.LY_chat_btn>a',()=>{
+                    this.send(name);
+                    
+                })
+                
+                this.LY_chat = LY_chat; 
+                this.socket = socket;
+                return this;
+
+            },
+
+            //显示
+            show:function(){
+                this.LY_chat.show().animate({width:600,height:500});
+
+                //输入框获取焦点
+                this.LY_chat.find('textarea')[0].focus();
+
+                return this;
+
+            },
+
+            //隐藏
+            hide:function(){
+
+                this.LY_chat.animate({width:0,height:0},()=>{
+                    this.LY_chat.hide();
+                });
+
+                 return this;
+            },
+
+            //拖动
+            drag:function(ox,oy){
+                document.onmousemove = evt=>{
+                    var left = evt.clientX-ox;
+                    var top = evt.clientY-oy;
+
+                    this.LY_chat.css({left:left,top:top});
+
+                }
+
+                 return this;
+            },
+
+            //发送消息
+            send:function(name){
+                 //获取输入框的值
+                 var $value = this.LY_chat.find('textarea').val();
+
+                 //发送
+                 this.socket.emit('receive',{
+                        name:name,
+                        value:$value,
+                 });
+
+                 //清空输入框
+                 this.LY_chat.find('textarea').val('').focus();
+
+                  return this;
+            },
+
+            //接收消息
+            receive:function(nameIn){
+              
+                this.socket.on('send',data=>{
+
+                    //生成结构         
+                    var $li = $('<li/>');
+                    if(data.name == nameIn){   
+                        $li.addClass('LY_left');
+                        $li.html(`
+                                <b>我:</b>
+                                <span>${data.value}</span>
+                            `);
+                    }else{
+                        $li.addClass('LY_right');
+                        $li.html(`
+                                <b>${data.name}</b>
+                                <span>${data.value}</span>
+                            `);
+                    }
+                    this.LY_chat.find('ul').append($li)
+
+                    
+                });
+                
+
+                 return this;
+            }
+        }
+
+        if(nameIn !== ''){
+            Chat.init(nameIn).receive(nameIn);
+        }
+        
         
     })
 })
