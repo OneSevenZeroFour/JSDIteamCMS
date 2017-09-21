@@ -1,9 +1,5 @@
 require(['config'],function(){
-<<<<<<< HEAD
-    require(['common','jquery'],function(com){
-=======
     require(['common','jquery','socket'],function(com,$,io){
->>>>>>> 1d1377c9b1d734a1435f634a67e954d07c80aade
         //头部手机版二维码
         $('.top_right span').eq(1).hover(function(){
             $('.topCode').stop().fadeIn('slow');
@@ -556,8 +552,6 @@ require(['config'],function(){
         $('.navList>li').eq(6).find('.navmenu div:first-child').find('a').attr('href','/html/outsea.html');
         //列表页路径设置
         
-<<<<<<< HEAD
-=======
       
         //--------------LY 聊天窗口------------------------------  
         var Chat = {
@@ -704,8 +698,5 @@ require(['config'],function(){
         if(nameIn !== ''){
             Chat.init(nameIn).receive(nameIn);
         }
-        
-        
->>>>>>> 1d1377c9b1d734a1435f634a67e954d07c80aade
     })
 })
