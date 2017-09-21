@@ -296,7 +296,7 @@
     console.log(val_sel)
     $.ajax({
       type:"POST",
-      data:{pageNo:pageNo,qty:qty,type:val_sel}, 
+      data:{pageNo:pageNo,qty:20,type:val_sel}, 
       url:"http://localhost:2222/select_type",
       success:function(data){
            je(data,"#list")

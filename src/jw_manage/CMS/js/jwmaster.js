@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-20 12:09:12
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-20 22:18:42
+* @Last Modified time: 2017-09-21 09:23:57
 */
 
 var express=require("express");
@@ -36,10 +36,10 @@ app.post("/select",function(req,res){
     console.log(type)
     connection.query('SELECT * FROM goodslist ', function(error, results, fields) {
         if(error) throw error;
-            console.log(results.length)
+            // console.log(results.length)
             var total=results.length;
             var result=results.splice(qty*(pageNo-1),qty)
-            console.log(result)
+            // console.log(result)
             res.send(JSON.stringify({
                 total:total,
                 status: 1,
@@ -54,7 +54,7 @@ app.post("/selecttype",function(req,res){
     res.append("Access-Control-Allow-Origin", "*")
     connection.query('select distinct type from goodslist ', function(error, results, fields) {
         if(error) throw error;
-            console.log(results.length)
+            // console.log(results.length)
             var total=results.length;
             res.send(JSON.stringify({
                 results
@@ -66,6 +66,7 @@ app.post("/select_type",function(req,res){
     res.append("Access-Control-Allow-Origin", "*")
     var pageNo=req.body.pageNo;
     var qty=req.body.qty;
+    console.log(qty)
     var type=req.body.type;
     connection.query(`SELECT * FROM goodslist where type='${type}'`, function(error, results, fields) {
         if(error) throw error;
