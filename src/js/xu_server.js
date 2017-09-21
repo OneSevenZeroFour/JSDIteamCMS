@@ -3,8 +3,15 @@
 var express =require("express");
 var multer = require("multer");
 var app = express();
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({
+    extended: true
+})); 
 
 
+app.use(express.static('html'));
 // var imgurl ='';
 // 引入模块和插件
 var peizi = multer.diskStorage({
@@ -28,55 +35,91 @@ var upload =multer({
 
 // 数据库
 var mysql = require('mysql');
-var bodyParser = require('body-parser')
+
 //配置连接的参数
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'user'
+    database: 'goods'
 });
 //执行连接
 connection.connect();
 
-
-
-// app.use(express.static('html'));
-
 app.post('/chuan',upload.any(),function(req,res,next){
     res.append("Access-Control-Allow-Origin","*");
-    console.log(req.files[0].filename);
+    // console.log(req.files[0].filename);
+    connection.query(`insert into userlist (imgurl) values ("${req.files[0].filename}")`, function(error, results, fields) {
+        // res.append("Access-Control-Allow-Origin","*")
+        console.log('The solution is: ', results); 
+    });
     res.send(req.files[0].filename);
-    // console.log(res.files);
-    // console.log(res);
-    // console.log('上传成功');
-    // res.send('上传成功');
 })
 
 
-
-
-app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({
-    extended: true
-})); 
-app.post('/getAccount', function(req, res) {
+app.get('/getAccount', function(req, res) {
     //用fs读写文件，实现爬虫，实现读写数据库，api接口等
     //获取post请求的参数 监听req的流
-    res.append("Access-Control-Allow-Origin","*");
-    console.log(req);
-    res.send();
-    // connection.query(`insert into adds (nicheng,xingbie) values ("${req.body.nicheng}","${req.body.xingbie}")`, function(error, results, fields) {
-    //     res.append("Access-Control-Allow-Origin","*")
-    //     if(error) throw error;
-    //     console.log('The solution is: ', results);
-    //     res.send(JSON.stringify({
-    //         results
-    //     }));
-    // });
+    // res.append("Access-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    // console.log(req.query);
+    
+connection.query(`update userlist set nicheng='${req.query.nicheng}',xingbie='${req.query.xingbie}',imgurl='${req.query.imgurl}' where name='${req.query.username}'`, function(error, results, fields) {
+        // res.append("Access-Control-Allow-Origin","*")
+        // if(error) throw error;
+        // console.log('The solution is: ', results);
+        // res.send(JSON.stringify({
+        //     results
+        // }));
+        res.send();
+    });
+    
 })
 
+app.post('/dizhi', function(req, res) {
+    //用fs读写文件，实现爬虫，实现读写数据库，api接口等
+    //获取post请求的参数 监听req的流
+    // res.append("Access-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    console.log(req.body);
+    
+connection.query(`update userlist set user='${req.body.user}',phone='${req.body.phone}',dizhi='${req.body.dizhi}',youbian='${req.body.youbian}' where name='${req.body.username}'`, function(error, results, fields) {
+        // res.append("Access-Control-Allow-Origin","*")
+        // if(error) throw error;
+        // console.log('The solution is: ', results);
+        // res.send(JSON.stringify({
+        //     results
+        // }));
+        res.send();
+    });
+    
+})
 
+app.get('/get',function(req,res){
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    // console.log(req.query)
+    connection.query(`SELECT * FROM userlist where name='${req.query.username}'`, function(error, results, fields) {
+                    if(error) throw error;
+                    // console.log('The solution is: ', results);
+                    res.end(JSON.stringify({
+                        status: 1,
+                        results
+                    }))
+                    // 输出结果到前台
+                });
+})
+
+app.post("/adds", function(req, res) {
+    //用fs读写文件，实现爬虫，实现读写数据库，api接口等
+    //获取post请求的参数 监听req的流
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    // console.log(req.body);
+    connection.query(`update userlist set province='${req.body.province}',city='${req.body.city}',district='${req.body.district}' where name='${req.body.username}'`, function(error, results, fields) {
+                    res.send()
+                });
+
+    
+})
 app.listen(12345);
 
 console.log('服务器开启成功');
