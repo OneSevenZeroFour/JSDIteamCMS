@@ -124,7 +124,8 @@ require(['config'],function(){
                         }                                   
                     }
                     $('.detail .imgsbox').html(imgs);
-                    $('.detailmsg .goodsshowPic').html(imgs);
+                    $('.detailmsg .goodsshowPic').html(gooddetail['descrption']);
+                    $('.point').text(gooddetail['point']);
 
                     function changeimg(){
                         var mainImgurl = $('.mainImg').attr('src');
@@ -248,7 +249,7 @@ require(['config'],function(){
             $('.outtime span').text(outtime);
             //倒计时设置
             //指定结束时间，精确到秒
-            var endTime = '2017/9/16 12:00:00';
+            var endTime = '2017/9/29 12:00:00';
             var end = Date.parse(endTime);
 
             // 2）每隔一秒拿当前时间和结束时间进行比较，计算差值

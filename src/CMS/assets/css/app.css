@@ -1,0 +1,40 @@
+/* Write your styles */
+.fl{float:left;}
+.fr{float:right;}
+.clearfix:after{
+    content:"";
+    height:0;
+    clear:both;
+    overflow:hidden;
+    visibility:hidden;
+    display:block;
+
+}
+
+/*修改样式*/ 
+thead tr th{text-align: center;}
+.jw_goods{text-align: center;}
+#list .table-title{width:350px;height:45px;overflow: hidden;white-space:nowrap;text-overflow: ellipsis;}
+
+/*.am-pagination>.am-active>span, .am-pagination>.am-active>span:focus, .am-pagination>.am-active>span:hover, .am-pagination>.am-active>span, .am-pagination>.am-active>span:focus, .am-pagination>.am-active>span:hover{
+    z-index: 2;
+    color: #fff;
+    background-color: #0e90d2;
+    border-color: #0e90d2;
+    cursor: default;
+}*/
+.am-pagination .page{padding:0;}
+.am-pagination .page li{list-style: none;margin-bottom: 5px; margin-right: 5px;}
+.am-pagination .page li>span{ display: block;padding:.5em 1em;line-height: 1.2;box-sizing: border-box;border: 1px solid #ddd;cursor:pointer;}
+.am-pagination .page li.active{background:#0e90d2;color:#fff;}
+
+.jw_select #jw_types{width:150px;height:32px; float:left;border:1px solid #ccc;outline:none;color:#444;font-size:14px;}
+
+    
+
+   
+    
+    
+    
+    
+
