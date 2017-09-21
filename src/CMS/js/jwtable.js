@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-21 19:20:32
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-21 19:43:27
+* @Last Modified time: 2017-09-21 20:07:59
 */
 
 require.config({
@@ -51,7 +51,7 @@ require(["jquery","amazeui.min"],function($){
      // 获取种类  
     $.ajax({
         type:"POST",
-        url:"http://localhost:2222/jw_selecttype",
+        url:"http://localhost:12345/jw_selecttype",
         success:function(data){
             var arr_type=JSON.parse(data).results;
 
@@ -79,7 +79,7 @@ require(["jquery","amazeui.min"],function($){
     $.ajax({
             type:"POST",
             data:{pageNo:1,qty:qty,type:val_sel_op}, 
-            url:"http://localhost:2222/jw_select",
+            url:"http://localhost:12345/jw_select",
             success:function(data){
             allid=JSON.parse(data).total;
             console.log(allid)
@@ -104,7 +104,7 @@ require(["jquery","amazeui.min"],function($){
         $.ajax({
             type:"POST",
             data:{pageNo:1,qty:qty,type:val_sel_op}, 
-            url:"http://localhost:2222/jw_select",
+            url:"http://localhost:12345/jw_select",
             success:function(data){
             console.log(data)
                 je(data,"#list")
@@ -138,7 +138,7 @@ require(["jquery","amazeui.min"],function($){
         $.ajax({
           type:"POST",
           data:datas, 
-          url:"http://localhost:2222/"+posts,
+          url:"http://localhost:12345/"+posts,
           success:function(data){
             je(data,"#list")
             $(".page li").eq(pageNo-1).addClass('active').siblings().removeClass('active') 
@@ -157,7 +157,7 @@ require(["jquery","amazeui.min"],function($){
         console.log(id)
             $.ajax({
             type:"POST",
-            url:"http://localhost:2222/jw_delete",
+            url:"http://localhost:12345/jw_delete",
             data: {
                 id:id,
               },
@@ -172,11 +172,11 @@ require(["jquery","amazeui.min"],function($){
         // console.log(666)
         var goodid=$(this).attr('data-goodid');
         console.log(goodid)
-        window.location.href = `admin-user.html?goodid=${goodid}`;
+        window.location.href = `/html/management.html?id=${goodid}`;
     })
       // 新增按钮
     $(".jw_add").on("click",function(){
-        window.location.href = `admin-user.html?maxid=${allid}`;
+        window.location.href = `/html/management.html?maxid=${allid}`;
     })
       // 模糊搜索
     $('.jw_search').click(function(){
@@ -187,7 +187,7 @@ require(["jquery","amazeui.min"],function($){
         $.ajax({
             type:"POST",
             data:{pageNo:1,qty:qty,type:val_sel_op,search_val:search_val}, 
-            url:"http://localhost:2222/jw_search",
+            url:"http://localhost:12345/jw_search",
             success:function(data){
             je(data,"#list")
           // 页码

@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-20 12:09:12
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-21 18:52:44
+* @Last Modified time: 2017-09-21 20:07:07
 */
 
 var express=require("express");
@@ -115,5 +115,5 @@ app.post("/jw_search",function(req,res){
 
     })
 
-app.listen("2222")
+app.listen("12345")
 console.log("开启服务器成功")
