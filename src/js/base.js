@@ -566,7 +566,7 @@ require(['config'],function(){
                 var LY_chat = $('<div/>');
                 LY_chat.addClass('LY_chat');
 
-                if(name == '346692921@qq.com'){
+                if(name == 'admin'){
                    socket.on('id',data=>{
                         LY_chat.html('');
                         LY_chat.html(`
@@ -590,7 +590,7 @@ require(['config'],function(){
                         LY_chat.append($ul);
                         for(var i=0;i<LY_chat.children().children().length;i++){
                             console.log()
-                            if(LY_chat.children().children().eq(i).find('h4').html() == '346692921@qq.com'){
+                            if(LY_chat.children().children().eq(i).find('h4').html() == 'admin'){
                                 LY_chat.children().children().eq(i).remove();
                             }
                         }
@@ -706,7 +706,7 @@ require(['config'],function(){
             //显示
             show:function(name){
                 this.LY_chat.show().animate({width:600,height:500});
-                if(name != '346692921@qq.com'){
+                if(name != 'admin'){
                     //输入框获取焦点
                     this.LY_chat.find('textarea')[0].focus();
                 }
@@ -729,6 +729,7 @@ require(['config'],function(){
             //拖动
             drag:function(ox,oy){
                 document.onmousemove = evt=>{
+
                     var left = evt.clientX-ox;
                     var top = evt.clientY-oy;
 
@@ -740,8 +741,13 @@ require(['config'],function(){
             },
 
             //发送消息
+<<<<<<< HEAD
             send:function(name,id,values,time){
                 if(name == '346692921@qq.com'){
+=======
+            send:function(name,id,values){
+                if(name == 'admin'){
+>>>>>>> 0daf658c03cb6a5bf4e851c5db3142f1be05e7d1
                     
                     this.socket.emit('receive',{
                             name:name,
@@ -772,7 +778,7 @@ require(['config'],function(){
             receive:function(nameIn){
 
                 this.socket.on('send',data=>{
-                    if(nameIn == '346692921@qq.com'){
+                    if(nameIn == 'admin'){
                         for(var i=0;i<this.LY_chat.children().children().length;i++){
                             if(this.LY_chat.children().children().eq(i).attr('data-id') == data.id){
                                 this.LY_chat.children().children().eq(i).find('strong').html(data.value).show();
@@ -789,7 +795,7 @@ require(['config'],function(){
                                     <b>我:</b>
                                     <span>${data.value}</span>
                                 `);
-                        }else if(data.name == '346692921@qq.com'){
+                        }else if(data.name == 'admin'){
                             $li.addClass('LY_right');
                             $li.html(`
                                     <b>${data.name}</b>

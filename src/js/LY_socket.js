@@ -19,7 +19,7 @@ io.on('connection',function(socket){
 		});
 
 		user.forEach(function(item){
-			if(item.name == '346692921@qq.com'){
+			if(item.name == 'admin'){
 				io.sockets.sockets[item.id].emit('id',user);
 			}
 		})
@@ -28,7 +28,7 @@ io.on('connection',function(socket){
 	socket.on('receive',function(data){
 		console.log('2',data)
 
-		if(data.name == '346692921@qq.com'){
+		if(data.name == 'admin'){
 			io.sockets.sockets[data.id].emit('send',{
 				name:data.name,
 				value:data.value,
