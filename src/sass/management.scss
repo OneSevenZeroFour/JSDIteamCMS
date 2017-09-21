@@ -1,0 +1,103 @@
+@import 'var';
+*{margin:0;padding:0;font-size:$fontSize;}
+.clearfixed::after{
+    content:'';
+    overflow:hidden;
+    display:block;
+    clear:both;
+    height:0;
+    visibility:hidden;
+}
+.container{
+    width:1000px;
+    min-width:1000px;
+    margin:0 auto;
+}
+ul,li{list-style:none;margin:0;padding:0;}
+a{color:#000;text-decoration:none;}
+.fl{float:left;}
+.fr{float:right;}
+
+#header{
+    height:60px;background:skyblue;position:relative;
+    h1{font-size:30px;color:#fff;line-height:60px;margin-left:120px;cursor:pointer;-webkit-user-select:none;width:400px;}
+    a{display:block;width:128px;height:40px;background:#15a2f7;position:absolute;right:240px;bottom:10px;border-radius:10px;color:#fff;font-size:18px;font-weight:bold;text-align:center;line-height:40px;}
+}
+#mains{
+    background:#f2f2f2;padding-bottom:30px;
+    .container{
+        h2{font-size:16px;color:$normalColor;line-height:40px;}
+        .details{
+            padding-left:20px;position:relative;
+            input:focus{outline:none;}
+            textarea:focus{outline:none;}
+            .bixuan{color:red;}
+            .intro{
+                span{float:left;}
+                textarea{float:left;margin-left:20px;}
+            }
+            p{
+                line-height:50px;
+                input{height:20px;width:600px;margin:0 20px;padding:0 6px;}
+            }
+            .price{
+                .showprice{margin-left:20px;color:$normalColor;}
+                input{height:24px;width:100px;}
+            }
+            .sale{
+                .showsale{margin-left:20px;color:$normalColor;}
+                input{height:24px;width:100px;}
+            }
+            .color{
+                input{width:100px;height:24px;}
+            }
+            .inventory{
+                input{width:100px;height:24px;}
+            }
+            .size{
+                background:#f2f2f2;
+                .showsize{
+                    padding-left:65px;
+                    span{float:left;display:inline-block;height:24px;padding:0 8px;border:1px solid #ccc;text-align:center;line-height:24px;margin-left:15px;margin-top:13px;cursor:pointer;-webkit-user-select:none;}
+                    span.selected{background:$normalColor;border:1px solid $normalColor;color:#fff;}
+                }
+                p:last-child{
+                    margin-left:80px;
+                    input{width:100px;height:24px;}
+                }
+            }
+            .imgs{
+                ul{
+                    li{
+                        float:left;width:90px;height:140px;border:1px solid #ccc;margin-right:20px;position:relative;
+                        img{width:90px;}
+                        .delbtn{position:absolute;left:0;bottom:0;text-align:center;line-height:20px;background:#999;color:#fff;width:90px;cursor:pointer;}
+                    }
+                    li:first-child{
+                        position:relative;margin-left:70px;
+                        span{display:block;width:90px;height:16px;position:absolute;left:0;top:0;background:rgba(33,33,33,.7);color:#fff;text-align:center;}
+                    }
+                }
+                p{margin-left:70px;}
+                input{margin-left:70px;}
+                .imgwaring{color:$normalColor;margin-left:15px;}
+            }
+            .imgbtn{position:absolute;right:360px;bottom:-61px;background:#f2f2f2;width:50px;height:18px;cursor:pointer;}
+        }
+
+        .kind{
+            margin-top:30px;
+            select{
+                width:100px;height:24px;font-size:16px;
+                option{width:100px;height:24px;font-size:16px;}
+            }
+            select:focus{outline:none;}
+        }
+        .sendwaring{text-align:center;color:red;width:100%;}
+        .jdtbox{
+            width:100%;height:10px;background:#fff;margin:5px 0;
+            .jdt{background:#58bc58;height:10px;width:0;}
+        }
+        .sendgood{width:200px;height:40px;background:#0fa3e0;border-radius:10px;color:#fff;font-size:20px;text-align:center;line-height:40px;margin:20px auto;-webkit-user-select:none;cursor:pointer;}
+    }
+}

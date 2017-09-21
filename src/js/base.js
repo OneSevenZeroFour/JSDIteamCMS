@@ -790,7 +790,5 @@ require(['config'],function(){
         if(nameIn !== ''){
             Chat.init(nameIn).receive(nameIn);
         }
-        
-        
     })
 })

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>商品信息管理</title>
+    <link rel="stylesheet" type="text/css" href="../css/management.css" />
+    <script src="../lib/require.js" data-main="../js/management.js"></script>   
+</head>
+<body>
+    <header id="header">
+        <h1>魅力惠后台商品管理系统</h1>
+        <a href="/index.html">返回后台首页</a>
+    </header>
+    <div id="mains">
+        <div class="container">
+            <h2>1、宝贝基本信息</h2>
+            <div class="details">
+                <p class="title">宝贝标题:<input type="text" maxlength="30" placeholder="请输入标题"><span class="bixuan">*(必填项)</span></p>
+                <div class="intro clearfixed"><span>宝贝卖点:</span><textarea name="intro" rows="4" cols="100"></textarea></div>
+                <p class="price">宝贝原价:<span class="showprice"></span><input type="number"><span class="bixuan">*(必填项)</span></p>
+                <p class="sale">宝贝现价:<span class="showsale"></span><input type="number"><span class="bixuan">*(必填项)</span></p>
+                <div class="size">
+                    <p>宝贝尺码:</p>                    
+                    <div class="showsize clearfixed">                       
+<!--                         <span class="selected">S</span>
+                        <span>M</span>
+                        <span>L</span> -->
+                    </div>
+                    <p>尺码(自定义):<input type="text" maxlength="4"><button>添加</button></p>
+                </div>
+                <p class="color">宝贝颜色:<input type="text"></p>
+                <p class="inventory">宝贝库存:<input type="text"><span class="bixuan">*(必填项)</span></p>
+                <div class="imgs">
+                    <span>宝贝图片:</span>
+                    <div class="imgbox">
+                        <ul class="clearfixed">
+                            <li><span>*宝贝主图</span>
+                            <div class="delbtn">删除</div></li>
+                            <li><div class="delbtn">删除</div></li>
+                            <li><div class="delbtn">删除</div></li>
+                            <li><div class="delbtn">删除</div></li>
+                        </ul>
+                        <p>* 长图横竖比必须为3：4，最小长度为480，建议使用480*640。</p>
+                        <input type="file" id="imgfile" name="file" accept="image/gif,image/jpeg,image/jpg,image/png"/><button class="imgfilebtn">上传图片</button><span class="imgwaring"></span>
+                    </div>
+                </div>
+                <div class="imgbtn">
+                <input type="file" id="crimg" name="crimg" accept="image/gif,image/jpeg,image/jpg,image/png"/>
+                </div>
+            </div>
+            <h2>2、宝贝详情</h2>
+            <div id="editor">
+            </div>
+            <div class="kind">
+                全网商品类型：
+                <select id="alltype">
+                    <option value="women">women</option>
+                    <option value="men">men</option>
+                    <option value="beauty">beauty</option>
+                    <option value="house">house</option>
+                    <option value="baby">baby</option>
+                    <option value="outsea">outsea</option>
+                </select>
+            </div>
+            <div class="sendwaring"></div>
+            <div class="jdtbox">
+                <div class="jdt"></div>
+            </div>
+            <div class="sendgood">发布宝贝</div>
+        </div>
+    </div>
+    
+</body>
+</html>

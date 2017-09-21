@@ -1,0 +1,320 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>魅力惠后台管理</title>
+  <meta name="description" content="这是一个 table 页面">
+  <meta name="keywords" content="table">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar am-topbar-inverse admin-header">
+  <div class="am-topbar-brand">
+    <strong>魅力惠</strong> <small>后台管理</small>
+  </div>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+          <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+          <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+        </ul>
+      </li>
+      <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+      <ul class="am-list admin-sidebar-list">
+    
+        <li class="admin-parent">
+          <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span>个人资料 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+            <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 个人资料<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+          </ul>
+        </li>
+        <li><a href="admin-table.html"><span class="am-icon-table"></span> 上架商品</a></li>
+        <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+      </ul>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-bookmark"></span> 公告</p>
+          <p>时光静好，与君语；细水流年，与君同。—— 魅力惠</p>
+        </div>
+      </div>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-tag"></span> wiki</p>
+          <p>Welcome to the 魅力惠!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">上架商品</strong> / <small>魅力惠</small></div>
+      </div>
+
+      <hr>
+
+      <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+          <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+              <button type="button" onclick="add()" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="am-u-sm-12 am-u-md-3">
+          <div class="am-form-group">
+            <select data-am-selected="{btnSize: 'sm'}">
+              <option value="option1">所有类别</option>
+              <option value="option2">women</option>
+              <option value="option3">man</option>
+              <option value="option3">beauty</option>
+              <option value="option3">house</option>
+              <option value="option3">baby</option>
+              <option value="option3">outsea</option>
+            </select>
+          </div> -->
+          <div class="jw_select">
+              <div class="jw_select_form">
+                  <select name="" id="jw_types">
+                    <option value="option1">所有类别</option>
+
+                  </select>
+              </div>
+          </div>
+        <!-- </div> -->
+        <div class="am-u-sm-12 am-u-md-3">
+          <div class="am-input-group am-input-group-sm">
+            <input type="text" class="am-form-field">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-default" type="button">搜索</button>
+          </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="am-g">
+        <div class="am-u-sm-12">
+          <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+              <thead>
+              <tr>
+                <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-author am-hide-sm-only">商品ID</th><th class="table-title">商品名</th><th class="table-type">类别</th><th class="table-price am-hide-sm-only">价格</th><th class="table-discount am-hide-sm-only">折扣 </th><th class="table-sale am-hide-sm-only">优惠</th><th class="table-color am-hide-sm-only">颜色</th><th class="table-inventory am-hide-sm-only">库存</th><th class="table-set">操作</th>
+              </tr>
+              </thead>
+              <tbody id="list">
+              
+              </tbody>
+            </table>
+            <div class="am-cf">
+              共 15 条记录
+              <div class="am-fr clearfix">
+                <ul class="am-pagination">
+                  <li class="am-disabled fl"><a href="#">«</a></li>
+                  <ul class="page fl">
+                      
+                  </ul>
+                  <!-- <li class="am-active"><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li> -->
+                  <li class="fr"><a href="#">»</a></li>
+                </ul>
+              </div>
+            </div>
+            <hr />
+            <p>注：.....</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </footer>
+
+  </div>
+  <!-- content end -->
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+
+<script src="assets/js/jquery.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+	function add(){
+		window.location.href = "admin-user.html"
+	}
+  function je(data,ele){
+      var list = JSON.parse(data);
+      var total=list.total;
+      console.log(list)
+      var html = list.result.map(function(item){
+        // console.log(item)
+        return `
+          <tr>
+                <td><input type="checkbox" /></td>
+                <td class="table-id jw_goods">${item.id}</td>
+                <td class="table-author jw_goods">${item.goodid}</td>
+                <td class="table-title jw_goods">${item.goodtitle}</td>
+                <td class="table-type jw_goods">${item.type}</td>
+                <td class="am-hide-sm-only jw_goods">${item.price}</td>
+                <td class="am-hide-sm-only jw_goods">${item.rabate}</td>
+                <td class="am-hide-sm-only jw_goods">${item.sale}</td>
+                <td class="am-hide-sm-only jw_goods">${item.color}</td>
+                <td class="am-hide-sm-only jw_goods">${item.inventory}</td>
+                <td>
+                  <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                      <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                      <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    </div>
+                  </div>
+                </td>
+          </tr> 
+        `
+      }).join("")
+        
+      // console.log(html)
+      $(ele).html("");
+      $(ele).html(html);
+
+  }
+  var pageNo=1;
+  var qty=20;
+	$.ajax({
+		type:"POST",
+    data:{pageNo:pageNo,qty:qty}, 
+		url:"http://localhost:2222/select",
+		success:function(data){
+      je(data,"#list")
+      // 页码
+      $('.page').html("");
+      var list = JSON.parse(data);
+      var total=list.total;
+       for(var i=1;i<=Math.ceil(total/qty);i++){
+            $('<li class="fl"></li>').append($("<span></span>").text(i)).appendTo($('.page'));     
+        }
+      $(".page li").eq(0).addClass('active');
+		}
+	})
+ 
+  // 点击页码
+  $(".page").on("click","li span",function(){
+    pageNo=$(this).text()*1;
+
+    console.log(pageNo,qty)
+    $.ajax({
+      type:"POST",
+      data:{pageNo:pageNo,qty:qty}, 
+      url:"http://localhost:2222/select",
+      success:function(data){
+        je(data,"#list")
+        $(".page li").eq(pageNo-1).addClass('active').siblings().removeClass('active') 
+      }
+    })
+    var scrollTop = $(".admin-content").scrollTop();
+    console.log(scrollTop)
+        $('.admin-content').stop().animate({'scrollTop':0},400); 
+  })
+  $("select option").on("click",function(){consloe.log(999)
+    var res= $('.am-selected .am-selected-status')
+    console.log(res)
+  })
+  
+    // 获取种类
+  $.ajax({
+    type:"POST",
+    url:"http://localhost:2222/selecttype",
+    success:function(data){
+        var arr_type=JSON.parse(data).results
+        console.log(arr_type)
+       var html_op=arr_type.map(function(item){
+            return `
+                  <option value="${item.type}">${item.type}</option>
+            `
+        })
+       $("#jw_types").append(html_op)
+    }
+  })
+
+  
+  // console.log(jw_types)
+  
+   // 筛选改变时发送请求
+ var jw_types=document.querySelector("#jw_types")
+  jw_types.onchange=function(){
+    var options=$("#jw_types option:selected");
+    var val_sel=options.text()
+    console.log(val_sel)
+    $.ajax({
+      type:"POST",
+      data:{pageNo:pageNo,qty:20,type:val_sel}, 
+      url:"http://localhost:2222/select_type",
+      success:function(data){
+           je(data,"#list")
+      // 页码
+          $('.page').html("");
+          var list = JSON.parse(data);
+          var total=list.total;
+           for(var i=1;i<=Math.ceil(total/qty);i++){
+                $('<li class="fl"></li>').append($("<span></span>").text(i)).appendTo($('.page'));     
+            }
+          $(".page li").eq(0).addClass('active');
+      }
+
+    })
+
+  }
+
+
+</script>
+</body>
+</html>
