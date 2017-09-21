@@ -577,7 +577,8 @@ require(['config'],function(){
                             return `
                                 <li data-id="${item.id}">
                                     <h4>${item.name}</h4>
-                                    <strong></strong>
+                                    <strong></strong><br/>
+                                    <em></em>
                                     <form>
                                         <input type="text"/>
                                         <a href="##" id="LY_chat_send">回复</a>
@@ -656,7 +657,16 @@ require(['config'],function(){
 
                 //绑定点击发送消息
                 LY_chat.on('click','.LY_chat_btn>a',()=>{
-                    this.send(name);
+
+                    //获取当前时间
+                    var now = new Date()
+                    var data = now.toLocaleDateString();
+                    var s = now.getHours();
+                    var f = now.getMinutes();
+                    var m = now.getSeconds();
+                    var time = data+' '+s+':'+f+':'+m;
+
+                    this.send(name,'','',time);
                     
                 })
 
@@ -665,10 +675,20 @@ require(['config'],function(){
                     var target = e.target;
 
                     if(target.id == 'LY_chat_send'){
-            
+                        //获取当前时间
+                        var now = new Date()
+                        var data = now.toLocaleDateString();
+                        var s = now.getHours();
+                        var f = now.getMinutes();
+                        var m = now.getSeconds();
+                        var time = data+' '+s+':'+f+':'+m;
+
+                        //获取数据
                         var id = target.parentNode.parentNode.dataset.id;
-                        var values = target.previousElementSibling.value;                      
-                        this.send(name,id,values);
+                        var values = target.previousElementSibling.value;
+                        target.parentNode.previousElementSibling.innerHTML =  values; 
+                        target.parentNode.previousElementSibling.style.display = 'block';                    
+                        this.send(name,id,values,time);
                         //清除/焦点
                         target.previousElementSibling.value = '';
                         target.previousElementSibling.focus();
@@ -712,7 +732,7 @@ require(['config'],function(){
                     var left = evt.clientX-ox;
                     var top = evt.clientY-oy;
 
-                    this.LY_chat.css({left:left,top:top});
+                    this.LY_chat.css({left:left,top:top,'margin-left':0,'margin-top':0});
 
                 }
 
@@ -720,22 +740,24 @@ require(['config'],function(){
             },
 
             //发送消息
-            send:function(name,id,values){
+            send:function(name,id,values,time){
                 if(name == '346692921@qq.com'){
                     
                     this.socket.emit('receive',{
                             name:name,
                             id:id,
                             value:values,
+                            time:time,
                     });
                 }else{
                     //获取输入框的值
-                     var $value = this.LY_chat.find('textarea').val();
-
-                     //发送
-                     this.socket.emit('receive',{
+                    var $value = this.LY_chat.find('textarea').val();
+                    console.log(time);
+                    //发送
+                    this.socket.emit('receive',{
                             name:name,
                             value:$value,
+                            time:time,
                      });
 
                      //清空输入框
@@ -753,7 +775,7 @@ require(['config'],function(){
                     if(nameIn == '346692921@qq.com'){
                         for(var i=0;i<this.LY_chat.children().children().length;i++){
                             if(this.LY_chat.children().children().eq(i).attr('data-id') == data.id){
-                                this.LY_chat.children().children().eq(i).find('strong').html(data.value);
+                                this.LY_chat.children().children().eq(i).find('strong').html(data.value).show();
                             }
                         }
                         this.show(nameIn);   
