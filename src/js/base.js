@@ -560,10 +560,59 @@ require(['config'],function(){
             
             //初始化
             init:function(name){
+                //跟后端连接
+                var socket = io("http://localhost:1111");
                 //生成结构
                 var LY_chat = $('<div/>');
                 LY_chat.addClass('LY_chat');
-                LY_chat.html(`
+
+                if(name == '346692921@qq.com'){
+                   socket.on('id',data=>{
+                        LY_chat.html('');
+                        LY_chat.html(`
+                                <div class="LY_chat_head"><h5></h5><span>&times;</span></div>
+                            `)
+                        var $ul = $('<ol/>');
+                        html = data.map(function(item){
+                            return `
+                                <li data-id="${item.id}">
+                                    <h4>${item.name}</h4>
+                                    <strong></strong>
+                                    <form>
+                                        <input type="text"/>
+                                        <a href="##" id="LY_chat_send">回复</a>
+                                    </form>
+                                </li>
+                            `
+                        }).join('');
+                        $ul.append(html)
+                        LY_chat.append($ul);
+                        for(var i=0;i<LY_chat.children().children().length;i++){
+                            console.log()
+                            if(LY_chat.children().children().eq(i).find('h4').html() == '346692921@qq.com'){
+                                LY_chat.children().children().eq(i).remove();
+                            }
+                        }
+
+                        //绑定点击隐藏
+                        LY_chat.find('.LY_chat_head>span').on('click',()=>{
+                            this.hide();
+                        });
+
+                        //绑定点击拖动
+                        LY_chat.find('.LY_chat_head').on('mousedown',e=>{
+                            //记录鼠标按下时的位置
+                            var ox = e.clientX - LY_chat.offset().left;
+                            var oy = e.clientY - LY_chat.offset().top;
+                            this.drag(ox,oy);
+                            
+                            e.preventDefault();
+                            
+                        })
+                    });
+                }else{
+                    LY_chat.html('');
+                    LY_chat.html(`
                         <div class="LY_chat_head"><h5>${name}</h5><span>&times;</span></div>
                         <ul></ul>
                         <textarea></textarea>
@@ -571,11 +620,14 @@ require(['config'],function(){
                             <a href="##">发送</a>
                         </div>
                     `);
+                }
+               
                 this.ele.children().append(LY_chat);
 
                 //绑定点击显示
                 this.btn.on('click',()=>{
-                     this.show();
+
+                     this.show(name);
                 });
 
                 //绑定点击隐藏
@@ -599,14 +651,31 @@ require(['config'],function(){
                     document.onmousemove = null;
                 });
 
-                //跟后端连接
-                var socket = io("http://10.3.132.143:1111");
+                //获取id
+                socket.emit('name',name)
 
                 //绑定点击发送消息
                 LY_chat.on('click','.LY_chat_btn>a',()=>{
                     this.send(name);
                     
                 })
+
+                //管理员回复
+                LY_chat[0].onclick = e=>{
+                    var target = e.target;
+
+                    if(target.id == 'LY_chat_send'){
+            
+                        var id = target.parentNode.parentNode.dataset.id;
+                        var values = target.previousElementSibling.value;                      
+                        this.send(name,id,values);
+                        //清除/焦点
+                        target.previousElementSibling.value = '';
+                        target.previousElementSibling.focus();
+                    }
+                }
+                    
+                
                 
                 this.LY_chat = LY_chat; 
                 this.socket = socket;
@@ -615,11 +684,13 @@ require(['config'],function(){
             },
 
             //显示
-            show:function(){
+            show:function(name){
                 this.LY_chat.show().animate({width:600,height:500});
-
-                //输入框获取焦点
-                this.LY_chat.find('textarea')[0].focus();
+                if(name != '346692921@qq.com'){
+                    //输入框获取焦点
+                    this.LY_chat.find('textarea')[0].focus();
+                }
+                
 
                 return this;
 
@@ -649,43 +720,64 @@ require(['config'],function(){
             },
 
             //发送消息
-            send:function(name){
-                 //获取输入框的值
-                 var $value = this.LY_chat.find('textarea').val();
+            send:function(name,id,values){
+                if(name == '346692921@qq.com'){
+                    
+                    this.socket.emit('receive',{
+                            name:name,
+                            id:id,
+                            value:values,
+                    });
+                }else{
+                    //获取输入框的值
+                     var $value = this.LY_chat.find('textarea').val();
 
-                 //发送
-                 this.socket.emit('receive',{
-                        name:name,
-                        value:$value,
-                 });
+                     //发送
+                     this.socket.emit('receive',{
+                            name:name,
+                            value:$value,
+                     });
 
-                 //清空输入框
-                 this.LY_chat.find('textarea').val('').focus();
+                     //清空输入框
+                     this.LY_chat.find('textarea').val('').focus();
+                }
+                 
 
                   return this;
             },
 
             //接收消息
             receive:function(nameIn){
-              
-                this.socket.on('send',data=>{
 
-                    //生成结构         
-                    var $li = $('<li/>');
-                    if(data.name == nameIn){   
-                        $li.addClass('LY_left');
-                        $li.html(`
-                                <b>我:</b>
-                                <span>${data.value}</span>
-                            `);
+                this.socket.on('send',data=>{
+                    if(nameIn == '346692921@qq.com'){
+                        for(var i=0;i<this.LY_chat.children().children().length;i++){
+                            if(this.LY_chat.children().children().eq(i).attr('data-id') == data.id){
+                                this.LY_chat.children().children().eq(i).find('strong').html(data.value);
+                            }
+                        }
+                        this.show(nameIn);   
+
                     }else{
-                        $li.addClass('LY_right');
-                        $li.html(`
-                                <b>${data.name}</b>
-                                <span>${data.value}</span>
-                            `);
+                         //生成结构         
+                        var $li = $('<li/>');
+                        if(data.name == nameIn){   
+                            $li.addClass('LY_left');
+                            $li.html(`
+                                    <b>我:</b>
+                                    <span>${data.value}</span>
+                                `);
+                        }else if(data.name == '346692921@qq.com'){
+                            $li.addClass('LY_right');
+                            $li.html(`
+                                    <b>${data.name}</b>
+                                    <span>${data.value}</span>
+                                `);
+                        }
+                        this.LY_chat.find('ul').append($li)
                     }
-                    this.LY_chat.find('ul').append($li)
+                   
+
 
                     
                 });
