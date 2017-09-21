@@ -129,6 +129,13 @@ a{color:#000;text-decoration:none;}
                 p{text-align:center;}
             }
         }
+        .LY_chat{
+            display: none;
+            border:1px solid red;
+            width:40px;
+            height:40px;
+            background:black;
+        }
     }
     .headLogo{
         a{display:inline-block;width:200px;height:90px;background:url("/img/set.fw.png") 0 -80px;}

@@ -229,8 +229,7 @@ require(['config'],function(){
                             console.log(res);
                         }
                     })
-                }
-                
+                }               
             })
         })
     })

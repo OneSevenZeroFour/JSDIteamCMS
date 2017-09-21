@@ -126,6 +126,7 @@ require(['config'],function(){
                     $('.detail .imgsbox').html(imgs);
                     $('.detailmsg .goodsshowPic').html(gooddetail['descrption']);
                     $('.point').text(gooddetail['point']);
+                    $('.detailmsg .goodsshowPic').html(imgs);
 
                     function changeimg(){
                         var mainImgurl = $('.mainImg').attr('src');
