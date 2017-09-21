@@ -2,9 +2,10 @@
 * @Author: Marte
 * @Date:   2017-09-20 10:58:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-20 19:16:25
+* @Last Modified time: 2017-09-21 16:47:35
 */
 .listtable{display:none;}
+#header .headTop .top_left{display:block};
 .active{font-size: 14px;}
 #content{height:950px;width:1000px;margin: 0 auto;border:1px solid #eee;overflow: hidden;margin-top:20px;}
 #content .left{width:180px;float:left;}
@@ -48,3 +49,17 @@
 #content .right_3 .right_bottom{height:246px;box-sizing: border-box;padding:50px 30px 25px;}
 #content .right_3 .right_bottom li{height:32px;line-height:32px;margin-bottom: 25px;}
 #content .right_3 .right_bottom li a{float:right;display:block;width:86px;height:32px;background:#eee;line-height: 32px;font-size: 14px;text-align: center;}
+
+
+#content .right_adds{width:700px;height:448px;background:#fff;margin: 0 auto;display:none;}
+#content .right_adds h3{height:60px;line-height: 60px;margin-bottom: 10px;text-align: center;font-weight: 800;color:#000;font-size:16px;}
+#content .right_adds p{width:535px;height:40px;line-height: 40px;margin:10px 0;padding-left: 150px;font-size:16px;}
+#content .right_adds p input{width:370px;height:38px;padding:0 14px;line-height: 38px;border: 1px solid #d7d7d7;float:right;margin-right: 50px;}
+#content .right_adds .qy{overflow:hidden;height:40px;line-height: 40px;margin:10px 0;font-size:16px;padding-left:150px;}
+#content .right_adds .qy div{float:left;width:123px;height:38px;border:1px solid #d7d7d7;margin-right:12px;text-align: center;}
+#content .right_adds .qy div span{font-size: 14px;}
+#content .right_adds .qy div:nth-child(1){border:none;width:72px;}
+#content .right_adds .add{padding-left:234px;}
+#content .right_adds .add .xinzheng{width:400px;height:38px;text-align: center;font-size:16px;background:#000;color:#fff;line-height: 38px;margin-right: 65px;}
+#content .right_adds .add div{text-align: center;width:400px;height:38px;line-height: 38px;}
+#content .right_adds .zy{height:22px;font-size: 12px;padding-left:234px;margin:0;line-height: 22px;}
