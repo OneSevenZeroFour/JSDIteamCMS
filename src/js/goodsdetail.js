@@ -124,7 +124,8 @@ require(['config'],function(){
                         }                                   
                     }
                     $('.detail .imgsbox').html(imgs);
-                    $('.detailmsg .goodsshowPic').html(imgs);
+                    $('.detailmsg .goodsshowPic').html(gooddetail['descrption']);
+                    $('.point').text(gooddetail['point']);
 
                     function changeimg(){
                         var mainImgurl = $('.mainImg').attr('src');
