@@ -138,7 +138,11 @@ a { color: #000; text-decoration: none; }
 
 #header .headTop .LY_chat ol li{margin-bottom:10px;}
 
-#header .headTop .LY_chat ol li h4{margin-bottom:7px;}
+#header .headTop .LY_chat ol li h4{margin-bottom:7px;float:left;}
+
+#header .headTop .LY_chat ol li span{float:right;padding:0 10px;font-size:18px;}
+
+#header .headTop .LY_chat ol li span:hover{background:red;cursor:pointer;color:#fff;}
 
 #header .headTop .LY_chat ol li  form{margin-top:5px;padding-top:5px; clear:both;}
 

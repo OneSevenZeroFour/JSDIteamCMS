@@ -289,14 +289,14 @@ io.on('connection',function(socket){
     socket.on('name',function(data){
  
         for(var i=0;i<user.length;i++){
-            if(user[i].name == data){
+            if(user[i].name == data.name){
                 user[i].id = socket.id;
                 break;
             }
         }
         if(i==user.length){
             user.push({
-                name:data,
+                name:data.name,
                 id:socket.id,
             });
         }
@@ -304,7 +304,7 @@ io.on('connection',function(socket){
         user.forEach(function(item){
             if(item.name == 'admin'){
                 io.sockets.sockets[item.id].emit('id',{
-                    name:data,
+                    name:data.name,
                     id:socket.id,
                 });    
             }
