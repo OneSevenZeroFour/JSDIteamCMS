@@ -109,13 +109,13 @@ require(['config'],function(){
                     $('.allmsg .msglist li:nth-child(6)').text(gooddetail['size']);
                     // 主图及小图显示
                     // 绑定事件
-                    var mainImgUrl = '/img/'+goodid+'link(1).jpg';
+                    var mainImgUrl = '/img/'+goodid+'link(1).jpg';              
                     $('.mainImg').attr('src',mainImgUrl);
                     $('.allmsg .msgmainImg').attr('src',mainImgUrl);
                     var goodtitle =  gooddetail['goodtitle']+'-商品代码：'+goodid;
                     $('.mainTop .goodtitle').text(goodtitle);
                     var imgqty = gooddetail['imgurls'];
-                    var imgs='';
+                    var imgs='';                      
                     for(var i=1;i<=imgqty;i++){
                         if(i==1){
                             imgs += '<img src="/img/'+goodid+'link('+i+').jpg" class="active"/>';
@@ -123,7 +123,7 @@ require(['config'],function(){
                             imgs += '<img src="/img/'+goodid+'link('+i+').jpg"/>';
                         }                                   
                     }
-                    $('.detail .imgsbox').html(imgs);
+                    $('.detail .imgsbox').html(imgs);                   
                     $('.detailmsg .goodsshowPic').html(gooddetail['descrption']);
                     $('.point').text(gooddetail['point']);
 
