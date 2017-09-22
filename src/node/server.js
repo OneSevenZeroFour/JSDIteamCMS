@@ -17,8 +17,6 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-var app = express();
-
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
     extended: true
@@ -81,11 +79,13 @@ app.post('/setgoods',function(req,res){
         console.log(path1);
         var path2 = "../img/"+good.id+'link('+(idx+1)+').jpg';
         console.log(path2);
-        fs.rename(path1,path2,function(err){  
+        var copysrc = '../img/copy'+ (idx+1) +'.jpg';
+        fs.writeFileSync(copysrc, fs.readFileSync(path1)); 
+        fs.rename(copysrc,path2,function(err){  
             if(err){  
                 console.error(err);  
                 return;  
-            }  
+            } 
             console.log('重命名成功');  
         });
     })

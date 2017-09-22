@@ -741,13 +741,8 @@ require(['config'],function(){
             },
 
             //发送消息
-<<<<<<< HEAD
-            send:function(name,id,values,time){
-                if(name == '346692921@qq.com'){
-=======
             send:function(name,id,values){
                 if(name == 'admin'){
->>>>>>> 0daf658c03cb6a5bf4e851c5db3142f1be05e7d1
                     
                     this.socket.emit('receive',{
                             name:name,

@@ -96,55 +96,7 @@ a { color: #000; text-decoration: none; }
 
 #header .headTop .top_right .topCode p { text-align: center; }
 
-<<<<<<< HEAD
-#header .headTop .LY_chat { display: none; width:10px; height:10px; background:#ddd;position: fixed;top:50%;left:50%;margin-left:-300px; margin-top:-250px; z-index: 9999;}
-=======
-#header .headTop .LY_chat { display: none; width:10px; height:10px; background:#ddd;position: fixed;left:50%;top:50%;margin-left:-300px;margin-top:-250px;z-index: 9999;overflow: auto;}
->>>>>>> 0daf658c03cb6a5bf4e851c5db3142f1be05e7d1
-
-#header .headTop .LY_chat .LY_chat_head {height:50px; line-height:40px;}
-
-#header .headTop .LY_chat .LY_chat_head h5 {float:left;padding-left:5px;}
-
-#header .headTop .LY_chat .LY_chat_head span {float:right;cursor:pointer;display: block;padding:0 10px;margin:0; font-size:25px;}
-
-#header .headTop .LY_chat .LY_chat_head span:hover {background:red;color:#fff;}
-
-#header .headTop .LY_chat ul {width:540px; height:290px; background:#fff;margin-left:25px; border-radius:4px; overflow: auto;padding:5px 5px;}
-
-#header .headTop .LY_chat ul .LY_left{text-align:left; }
-
-#header .headTop .LY_chat ul li{margin-top:5px;}
-
-#header .headTop .LY_chat ul li b{display: block;}
-
-#header .headTop .LY_chat ul .LY_left span{display: inline-block; float:none;border:1px solid #ddd; background:#58bc58; padding:3px 10px; border-radius: 5px; line-height:20px;}
-
-#header .headTop .LY_chat ul .LY_right{text-align:right;}
-
-#header .headTop .LY_chat ul .LY_right span{ display: inline-block; float:none; border:1px solid #ddd;  padding:5px 10px; border-radius: 5px;line-height:20px;}
-
-#header .headTop .LY_chat textarea {width:540px;margin-left:25px; height:70px; background:#fff; border:0;border-radius: 4px; margin-top:30px; resize : none;padding:5px;}
-
-#header .headTop .LY_chat ol {width:auto; margin:5px 40px; background:#fff;height:80%;padding:5px;border-radius: 4px; overflow: auto;}
-
-#header .headTop .LY_chat ol li{margin-bottom:10px;}
-
-#header .headTop .LY_chat ol li h4{margin-bottom:7px;}
-
-#header .headTop .LY_chat ol li  form{margin-top:5px;padding-top:5px; clear:both;}
-
-#header .headTop .LY_chat ol li  form input {width:450px; height:40px;float:left;border:0;background:#ddd;}
-
-#header .headTop .LY_chat ol li  form a {display: inline-block;padding:5px 10px;background:red;height:30px;width:40px; line-height:30px;text-align: center;color:#fff;}
-
-#header .headTop .LY_chat ol li strong{ display:none;background-color: #58bc58;padding: 5px 25px;border-radius: 10px;}
-
-#header .headTop .LY_chat ol li em{display:none;padding: 5px 25px;border-radius: 10px;border:1px solid #ddd;float:right;}
-
-#header .headTop .LY_chat .LY_chat_btn {text-align:right; width:550px;margin-left:25px;}
-
-#header .headTop .LY_chat .LY_chat_btn a{margin-top:5px;display: inline-block; padding:0 25px; line-height:25px; background:#ff9; border-radius: 4px;}
+#header .headTop .LY_chat { display: none; border: 1px solid red; width: 40px; height: 40px; background: black; }
 
 #header .headLogo a { display: inline-block; width: 200px; height: 90px; background: url("/img/set.fw.png") 0 -80px; }
 
