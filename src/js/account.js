@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-20 10:30:21
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-21 21:11:12
+* @Last Modified time: 2017-09-22 17:43:42
 */
 
 require(['config'],function(){   
@@ -15,18 +15,21 @@ require(['config'],function(){
         // 进入页面加载数据
         require(['base'],function(){
 
-
+        // 获取cookie里的账户名
         var username;
         var cookies=document.cookie.split('; ')
                 console.log(cookies)
                 cookies.forEach(function(item){
                     var res =item.split('=')
+                    console.log(res);
                     if(res[0]==='prusername'){
                         username =res[1]
                         console.log(username);
                     }
                 })
 
+        // 加载页面到时候，通过判断用户名请求数据库数据,
+        //声明头像,便于接受修改后的头像;
         var imgurl;
         console.log(username)
         $.ajax({
@@ -57,18 +60,16 @@ require(['config'],function(){
                 
                 imgurl = $('.right .touxiang2').find('img').attr('src');
 
-
-                // if(username !==''){
-                //     // $('#header .top_left').find('img').hide();
-                //     // $('#header .top_left').find('a')[0].style.display='none';
-                //     // $('#header .top_left').find('a')[1].onmouseover=function(){
-                //     //     $('.ledgerlist')[0].style.display="block";
-                //     //     console.log($('.ledgerlist'))
-                //     // }
-                // }
-
-              
-
+                $('.addslist ul').append(`
+                        <li>
+                            <h3 class="ren">${res.user}</h3>
+                            <p class="phone">${res.phone}</p>
+                            <p class="ssq">${res.province+res.city+res.district}</p>
+                            <p class="dizhi">${res.dizhi}</p>
+                            <p class="youzheng">${res.youbian}</p>
+                        </li>
+                    `)
+                // console.log($('.ren').html());
             }
         })
 
@@ -83,6 +84,7 @@ require(['config'],function(){
             $('._xb').show();
         })
 
+        // 选择男女
         $('.nan').on('click',function(){
             $(this).addClass('active').css({'background':'#000','color':'#fff'});
             $('.nv').removeClass('active').css({'background':'#ccc','color':'#000'});
@@ -94,9 +96,7 @@ require(['config'],function(){
 
         // 点击上传头像，先保存起来，点击保存的时候上传到数据库
         // 点击保存，上传数据到数据库
-        
-        
-        var imgurl;
+        // var imgurl;
         $('.baocun').on('click',function(){
             $('.bj').hide();
             $('.bianji').show();
@@ -107,23 +107,26 @@ require(['config'],function(){
             $('._xb').hide();
 
             var nicheng = $('._nicheng').val();
-            console.log(nicheng);
+            // console.log(nicheng);
             var xingbie = $('.active').html();
-            console.log(xingbie)
-            console.log(imgurl);
+            // console.log(xingbie)
+            // console.log(imgurl);
             $.ajax({
                 url: 'http://localhost:12345/getAccount',
                 type: 'get',
+                // 发送修改后的用户信息到数据库
                 data:{username:username,nicheng:nicheng,xingbie:xingbie,imgurl:imgurl},
                 // processData: false,
                 // contentType: false,
                 success: function(data) {
-                    
+                    // 保存后,刷新页面
+                    window.location.reload();
                 }
             })
         
         })
 
+        // 图片上传，图片存入/mulu,上传路径到数据库
         $('#file').on('change',function(){
                 $.ajax({
                     url: 'http://localhost:12345/chuan',
@@ -134,14 +137,11 @@ require(['config'],function(){
                     contentType: false,
                     success: function(data) {
                         imgurl ='/js/mulu/'+data;
+                        $('.right .touxiang2').find('img').attr('src',imgurl);
                     }
                 })
         })
         
-            
-        
-
-
         // 点击取消，回到展示状态
         $('.quxiao').on('click',function(){
             $('.bj').hide();
@@ -151,10 +151,13 @@ require(['config'],function(){
             $('.nicheng').show();
             $('.xb').show();
             $('._xb').hide();
+
         })
 
 
-        // 页面加载开始定位地理位置，并上传到数据库
+
+
+        // 页面加载开始定位地理位置
         var geolocation = new BMap.Geolocation();
         geolocation.getCurrentPosition(function(r){
         console.log(r.point);
@@ -165,36 +168,59 @@ require(['config'],function(){
                 console.log(addComp)
                 $.ajax({
                     url:'http://localhost:12345/adds',
-                    type:'POST',
+                    type:'post',
                     data:{username:username,province:addComp.province,city:addComp.city,district:addComp.district},
-                    success:function(data){
-                        
-                        console.log(data);
-                        // $('.qy').find('div')[1].innerHTML = data.province;
-                             
+                    success:function(){
+
                     }
                 })
-                $('.xu_dz').html(addComp.city+addComp.district);
+                
             });       
         },{enableHighAccuracy: true})
-             
+
+        // // 获取cookie里的地址
+        // var xu_cookies=document.cookie.split('; ')
+        //         console.log(cookies)
+        //         xu_cookies.forEach(function(item){
+        //             var res =item.split('=')
+        //             console.log(res);
+        //             if(res[0]==='xu_location'){
+        //                 xu_location =res[1]
+        //                 console.log(xu_location);
+        //                 // 写入HTML
+        //                 $('#header .top_left').find('a')[2].innerHTML=xu_location;
+        //                 $('.xu_dz').html(xu_location);
+        //             }
+        //         })
+                    
     // 点击切换界面
     $('.adds').on('click',function(){
         $('.right_3').hide();
         $('.right_adds').show();
         $(this).css('background','#eee');
         $('.account').css('background','#fff');
+        $('.shdz').css('background','#eee');
+        $('.zhxx').css('background','#fff');
+        $('.addslist ul').show();
+        // console.log($('.ren').html())
+        // if($('.ren').html()=== ''){
+        //             $('.addslist').hide();
+        //         }
     })
+
     $('.account').on('click',function(){
+
         $('.right_3').show();
         $('.right_adds').hide();
         $(this).css('background','#eee');
         $('.adds').css('background','#fff');
+        $('.shdz').css('background','#fff');
+        $('.zhxx').css('background','#eee');
     })
-
 
     // 新增收货地址
     $('.xinzheng').on('click',function(){
+
         var user = $('.ren').val()
         var phone = $('.phone').val();
         var dizhi = $('.dizhi').val();
@@ -209,6 +235,9 @@ require(['config'],function(){
                     }
         })
     })
+
+
+    
 
         })
     })
