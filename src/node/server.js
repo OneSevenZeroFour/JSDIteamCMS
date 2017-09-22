@@ -339,7 +339,6 @@ io.on('connection',function(socket){
     })    
 });
 
-server.listen(3001);
 
 app.listen(12345);
 console.log("开启服务器")

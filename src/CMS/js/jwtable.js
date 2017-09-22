@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-21 19:20:32
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-22 17:20:41
+* @Last Modified time: 2017-09-22 21:10:13
 */
 
 require.config({
@@ -42,10 +42,10 @@ require(["jquery","amazeui.min"],function($){
             `
         }).join("")
         
-      // console.log(html)
-      $(ele).html("");
-      $(ele).html(html);
-      $(".totalnumber").html(total)
+        // console.log(html)
+        $(ele).html("");
+        $(ele).html(html);
+        $(".totalnumber").html(total)
     }
      // 获取种类  
     $.ajax({
@@ -70,15 +70,24 @@ require(["jquery","amazeui.min"],function($){
     var options=$("#jw_types option:selected");
     val_sel_op=options.text()
     search_val=$('#myInput').val();
-      // console.log(val_sel_op)
+      console.log(val_sel_op)
     var jw_types=document.querySelector("#jw_types")
       // 点击页码
     var pageNo=1;
     var qty=20;
+    var datas;
+    var posts;
+    if(search_val!=""){
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op,search_val:search_val};
+          posts='jw_search';
+        }else{
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op};
+          posts='jw_select';
+        }
     $.ajax({
             type:"POST",
-            data:{pageNo:1,qty:qty,type:val_sel_op}, 
-            url:"http://localhost:12345/jw_select",
+            data:datas, 
+            url:"http://localhost:12345/"+posts,
             success:function(data){
             // allid=JSON.parse(data).total;
             // console.log(allid)
@@ -121,7 +130,7 @@ require(["jquery","amazeui.min"],function($){
         }
         $.ajax({
             type:"POST",
-            data:{pageNo:1,qty:qty,type:val_sel_op,search_val:search_val}, 
+            data:datas, 
             url:"http://localhost:12345/"+posts,
             success:function(data){
             // console.log(data)
@@ -172,7 +181,7 @@ require(["jquery","amazeui.min"],function($){
     //下一页
    
     $(".am-pagination").on("click",".jw_nextpage",function(){
-        if(pageNo==$(".page li").length){
+        if(pageNo>=$(".page li").length){
             return false
         }
         pageNo=$(".active").text();
