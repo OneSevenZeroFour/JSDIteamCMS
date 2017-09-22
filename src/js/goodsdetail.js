@@ -270,7 +270,7 @@ require(['config'],function(){
                 // 转成倒计时格式
                 var secLeft = offset%60;
                 var minLeft = Math.floor(offset/60)%60;
-                var hourLeft = Math.floor(offset/60/24)%60;
+                var hourLeft = Math.floor(offset/60/60)%24;
                 var dayLeft = Math.floor(offset/60/60/24);
 
                 var minLeft = minLeft<10?'0'+minLeft:minLeft;

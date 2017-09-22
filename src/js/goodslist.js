@@ -75,7 +75,7 @@ require(['config'],function(){
                 // 转成倒计时格式
                 var secLeft = offset%60;
                 var minLeft = Math.floor(offset/60)%60;
-                var hourLeft = Math.floor(offset/60/24)%60;
+                var hourLeft = Math.floor(offset/60/60)%24;
                 var dayLeft = Math.floor(offset/60/60/24);
 
                 var timetext = dayLeft+'天'+hourLeft+'时'+minLeft+'分'+secLeft+'秒';
