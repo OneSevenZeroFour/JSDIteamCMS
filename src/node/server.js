@@ -208,27 +208,36 @@ app.post("/jw_search",function(req,res){
 var user = [];
 //连接
 io.on('connection',function(socket){
-    socket.on('name',function(data){
-        console.log('1',data)
-        user.push({
-            name:data,
-            id:socket.id,
-        });
-
+    socket.on('name',function(data){  
+        for(var i=0;i<user.length;i++){
+            if(user[i].name == data){
+                user[i].id = socket.id;
+                break;
+            }
+        }
+        if(i==user.length){
+            user.push({
+                name:data,
+                id:socket.id,
+            });
+        }
         user.forEach(function(item){
             if(item.name == 'admin'){
-                io.sockets.sockets[item.id].emit('id',user);
+                io.sockets.sockets[item.id].emit('id',{
+                    name:data,
+                    id:socket.id,
+                });    
             }
-        })
+        });
     })
     //接收
     socket.on('receive',function(data){
-        console.log('2',data)
-
+       
         if(data.name == 'admin'){
             io.sockets.sockets[data.id].emit('send',{
                 name:data.name,
                 value:data.value,
+                time:data.time,
             });
         }else{
             //发送
@@ -236,10 +245,12 @@ io.on('connection',function(socket){
                 name:data.name,
                 id:socket.id,
                 value:data.value,
+                time:data.time,
             });
         }
         
     })    
 });
+server.listen(3001);
 app.listen(12345);
 console.log("开启服务器")

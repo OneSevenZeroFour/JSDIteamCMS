@@ -561,64 +561,78 @@ require(['config'],function(){
             //初始化
             init:function(name){
                 //跟后端连接
-                var socket = io("http://localhost:1111");
+                var socket = io("http://localhost:3001");
                 //生成结构
                 var LY_chat = $('<div/>');
                 LY_chat.addClass('LY_chat');
 
-                if(name == '346692921@qq.com'){
-                   socket.on('id',data=>{
-                        LY_chat.html('');
-                        LY_chat.html(`
-                                <div class="LY_chat_head"><h5></h5><span>&times;</span></div>
-                            `)
-                        var $ul = $('<ol/>');
-                        console.log(data)
-                        html = data.map(function(item){
-                            return `
-                                <li data-id="${item.id}">
-                                    <h4>${item.name}</h4>
-                                    <a class="LY_a"></a>
-                                    <p></p><br/>
-                                    <em></em><br/>
-                                    <b></b>
+                if(name == 'admin'){
+                    
+                    LY_chat.html(`
+                            <div class="LY_chat_head"><h5></h5><span>&times;</span></div>
+                            <ol></ol>
+                        `)
+                    socket.on('id',data=>{
+
+                        //找出相同的name
+                        //重置id
+                        var LY_name = LY_chat.find('ol').children();
+                        for(var j=0;j<LY_name.length;j++){
+                            console.log(LY_name.eq(j).find('h4').html())
+                            if(data.name == LY_name.eq(j).find('h4').html()){
+                                LY_name.eq(j).attr('data-id',data.id);
+                                break;
+                            }
+                        }
+                        //找出管理员
+                        if(data.name != 'admin' && j==LY_name.length){
+                            $li = $('<li/>');
+                            $li.attr('data-id',data.id);
+                            $li.html (`
+                                    <h4>${data.name}</h4>
+                                    <ul class="LY_kefu"></ul>
                                     <form>
                                         <input type="text"/>
                                         <a href="##" id="LY_chat_send">回复</a>
                                     </form>
-                                </li>
-                            `
-                        }).join('');
-                        $ul.append(html)
-                        LY_chat.append($ul);
-                        for(var i=0;i<LY_chat.children().children().length;i++){
-                            
-                            if(LY_chat.children().children().eq(i).find('h4').html() == '346692921@qq.com'){
-                                LY_chat.children().children().eq(i).remove();
-                            }
+                                    
+                                `
+                            )
+                            LY_chat.find('ol').append($li)
                         }
-
-                        //绑定点击隐藏
-                        LY_chat.find('.LY_chat_head>span').on('click',()=>{
-                            this.hide();
-                        });
-
-                        //绑定点击拖动
-                        LY_chat.find('.LY_chat_head').on('mousedown',e=>{
-                            //记录鼠标按下时的位置
-                            var ox = e.clientX - LY_chat.offset().left;
-                            var oy = e.clientY - LY_chat.offset().top;
-                            this.drag(ox,oy);
-                            
-                            e.preventDefault();
-                            
-                        })
+                        
+                        
+                        
                     });
+
+
+                    for(var i=0;i<LY_chat.children().children().length;i++){
+                            
+                        if(LY_chat.children().children().eq(i).find('h4').html() == 'admin'){
+                            LY_chat.children().children().eq(i).remove();
+                        }
+                    }
+
+                    //绑定点击隐藏
+                    LY_chat.find('.LY_chat_head>span').on('click',()=>{
+                        this.hide();
+                    });
+
+                    //绑定点击拖动
+                    LY_chat.find('.LY_chat_head').on('mousedown',e=>{
+                        //记录鼠标按下时的位置
+                        var ox = e.clientX - LY_chat.offset().left;
+                        var oy = e.clientY - LY_chat.offset().top;
+                        this.drag(ox,oy);
+                        
+                        e.preventDefault();
+                        
+                    })
                 }else{
                     LY_chat.html('');
                     LY_chat.html(`
                         <div class="LY_chat_head"><h5>${name}</h5><span>&times;</span></div>
-                        <ul></ul>
+                        <ul class="LY_yonghu"></ul>
                         <div class="LY_icon">
                             <div class="iconfont icon-smile"></div>
                             <div class="iconfont icon-pic"></div>
@@ -633,7 +647,7 @@ require(['config'],function(){
                 }
                
                 this.ele.children().append(LY_chat);
-                var arr = ['晕','奋斗','亲亲','害羞','惊讶'];
+                var arr = ['晕','奋斗','亲亲','害羞','惊讶','发呆','流泪','酷','睡觉','冷汗'];
                 //生成表情包
                 var $ul = $('<ol>/');
                 for(var i=0;i<arr.length;i++){
@@ -737,9 +751,18 @@ require(['config'],function(){
                         //获取数据
                         var id = target.parentNode.parentNode.dataset.id;
                         var values = target.previousElementSibling.value;
-                        target.parentNode.previousElementSibling.innerHTML = time;
-                        target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML =  values; 
-                        target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.style.display = 'inline-block';                    
+                        
+                        //生成结构         
+                        var $li = $('<li/>');      
+                        $li.addClass('LY_left');
+                        $li.html(`
+                                <a>${values}</a>
+                                 <p>${time}</p>
+                            `);           
+        
+                        //写入当前
+                        target.parentNode.previousElementSibling.appendChild($li[0]);
+                        target.parentNode.previousElementSibling.scrollTop = target.parentNode.previousElementSibling.scrollHeight;                  
                         this.send(name,id,values,time);
                         //清除/焦点
                         target.previousElementSibling.value = '';
@@ -758,7 +781,7 @@ require(['config'],function(){
             //显示
             show:function(name){
                 this.LY_chat.show().animate({width:600,height:500});
-                if(name != '346692921@qq.com'){
+                if(name != 'admin'){
                     //输入框获取焦点
                     this.LY_chat.find('textarea')[0].focus();
                 }
@@ -794,7 +817,7 @@ require(['config'],function(){
 
             //发送消息
             send:function(name,id,values,time){
-                if(name == '346692921@qq.com'){
+                if(name == 'admin'){
                     
                     this.socket.emit('receive',{
                             name:name,
@@ -826,17 +849,28 @@ require(['config'],function(){
 
                 this.socket.on('send',data=>{
                     console.log(data)
-                    if(nameIn == '346692921@qq.com'){
-                        for(var i=0;i<this.LY_chat.children().children().length;i++){
-                            if(this.LY_chat.children().children().eq(i).attr('data-id') == data.id){
-                                this.LY_chat.children().children().eq(i).find('p').html(data.time);
-                                this.LY_chat.children().children().eq(i).find('.LY_a').html(data.value).show().css({display:'inline-block'});
+                    if(nameIn == 'admin'){
+                       //生成结构         
+                        var $li = $('<li/>');      
+                        $li.addClass('LY_right');
+                        $li.html(`
+                                <a>${data.value}</a>
+                                 <p>${data.time}</p>
+                            `);
+                   
+                        var $name = this.LY_chat.find('ol').children();
+                        for(var i=0;i<$name.length;i++){
+                            if(data.name == $name.eq(i).find('h4').html()){
+                                $name.eq(i).find('ul').append($li);
+                               $name.eq(i).find('ul')[0].scrollTop = $name.eq(i).find('ul')[0].scrollHeight;
                             }
                         }
+                    
+                       
                         this.show(nameIn);   
 
                     }else{
-                         //生成结构         
+                        //生成结构         
                         var $li = $('<li/>');
                         if(data.name == nameIn){   
                             $li.addClass('LY_left');
@@ -845,7 +879,7 @@ require(['config'],function(){
                                     <a>${data.value}</a>
                                     <p>${data.time}</p>
                                 `);
-                        }else if(data.name == '346692921@qq.com'){
+                        }else if(data.name == 'admin'){
                             $li.addClass('LY_right');
                             $li.html(`
                                     <b>客服:</b>
@@ -868,7 +902,11 @@ require(['config'],function(){
         }
 
         if(nameIn !== ''){
+            if(nameIn == 'admin'){
+                $('.top_right').children().eq(0).find('a').html('客户咨询');
+           }
             Chat.init(nameIn).receive(nameIn);
         }
+
     })
 })
