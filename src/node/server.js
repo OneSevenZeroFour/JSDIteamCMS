@@ -1,7 +1,7 @@
 var multer = require("multer");
 var express = require('express');
 var app = require('express')();
-var server = require('http').createServer(app);
+var server = require('http').createServer();
 var socket = require("socket.io");
 var io = socket(server);
 var bodyParser = require('body-parser');
@@ -204,7 +204,42 @@ app.post("/jw_search",function(req,res){
                 result
             }))
         });
+})
+var user = [];
+//连接
+io.on('connection',function(socket){
+    socket.on('name',function(data){
+        console.log('1',data)
+        user.push({
+            name:data,
+            id:socket.id,
+        });
 
+        user.forEach(function(item){
+            if(item.name == 'admin'){
+                io.sockets.sockets[item.id].emit('id',user);
+            }
+        })
     })
+    //接收
+    socket.on('receive',function(data){
+        console.log('2',data)
+
+        if(data.name == 'admin'){
+            io.sockets.sockets[data.id].emit('send',{
+                name:data.name,
+                value:data.value,
+            });
+        }else{
+            //发送
+            io.emit('send',{
+                name:data.name,
+                id:socket.id,
+                value:data.value,
+            });
+        }
+        
+    })    
+});
 app.listen(12345);
 console.log("开启服务器")
