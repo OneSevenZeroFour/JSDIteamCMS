@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-21 19:20:32
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-21 20:07:59
+* @Last Modified time: 2017-09-22 10:16:14
 */
 
 require.config({
@@ -95,16 +95,26 @@ require(["jquery","amazeui.min"],function($){
             $(".page li").eq(0).addClass('active');
             }
     })
-      
+    
        // 筛选改变时发送请求
     jw_types.onchange=function(){
         var options=$("#jw_types option:selected");
-        val_sel_op=options.text()
+        val_sel_op=options.text();
+        search_val=$('#myInput').val();
+        var datas;
+        var posts;
         // console.log(val_sel_op)
+        if(search_val!=""){
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op,search_val:search_val};
+          posts='jw_search';
+        }else{
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op};
+          posts='jw_select';
+        }
         $.ajax({
             type:"POST",
-            data:{pageNo:1,qty:qty,type:val_sel_op}, 
-            url:"http://localhost:12345/jw_select",
+            data:{pageNo:1,qty:qty,type:val_sel_op,search_val:search_val}, 
+            url:"http://localhost:12345/"+posts,
             success:function(data){
             console.log(data)
                 je(data,"#list")
@@ -124,6 +134,9 @@ require(["jquery","amazeui.min"],function($){
       // 点击页码发送请求
     $(".page").on("click","li span",function(){
         pageNo=$(this).text()*1;
+        // options=$("#jw_types option:selected");
+        // val_sel_op=options.text();
+        // search_val=$('#myInput').val();
         console.log(pageNo,qty);
         var datas;
         var posts;
