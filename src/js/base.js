@@ -8,6 +8,13 @@ require(['config'],function(){
         })
         //头部默认读取cookie并验证
         var nameIn = com.Cookie.get('prusername');
+        if(nameIn==='admin'){
+            $('.xu_dz').html('后台管理')
+            $('.xu_dz').on('click',function(){
+                window.location.href ='/CMS/admin-table.html'
+            })
+        }
+        
         //判断是否有写入的特定用户名
         if(nameIn==''){
             $('.top_left').show();
@@ -36,6 +43,41 @@ require(['config'],function(){
                 cartlistgetmsg();
             }     
         }
+
+        
+        // 获取地理位置。并写入cookie,然后从cookie中读取写入引入了base的页面;
+        
+        
+        var  xu_location =com.Cookie.get('xu_location');
+        if(xu_location===''){
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function(r){
+            console.log(r.point);
+                var geoc = new BMap.Geocoder();                     
+                var pt = r.point;
+                geoc.getLocation(pt, function(rs){
+                    var addComp = rs.addressComponents;
+                    console.log(addComp.city)
+                    var now = new Date();
+                    document.cookie = 'xu_location='+addComp.city+';path=/'+';expires='+now.toString();       
+                    $('#header .top_left').find('a')[2].innerHTML=addComp.city;
+                     $('.xu_dz').html(addComp.city);
+                });       
+            },{enableHighAccuracy: true})
+            // var now = new Date();
+            // document.cookie = 'xu_location='+xu_location+';path=/'+';expires='+now.toString(); 
+
+        }
+        if(nameIn!=='admin'){
+            $('#header .top_left').find('a')[2].innerHTML=xu_location;
+            $('.xu_dz').html(xu_location);
+            console.log(xu_location)
+        }
+        
+
+        
+
+
         var obj3={women:'SERGIO ROSSI',men:'VERSACE COLLECTION & VERSACE',beauty:'LOUIS VUITTON',house:'MASADA & HARIO',baby:'ORANGE TOYS',outsea:'MOROCCAOIL & LEONOR GREYL'};
         // 读取用户购物车并写入购物车页面
         function cartlistgetmsg(){
@@ -594,15 +636,12 @@ require(['config'],function(){
                                     <form>
                                         <input type="text"/>
                                         <a href="##" id="LY_chat_send">回复</a>
-                                    </form>
-                                    
+                                    </form>          
                                 `
                             )
-                            LY_chat.find('ol').append($li)
+                            LY_chat.find('ol').append($li)                        
                         }
-                        
-                        
-                        
+                                                                
                     });
 
 
@@ -816,7 +855,10 @@ require(['config'],function(){
             },
 
             //发送消息
+
+
             send:function(name,id,values,time){
+
                 if(name == 'admin'){
                     
                     this.socket.emit('receive',{
@@ -865,8 +907,6 @@ require(['config'],function(){
                                $name.eq(i).find('ul')[0].scrollTop = $name.eq(i).find('ul')[0].scrollHeight;
                             }
                         }
-                    
-                       
                         this.show(nameIn);   
 
                     }else{

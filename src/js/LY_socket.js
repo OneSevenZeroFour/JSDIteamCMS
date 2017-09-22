@@ -12,6 +12,7 @@ var user = [];
 io.on('connection',function(socket){
 
 	socket.on('name',function(data){
+<<<<<<< HEAD
 		for(var i=0;i<user.length;i++){
 			if(user[i].name == data){
 				user[i].id = socket.id;
@@ -26,6 +27,17 @@ io.on('connection',function(socket){
 		}
 		
 		console.log(user)
+=======
+		console.log('1',data)
+		for(var i=0;i<4;i++){
+            console.log(data);
+        }
+		user.push({
+			name:data,
+			id:socket.id,
+		});
+
+>>>>>>> 9d636b28034772d9bcd3f0386ca95cef5dcf7101
 		user.forEach(function(item){
 			if(item.name == '346692921@qq.com'){
 				if(item.id){

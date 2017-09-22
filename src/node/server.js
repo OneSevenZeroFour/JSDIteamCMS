@@ -78,6 +78,7 @@ app.post('/setgoods',function(req,res){
         var path1 = "../img/"+path1arr[path1arr.length-1];
         console.log(path1);
         var path2 = "../img/"+good.id+'link('+(idx+1)+').jpg';
+        console.log(idx);
         console.log(path2);
         var copysrc = '../img/copy'+ (idx+1) +'.jpg';
         fs.writeFileSync(copysrc, fs.readFileSync(path1)); 
@@ -205,10 +206,88 @@ app.post("/jw_search",function(req,res){
             }))
         });
 })
+
+
+// 获取最大id值
+app.post("/jw_id",function(req,res){
+    res.append("Access-Control-Allow-Origin", "*")
+    connection.query(`select id from goodslist order by id DESC limit 0,1`,function(erro,results,fields){
+        console.log(results)
+        res.send(results)
+    })
+
+})
+
+
+// 徐啸的
+// 
+// 上传头像
+app.post('/chuan',upload.any(),function(req,res,next){
+    res.append("Access-Control-Allow-Origin","*");
+    connection.query(`insert into userlist (imgurl) values ("${req.files[0].filename}")`, function(error, results, fields) {
+ 
+    });
+    res.send(req.files[0].filename);
+})
+
+// 修改用户个人信息
+app.get('/getAccount', function(req, res) {
+   
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    
+connection.query(`update userlist set nicheng='${req.query.nicheng}',xingbie='${req.query.xingbie}',imgurl='${req.query.imgurl}' where name='${req.query.username}'`, function(error, results, fields) {
+       
+        res.send();
+    });
+    
+})
+
+
+// 上传收货地址
+app.post('/dizhi', function(req, res) {
+    
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    console.log(req.body);
+    
+connection.query(`update userlist set user='${req.body.user}',phone='${req.body.phone}',dizhi='${req.body.dizhi}',youbian='${req.body.youbian}' where name='${req.body.username}'`, function(error, results, fields) {
+
+        res.send();
+    });
+    
+})
+
+
+// 获取用户所有信息
+app.get('/get',function(req,res){
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    
+    connection.query(`SELECT * FROM userlist where name='${req.query.username}'`, function(error, results, fields) {
+                    if(error) throw error;
+                    
+                    res.end(JSON.stringify({
+                        status: 1,
+                        results
+                    }))
+                });
+})
+
+// 添加地理位置到数据库
+app.post("/adds", function(req, res) {
+    
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    // console.log(req.body);
+    connection.query(`update userlist set province='${req.body.province}',city='${req.body.city}',district='${req.body.district}' where name='${req.body.username}'`, function(error, results, fields) {
+                    res.send()
+                });
+})
+
+server.listen(3001);
 var user = [];
 //连接
 io.on('connection',function(socket){
-    socket.on('name',function(data){  
+
+    socket.on('name',function(data){
+ 
         for(var i=0;i<user.length;i++){
             if(user[i].name == data){
                 user[i].id = socket.id;
@@ -221,6 +300,7 @@ io.on('connection',function(socket){
                 id:socket.id,
             });
         }
+
         user.forEach(function(item){
             if(item.name == 'admin'){
                 io.sockets.sockets[item.id].emit('id',{
@@ -229,7 +309,9 @@ io.on('connection',function(socket){
                 });    
             }
         });
+
     })
+
     //接收
     socket.on('receive',function(data){
        
@@ -238,6 +320,7 @@ io.on('connection',function(socket){
                 name:data.name,
                 value:data.value,
                 time:data.time,
+
             });
         }else{
             //发送
@@ -246,11 +329,14 @@ io.on('connection',function(socket){
                 id:socket.id,
                 value:data.value,
                 time:data.time,
+
             });
         }
         
     })    
 });
+
 server.listen(3001);
+
 app.listen(12345);
 console.log("开启服务器")

@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-20 12:09:12
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-21 20:07:07
+* @Last Modified time: 2017-09-22 15:16:50
 */
 
 var express=require("express");
@@ -111,9 +111,18 @@ app.post("/jw_search",function(req,res){
                 status: 1,
                 result
             }))
-        });
+    });
+})
 
+// 获取最大id值
+app.post("/jw_id",function(req,res){
+    res.append("Access-Control-Allow-Origin", "*")
+    connection.query(`select id from goodslist order by id DESC limit 0,1`,function(erro,results,fields){
+        console.log(results)
+        res.send(results)
     })
+
+})
 
 app.listen("12345")
 console.log("开启服务器成功")
