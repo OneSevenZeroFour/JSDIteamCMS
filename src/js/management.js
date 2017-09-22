@@ -34,8 +34,41 @@ require(['config'],function(){
                     $(this).val("请输入数字")
                 }
             })
+            $('.changebtn').hide();
+            $('.imgs li').hover(function(){
+                $(this).find('.changebtn').show();
+            },function(){
+                $(this).find('.changebtn').hide();
+            })
             $('.imgs .delbtn').click(function(){
-                $(this).siblings('img').remove();
+                $(this).parent().siblings('img').remove();
+            })
+            //左右移动切换位子
+            $('.changebtn .prev').click(function(){
+                var idx = $(this).parents('li').index();
+                if(idx==0){
+                    return;
+                }else{
+                    var $old = $('.imgbox li').eq(idx-1).find('img');
+                    var $newimg = $(this).parent().siblings('img');
+                    var $oldli = $('.imgbox li').eq(idx-1);
+                    $newimg.appendTo($oldli);
+                    var $newli = $(this).parents('li');
+                    $old.appendTo($newli);
+                }
+            })
+            $('.changebtn .next').click(function(){
+                var idx = $(this).parents('li').index();
+                if(idx==3){
+                    return;
+                }else{
+                    var $old = $('.imgbox li').eq(idx+1).find('img');
+                    var $newimg = $(this).parent().siblings('img');
+                    var $oldli = $('.imgbox li').eq(idx+1);
+                    $newimg.appendTo($oldli);
+                    var $newli = $(this).parents('li');
+                    $old.appendTo($newli);
+                }
             })
             $('.imgfilebtn').click(function(){
                 var formData = new FormData();
