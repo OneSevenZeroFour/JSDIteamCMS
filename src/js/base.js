@@ -959,6 +959,14 @@ require(['config'],function(){
                 $('.top_right').children().eq(0).find('a').html('客户咨询');
            }
             Chat.init(nameIn).receive(nameIn);
+        }else{
+            $('.top_right').children().eq(0).find('a').click(function(){
+                var href = location.href;
+                com.Cookie.set('hoshref',href,'','/');
+                var typelink = location.search.slice(1).split('=')[1];
+                com.Cookie.set('typelink',typelink,'','/');
+                window.location.href="/html/user.html?type=login";
+            })            
         }
 
     })
