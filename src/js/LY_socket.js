@@ -12,21 +12,31 @@ var user = [];
 io.on('connection',function(socket){
 
 	socket.on('name',function(data){
-		console.log('1',data)
-		user.push({
-			name:data,
-			id:socket.id,
-		});
-
+		for(var i=0;i<user.length;i++){
+			if(user[i].name == data){
+				user[i].id = socket.id;
+				break;
+			}
+		}
+		if(i==user.length){
+			user.push({
+				name:data,
+				id:socket.id,
+			});
+		}
+		
+		console.log(user)
 		user.forEach(function(item){
 			if(item.name == '346692921@qq.com'){
-				io.sockets.sockets[item.id].emit('id',user);
+				if(item.id){
+					io.sockets.sockets[item.id].emit('id',user);
+				}
+				
 			}
 		})
 	})
 	//接收
 	socket.on('receive',function(data){
-		console.log('2',data)
 
 		if(data.name == '346692921@qq.com'){
 			io.sockets.sockets[data.id].emit('send',{

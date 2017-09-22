@@ -573,6 +573,7 @@ require(['config'],function(){
                                 <div class="LY_chat_head"><h5></h5><span>&times;</span></div>
                             `)
                         var $ul = $('<ol/>');
+                        console.log(data)
                         html = data.map(function(item){
                             return `
                                 <li data-id="${item.id}">
@@ -591,7 +592,7 @@ require(['config'],function(){
                         $ul.append(html)
                         LY_chat.append($ul);
                         for(var i=0;i<LY_chat.children().children().length;i++){
-                            console.log()
+                            
                             if(LY_chat.children().children().eq(i).find('h4').html() == '346692921@qq.com'){
                                 LY_chat.children().children().eq(i).remove();
                             }
