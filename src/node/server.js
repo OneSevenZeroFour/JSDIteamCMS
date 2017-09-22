@@ -80,12 +80,12 @@ app.post('/setgoods',function(req,res){
         console.log(path1);
         
         var copysrc = '../img/copy'+ (idx+1) +'.jpg';
-        fs.writeFile(copysrc, fs.readFileSync(path1)); 
+        fs.writeFileSync(copysrc, fs.readFileSync(path1)); 
     })
     for(var i=1;i<=max;i++){
         var path2 = "../img/"+good.id+'link('+i+').jpg';
         var copysrc = '../img/copy'+ i +'.jpg';
-        fs.rename(copysrc,path2,function(err){  
+        fs.renameSync(copysrc,path2,function(err){  
             if(err){  
                 console.error(err);  
                 return;  
