@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-21 19:20:32
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-22 10:16:14
+* @Last Modified time: 2017-09-22 17:20:41
 */
 
 require.config({
@@ -30,11 +30,10 @@ require(["jquery","amazeui.min"],function($){
                     <td class="am-hide-sm-only jw_goods">${item.sale}</td>
                     <td class="am-hide-sm-only jw_goods">${item.color}</td>
                     <td class="am-hide-sm-only jw_goods">${item.inventory}</td>
-                    <td>
+                    <td class="jw_goods">
                       <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs">
                           <button class="am-btn am-btn-default am-btn-xs am-text-secondary jw_bjbtn" data-goodid="${item.goodid}"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                          <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
                           <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only jw_sc" data-guid="${item.id}"><span class="am-icon-trash-o"></span> 删除</button>
                         </div>
                       </div>
@@ -66,7 +65,7 @@ require(["jquery","amazeui.min"],function($){
     }) 
   // 获取分类值()
     var val_sel_op;
-    var allid;
+    var maxid;
     var search_val;
     var options=$("#jw_types option:selected");
     val_sel_op=options.text()
@@ -81,8 +80,8 @@ require(["jquery","amazeui.min"],function($){
             data:{pageNo:1,qty:qty,type:val_sel_op}, 
             url:"http://localhost:12345/jw_select",
             success:function(data){
-            allid=JSON.parse(data).total;
-            console.log(allid)
+            // allid=JSON.parse(data).total;
+            // console.log(allid)
             je(data,"#list")
             // 页码
             $('.page').html("");
@@ -94,8 +93,17 @@ require(["jquery","amazeui.min"],function($){
             }
             $(".page li").eq(0).addClass('active');
             }
+    })   
+    // 获取最大id的请求
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:12345/jw_id",
+        success:function(data){
+            // console.log(888)
+            maxid=data[0].id
+            
+        }
     })
-    
        // 筛选改变时发送请求
     jw_types.onchange=function(){
         var options=$("#jw_types option:selected");
@@ -116,7 +124,7 @@ require(["jquery","amazeui.min"],function($){
             data:{pageNo:1,qty:qty,type:val_sel_op,search_val:search_val}, 
             url:"http://localhost:12345/"+posts,
             success:function(data){
-            console.log(data)
+            // console.log(data)
                 je(data,"#list")
           // 页码
                 $('.page').html("");
@@ -138,6 +146,70 @@ require(["jquery","amazeui.min"],function($){
         // val_sel_op=options.text();
         // search_val=$('#myInput').val();
         console.log(pageNo,qty);
+        var datas;
+        var posts;
+        console.log(search_val)
+        if(search_val!=""){
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op,search_val:search_val};
+          posts='jw_search';
+        }else{
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op};
+          posts='jw_select';
+        }
+        $.ajax({
+          type:"POST",
+          data:datas, 
+          url:"http://localhost:12345/"+posts,
+          success:function(data){
+            je(data,"#list")
+            $(".page li").eq(pageNo-1).addClass('active').siblings().removeClass('active') 
+          }
+        })
+        var scrollTop = $(".admin-content").scrollTop();
+        // console.log(scrollTop)
+            $('.admin-content').stop().animate({'scrollTop':0},400); 
+    })
+    //下一页
+   
+    $(".am-pagination").on("click",".jw_nextpage",function(){
+        if(pageNo==$(".page li").length){
+            return false
+        }
+        pageNo=$(".active").text();
+        console.log(pageNo)
+        pageNo++;
+        var datas;
+        var posts;
+        console.log(search_val)
+        if(search_val!=""){
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op,search_val:search_val};
+          posts='jw_search';
+        }else{
+          datas={pageNo:pageNo,qty:qty,type:val_sel_op};
+          posts='jw_select';
+        }
+        $.ajax({
+          type:"POST",
+          data:datas, 
+          url:"http://localhost:12345/"+posts,
+          success:function(data){
+            je(data,"#list")
+            $(".page li").eq(pageNo-1).addClass('active').siblings().removeClass('active') 
+          }
+        })
+        var scrollTop = $(".admin-content").scrollTop();
+        // console.log(scrollTop)
+            $('.admin-content').stop().animate({'scrollTop':0},400); 
+    })
+
+    //上一页
+    $(".am-pagination").on("click",".jw_prepage",function(){
+        if(pageNo==1){
+            return false
+        }
+        pageNo=$(".active").text();
+        console.log(pageNo)
+        pageNo--;
         var datas;
         var posts;
         console.log(search_val)
@@ -189,7 +261,7 @@ require(["jquery","amazeui.min"],function($){
     })
       // 新增按钮
     $(".jw_add").on("click",function(){
-        window.location.href = `/html/management.html?maxid=${allid}`;
+        window.location.href = `/html/management.html?maxid=${maxid}`;
     })
       // 模糊搜索
     $('.jw_search').click(function(){

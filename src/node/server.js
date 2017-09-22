@@ -205,6 +205,16 @@ app.post("/jw_search",function(req,res){
             }))
         });
 
+})
+
+// 获取最大id值
+app.post("/jw_id",function(req,res){
+    res.append("Access-Control-Allow-Origin", "*")
+    connection.query(`select id from goodslist order by id DESC limit 0,1`,function(erro,results,fields){
+        console.log(results)
+        res.send(results)
     })
+
+})
 app.listen(12345);
 console.log("开启服务器")
