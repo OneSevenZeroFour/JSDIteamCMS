@@ -632,6 +632,7 @@ require(['config'],function(){
                             $li.attr('data-id',data.id);
                             $li.html (`
                                     <h4>${data.name}</h4>
+                                    <span>&times;</span>
                                     <ul class="LY_kefu"></ul>
                                     <form>
                                         <input type="text"/>
@@ -651,6 +652,11 @@ require(['config'],function(){
                             LY_chat.children().children().eq(i).remove();
                         }
                     }
+
+                    //绑定点击事件删除
+                    LY_chat.find('ol').on('click','span',function(){
+                        $(this).parent().remove();
+                    })
 
                     //绑定点击隐藏
                     LY_chat.find('.LY_chat_head>span').on('click',()=>{
@@ -757,7 +763,7 @@ require(['config'],function(){
                 });
 
                 //获取id
-                socket.emit('name',name);
+                socket.emit('name',{name:name});
 
                 //绑定点击发送消息
                 LY_chat.on('click','.LY_chat_btn>a',()=>{
@@ -769,7 +775,14 @@ require(['config'],function(){
                     var f = now.getMinutes();
                     var m = now.getSeconds();
                     var time = data+' '+s+':'+f+':'+m;
+                    //获取输入框的值
+                    var values = this.LY_chat.find('textarea').val();
+                    socket.emit('name',{
+                        name:name,
+                        value:values,
+                    })
 
+                    
                     this.send(name,'','',time);
                     
                 })
