@@ -132,13 +132,13 @@ require(['config'],function(){
                         var firstImgurl = $('.detail .imgsbox img:first-child').attr('src');
                         var lastImgurl = $('.detail .imgsbox img:last-child').attr('src');
                         if($('.detail .imgsbox img').length==1){
-                            $('.detail i').hide();
+                            $('.detail .mainbox i').hide();
                         }else if($('.detail .imgsbox img').length>1&&mainImgurl==firstImgurl){
                             $('.detail .prevbtn').hide().siblings('.nextbtn').show();
                         }else if($('.detail .imgsbox img').length>1&&mainImgurl==lastImgurl){
                             $('.detail .prevbtn').show().siblings('.nextbtn').hide();
                         }else{
-                            $('.detail i').show();
+                            $('.detail .mainbox i').show();
                         }
                     }
                     changeimg();

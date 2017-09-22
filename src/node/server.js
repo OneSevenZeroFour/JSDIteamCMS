@@ -205,18 +205,27 @@ app.post("/jw_search",function(req,res){
             }))
         });
 })
+server.listen(3001);
 var user = [];
 //连接
 io.on('connection',function(socket){
     socket.on('name',function(data){
         console.log('1',data)
-        user.push({
-            name:data,
-            id:socket.id,
-        });
-
+        for(var i=0;i<user.length;i++){
+            if(user[i].name == data){
+                user[i].id = socket.id;
+                break;
+            }
+        }
+        if(i==user.length){
+            user.push({
+                name:data,
+                id:socket.id,
+            });
+        }
         user.forEach(function(item){
             if(item.name == 'admin'){
+                console.log(io.sockets.sockets);
                 io.sockets.sockets[item.id].emit('id',user);
             }
         })
@@ -229,6 +238,7 @@ io.on('connection',function(socket){
             io.sockets.sockets[data.id].emit('send',{
                 name:data.name,
                 value:data.value,
+                time:data.time
             });
         }else{
             //发送
@@ -236,6 +246,7 @@ io.on('connection',function(socket){
                 name:data.name,
                 id:socket.id,
                 value:data.value,
+                time:data.time
             });
         }
         

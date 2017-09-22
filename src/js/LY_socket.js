@@ -13,6 +13,9 @@ io.on('connection',function(socket){
 
 	socket.on('name',function(data){
 		console.log('1',data)
+		for(var i=0;i<4;i++){
+            console.log(data);
+        }
 		user.push({
 			name:data,
 			id:socket.id,

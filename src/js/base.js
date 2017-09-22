@@ -561,12 +561,12 @@ require(['config'],function(){
             //初始化
             init:function(name){
                 //跟后端连接
-                var socket = io("http://localhost:1111");
+                var socket = io("http://localhost:3001");
                 //生成结构
                 var LY_chat = $('<div/>');
                 LY_chat.addClass('LY_chat');
 
-                if(name == '346692921@qq.com'){
+                if(name == 'admin'){
                    socket.on('id',data=>{
                         LY_chat.html('');
                         LY_chat.html(`
@@ -592,7 +592,7 @@ require(['config'],function(){
                         LY_chat.append($ul);
                         for(var i=0;i<LY_chat.children().children().length;i++){
                             console.log()
-                            if(LY_chat.children().children().eq(i).find('h4').html() == '346692921@qq.com'){
+                            if(LY_chat.children().children().eq(i).find('h4').html() == 'admin'){
                                 LY_chat.children().children().eq(i).remove();
                             }
                         }
@@ -757,7 +757,7 @@ require(['config'],function(){
             //显示
             show:function(name){
                 this.LY_chat.show().animate({width:600,height:500});
-                if(name != '346692921@qq.com'){
+                if(name != 'admin'){
                     //输入框获取焦点
                     this.LY_chat.find('textarea')[0].focus();
                 }
@@ -793,7 +793,7 @@ require(['config'],function(){
 
             //发送消息
             send:function(name,id,values,time){
-                if(name == '346692921@qq.com'){
+                if(name == 'admin'){
                     
                     this.socket.emit('receive',{
                             name:name,
@@ -825,7 +825,7 @@ require(['config'],function(){
 
                 this.socket.on('send',data=>{
                     console.log(data)
-                    if(nameIn == '346692921@qq.com'){
+                    if(nameIn == 'admin'){
                         for(var i=0;i<this.LY_chat.children().children().length;i++){
                             if(this.LY_chat.children().children().eq(i).attr('data-id') == data.id){
                                 this.LY_chat.children().children().eq(i).find('p').html(data.time);
@@ -844,7 +844,7 @@ require(['config'],function(){
                                     <a>${data.value}</a>
                                     <p>${data.time}</p>
                                 `);
-                        }else if(data.name == '346692921@qq.com'){
+                        }else if(data.name == 'admin'){
                             $li.addClass('LY_right');
                             $li.html(`
                                     <b>客服:</b>
