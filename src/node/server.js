@@ -1,7 +1,7 @@
 var multer = require("multer");
 var express = require('express');
 var app = require('express')();
-var server = require('http').createServer(app);
+var server = require('http').createServer();
 var socket = require("socket.io");
 var io = socket(server);
 var bodyParser = require('body-parser');
@@ -16,8 +16,6 @@ var connection = mysql.createConnection({
     database:'goods'
 });
 connection.connect();
-
-var app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
@@ -81,11 +79,13 @@ app.post('/setgoods',function(req,res){
         console.log(path1);
         var path2 = "../img/"+good.id+'link('+(idx+1)+').jpg';
         console.log(path2);
-        fs.rename(path1,path2,function(err){  
+        var copysrc = '../img/copy'+ (idx+1) +'.jpg';
+        fs.writeFileSync(copysrc, fs.readFileSync(path1)); 
+        fs.rename(copysrc,path2,function(err){  
             if(err){  
                 console.error(err);  
                 return;  
-            }  
+            } 
             console.log('重命名成功');  
         });
     })
@@ -204,8 +204,37 @@ app.post("/jw_search",function(req,res){
                 result
             }))
         });
+})
+var user = [];
+//连接
+io.on('connection',function(socket){
+    socket.on('name',function(data){
+        console.log('1',data)
+        user.push({
+            name:data,
+            id:socket.id,
+        });
 
+
+})
+
+// 获取最大id值
+app.post("/jw_id",function(req,res){
+    res.append("Access-Control-Allow-Origin", "*")
+    connection.query(`select id from goodslist order by id DESC limit 0,1`,function(erro,results,fields){
+        console.log(results)
+        res.send(results)
     })
+
+})
+
+        user.forEach(function(item){
+            if(item.name == 'admin'){
+                io.sockets.sockets[item.id].emit('id',user);
+            }
+        })
+    })
+<<<<<<< HEAD
 
 // 徐啸的
 // 
@@ -269,6 +298,28 @@ app.post("/adds", function(req, res) {
                 });
 })
 
+=======
+    //接收
+    socket.on('receive',function(data){
+        console.log('2',data)
+
+        if(data.name == 'admin'){
+            io.sockets.sockets[data.id].emit('send',{
+                name:data.name,
+                value:data.value,
+            });
+        }else{
+            //发送
+            io.emit('send',{
+                name:data.name,
+                id:socket.id,
+                value:data.value,
+            });
+        }
+        
+    })    
+});
+>>>>>>> aa4e4add2525e9c6a329e44b59b8c706f2eb49aa
 
 app.listen(12345);
 console.log("开启服务器")
