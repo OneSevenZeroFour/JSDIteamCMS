@@ -73,23 +73,26 @@ app.post('/setgoods',function(req,res){
         }))
     })
     var imgurls = good.imgurls;
+    var max = imgurls.length;
     imgurls.forEach(function(item,idx){
         var path1arr = item.split('/');
         var path1 = "../img/"+path1arr[path1arr.length-1];
         console.log(path1);
-        var path2 = "../img/"+good.id+'link('+(idx+1)+').jpg';
-        console.log(idx);
-        console.log(path2);
+        
         var copysrc = '../img/copy'+ (idx+1) +'.jpg';
-        fs.writeFileSync(copysrc, fs.readFileSync(path1)); 
+        fs.writeFile(copysrc, fs.readFileSync(path1)); 
+    })
+    for(var i=1;i<=max;i++){
+        var path2 = "../img/"+good.id+'link('+i+').jpg';
+        var copysrc = '../img/copy'+ i +'.jpg';
         fs.rename(copysrc,path2,function(err){  
             if(err){  
                 console.error(err);  
                 return;  
             } 
-            console.log('重命名成功');  
+            console.log('重命名成功');
         });
-    })
+    }        
 })
 app.post('/addgoods',function(req,res){
     res.append("Access-Control-Allow-Origin","*");

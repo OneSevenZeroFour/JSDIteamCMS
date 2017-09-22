@@ -180,7 +180,7 @@ require(['config'],function(){
                 $('.inventory input').val(inventory);
                 var imgurls = res.imgurls;
                 for(var i=1;i<=imgurls;i++){
-                    var src = "http://localhost:10086/img/"+id+'link('+i+').jpg';
+                    var src = "http://localhost:10086/img/"+id+'link('+i+').jpg?'+Date.now();
                     var $img = $('<img/>').attr('src',src);
                     $('.imgs li').eq(i-1).append($img);
                 }
@@ -205,7 +205,7 @@ require(['config'],function(){
                 var img = $('.imgs li img').length;
                 var imgurls = [];
                 $('.imgs img').each(function(){
-                    imgurls.push($(this).attr('src'));
+                    imgurls.push($(this).attr('src').split('?')[0]);
                 })
                 var descrption = editor.txt.html();
                 var type = $('#alltype').val();
