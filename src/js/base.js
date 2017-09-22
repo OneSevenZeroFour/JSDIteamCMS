@@ -566,7 +566,7 @@ require(['config'],function(){
                 var LY_chat = $('<div/>');
                 LY_chat.addClass('LY_chat');
 
-                if(name == 'admin'){
+                if(name == '346692921@qq.com'){
                    socket.on('id',data=>{
                         LY_chat.html('');
                         LY_chat.html(`
@@ -577,8 +577,10 @@ require(['config'],function(){
                             return `
                                 <li data-id="${item.id}">
                                     <h4>${item.name}</h4>
-                                    <strong></strong><br/>
-                                    <em></em>
+                                    <a class="LY_a"></a>
+                                    <p></p><br/>
+                                    <em></em><br/>
+                                    <b></b>
                                     <form>
                                         <input type="text"/>
                                         <a href="##" id="LY_chat_send">回复</a>
@@ -590,7 +592,7 @@ require(['config'],function(){
                         LY_chat.append($ul);
                         for(var i=0;i<LY_chat.children().children().length;i++){
                             console.log()
-                            if(LY_chat.children().children().eq(i).find('h4').html() == 'admin'){
+                            if(LY_chat.children().children().eq(i).find('h4').html() == '346692921@qq.com'){
                                 LY_chat.children().children().eq(i).remove();
                             }
                         }
@@ -616,6 +618,12 @@ require(['config'],function(){
                     LY_chat.html(`
                         <div class="LY_chat_head"><h5>${name}</h5><span>&times;</span></div>
                         <ul></ul>
+                        <div class="LY_icon">
+                            <div class="iconfont icon-smile"></div>
+                            <div class="iconfont icon-pic"></div>
+                            <div class="iconfont icon-remind"></div>
+                            <div class="iconfont icon-video"></div>
+                        </div>
                         <textarea></textarea>
                         <div class="LY_chat_btn">
                             <a href="##">发送</a>
@@ -624,6 +632,48 @@ require(['config'],function(){
                 }
                
                 this.ele.children().append(LY_chat);
+                var arr = ['晕','奋斗','亲亲','害羞','惊讶'];
+                //生成表情包
+                var $ul = $('<ol>/');
+                for(var i=0;i<arr.length;i++){
+                    var $li = $('<li/>');
+                    $li.html(`
+                            <a href="##" title="${arr[i]}"><img src="img/icon/img/${i}.png"></a>
+                        `);
+                    $ul.append($li);
+                }
+                LY_chat.find('.icon-smile').append($ul);
+
+                //绑定鼠标移入事件
+                var kaiguan = false;
+                LY_chat.on('click','.icon-smile',function(){
+                    if(kaiguan){
+                        $(this).children().hide(); 
+                        kaiguan = false;
+                    }else{
+                        $(this).children().show(); 
+                        kaiguan = true;
+                    }
+                   
+                }); 
+                //事件委托发送表情
+                LY_chat.on('click','.icon-smile>ol>li>a',function(){
+                     //获取当前时间
+                    var now = new Date()
+                    var data = now.toLocaleDateString();
+                    var s = now.getHours();
+                    var f = now.getMinutes();
+                    var m = now.getSeconds();
+                    var time = data+' '+s+':'+f+':'+m;
+
+                    var values = $(this).children().clone(true);
+                    var value = `<img src="${values[0].src}"/>`;
+                    socket.emit('receive',{
+                        name:name,
+                        time:time,
+                        value:value,
+                    })
+                })
 
                 //绑定点击显示
                 this.btn.on('click',()=>{
@@ -653,7 +703,7 @@ require(['config'],function(){
                 });
 
                 //获取id
-                socket.emit('name',name)
+                socket.emit('name',name);
 
                 //绑定点击发送消息
                 LY_chat.on('click','.LY_chat_btn>a',()=>{
@@ -686,8 +736,9 @@ require(['config'],function(){
                         //获取数据
                         var id = target.parentNode.parentNode.dataset.id;
                         var values = target.previousElementSibling.value;
-                        target.parentNode.previousElementSibling.innerHTML =  values; 
-                        target.parentNode.previousElementSibling.style.display = 'block';                    
+                        target.parentNode.previousElementSibling.innerHTML = time;
+                        target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML =  values; 
+                        target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.style.display = 'inline-block';                    
                         this.send(name,id,values,time);
                         //清除/焦点
                         target.previousElementSibling.value = '';
@@ -706,7 +757,7 @@ require(['config'],function(){
             //显示
             show:function(name){
                 this.LY_chat.show().animate({width:600,height:500});
-                if(name != 'admin'){
+                if(name != '346692921@qq.com'){
                     //输入框获取焦点
                     this.LY_chat.find('textarea')[0].focus();
                 }
@@ -741,13 +792,8 @@ require(['config'],function(){
             },
 
             //发送消息
-<<<<<<< HEAD
             send:function(name,id,values,time){
                 if(name == '346692921@qq.com'){
-=======
-            send:function(name,id,values){
-                if(name == 'admin'){
->>>>>>> 0daf658c03cb6a5bf4e851c5db3142f1be05e7d1
                     
                     this.socket.emit('receive',{
                             name:name,
@@ -778,10 +824,12 @@ require(['config'],function(){
             receive:function(nameIn){
 
                 this.socket.on('send',data=>{
-                    if(nameIn == 'admin'){
+                    console.log(data)
+                    if(nameIn == '346692921@qq.com'){
                         for(var i=0;i<this.LY_chat.children().children().length;i++){
                             if(this.LY_chat.children().children().eq(i).attr('data-id') == data.id){
-                                this.LY_chat.children().children().eq(i).find('strong').html(data.value).show();
+                                this.LY_chat.children().children().eq(i).find('p').html(data.time);
+                                this.LY_chat.children().children().eq(i).find('.LY_a').html(data.value).show().css({display:'inline-block'});
                             }
                         }
                         this.show(nameIn);   
@@ -793,16 +841,19 @@ require(['config'],function(){
                             $li.addClass('LY_left');
                             $li.html(`
                                     <b>我:</b>
-                                    <span>${data.value}</span>
+                                    <a>${data.value}</a>
+                                    <p>${data.time}</p>
                                 `);
-                        }else if(data.name == 'admin'){
+                        }else if(data.name == '346692921@qq.com'){
                             $li.addClass('LY_right');
                             $li.html(`
-                                    <b>${data.name}</b>
-                                    <span>${data.value}</span>
+                                    <b>客服:</b>
+                                    <a>${data.value}</a>
+                                     <p>${data.time}</p>
                                 `);
                         }
                         this.LY_chat.find('ul').append($li)
+                        this.LY_chat.find('ul')[0].scrollTop = this.LY_chat.find('ul')[0].scrollHeight; 
                     }
                    
 
