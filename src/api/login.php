@@ -5,7 +5,7 @@
 
     $jmpassword = md5($password);
 
-    $conn = new mysqli('localhost','root','','user');
+    $conn = new mysqli('localhost','root','','goods');
     // 检测连接
     if ($conn->connect_error) {
         die("连接失败: " . $conn->connect_error);
