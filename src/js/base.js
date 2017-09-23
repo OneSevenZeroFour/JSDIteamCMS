@@ -894,7 +894,16 @@ require(['config'],function(){
 
                     var left = evt.clientX-ox;
                     var top = evt.clientY-oy;
-
+                    if(left <= -300){
+                        left = -300;
+                    }else if(left >= window.innerWidth-300){
+                        left = window.innerWidth-300;
+                    }
+                    if(top<=0){
+                        top = 0;
+                    }else if(top >= window.innerHeight-300){
+                        top = window.innerHeight-300
+                    }
                     this.LY_chat.css({left:left,top:top,'margin-left':0,'margin-top':0});
 
                 }
