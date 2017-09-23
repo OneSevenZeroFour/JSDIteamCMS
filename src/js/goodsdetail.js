@@ -109,7 +109,7 @@ require(['config'],function(){
                     $('.allmsg .msglist li:nth-child(6)').text(gooddetail['size']);
                     // 主图及小图显示
                     // 绑定事件
-                    var mainImgUrl = '/img/'+goodid+'link(1).jpg';              
+                    var mainImgUrl = '/img/'+goodid+'link(1).jpg?'+Date.now();            
                     $('.mainImg').attr('src',mainImgUrl);
                     $('.allmsg .msgmainImg').attr('src',mainImgUrl);
                     var goodtitle =  gooddetail['goodtitle']+'-商品代码：'+goodid;
@@ -118,9 +118,9 @@ require(['config'],function(){
                     var imgs='';                      
                     for(var i=1;i<=imgqty;i++){
                         if(i==1){
-                            imgs += '<img src="/img/'+goodid+'link('+i+').jpg" class="active"/>';
+                            imgs += '<img src="/img/'+goodid+'link('+i+').jpg?'+Date.now()+'" class="active"/>';
                         }else{
-                            imgs += '<img src="/img/'+goodid+'link('+i+').jpg"/>';
+                            imgs += '<img src="/img/'+goodid+'link('+i+').jpg?'+Date.now()+'"/>';
                         }                                   
                     }
                     $('.detail .imgsbox').html(imgs);                   
@@ -128,9 +128,9 @@ require(['config'],function(){
                     $('.point').text(gooddetail['point']);
 
                     function changeimg(){
-                        var mainImgurl = $('.mainImg').attr('src');
-                        var firstImgurl = $('.detail .imgsbox img:first-child').attr('src');
-                        var lastImgurl = $('.detail .imgsbox img:last-child').attr('src');
+                        var mainImgurl = $('.mainImg').attr('src').split('?')[0];
+                        var firstImgurl = $('.detail .imgsbox img:first-child').attr('src').split('?')[0];
+                        var lastImgurl = $('.detail .imgsbox img:last-child').attr('src').split('?')[0];
                         if($('.detail .imgsbox img').length==1){
                             $('.detail .mainbox i').hide();
                         }else if($('.detail .imgsbox img').length>1&&mainImgurl==firstImgurl){
@@ -150,7 +150,7 @@ require(['config'],function(){
                         }else if($(this).hasClass('nextbtn')){
                             var margetidx = Number(idx)+1;
                         }
-                        var imgurl = '/img/'+goodid+'link('+margetidx+').jpg';
+                        var imgurl = '/img/'+goodid+'link('+margetidx+').jpg?'+Date.now();
                         $('.imgsbox img').eq(margetidx-1).addClass('active').siblings('img').removeClass('active');
                         $('.mainImg').attr('src',imgurl);
                         $('.zoomImg').attr('src',imgurl);
@@ -270,7 +270,7 @@ require(['config'],function(){
                 // 转成倒计时格式
                 var secLeft = offset%60;
                 var minLeft = Math.floor(offset/60)%60;
-                var hourLeft = Math.floor(offset/60/24)%60;
+                var hourLeft = Math.floor(offset/60/60)%24;
                 var dayLeft = Math.floor(offset/60/60/24);
 
                 var minLeft = minLeft<10?'0'+minLeft:minLeft;
