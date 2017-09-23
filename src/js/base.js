@@ -611,7 +611,7 @@ require(['config'],function(){
                 if(name == 'admin'){
                     
                     LY_chat.html(`
-                            <div class="LY_chat_head"><h5></h5><span>&times;</span></div>
+                            <div class="LY_chat_head"><h5>消息管理</h5><span>&times;</span></div>
                             <ol></ol>
                         `)
                     socket.on('id',data=>{
