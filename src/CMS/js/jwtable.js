@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-21 19:20:32
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-22 21:10:13
+* @Last Modified time: 2017-09-23 11:10:15
 */
 
 require.config({
@@ -67,10 +67,14 @@ require(["jquery","amazeui.min"],function($){
     var val_sel_op;
     var maxid;
     var search_val;
-    var options=$("#jw_types option:selected");
-    val_sel_op=options.text()
+
+    // var options=$("#jw_types option:selected");
+    // val_sel_op=options.text()
+    val_sel_op=$("#jw_types").val();
     search_val=$('#myInput').val();
-      console.log(val_sel_op)
+    if(!val_sel_op){
+      val_sel_op='所有类别';
+    }
     var jw_types=document.querySelector("#jw_types")
       // 点击页码
     var pageNo=1;
@@ -115,8 +119,9 @@ require(["jquery","amazeui.min"],function($){
     })
        // 筛选改变时发送请求
     jw_types.onchange=function(){
-        var options=$("#jw_types option:selected");
-        val_sel_op=options.text();
+        // var options=$("#jw_types option:selected");
+        // val_sel_op=options.text();
+         var val_sel_op=$("#jw_types").val();
         search_val=$('#myInput').val();
         var datas;
         var posts;
