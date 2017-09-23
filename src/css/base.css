@@ -140,7 +140,7 @@ a { color: #000; text-decoration: none; }
 
 #header .headTop .LY_chat ol li{margin-bottom:10px;}
 
-#header .headTop .LY_chat ol li h4{margin-bottom:7px;}
+#header .headTop .LY_chat ol li h4{margin-bottom:7px;float:left;}
 
 #header .headTop .LY_chat ol li  form{margin-top:5px;padding-top:5px; clear:both;}
 
@@ -148,15 +148,26 @@ a { color: #000; text-decoration: none; }
 
 #header .headTop .LY_chat ol li  form a {display: inline-block;padding:5px 10px;background:red;height:30px;width:40px; line-height:30px;text-align: center;color:#fff;}
 
-#header .headTop .LY_chat ol li .LY_a{ display:none;background-color: #58bc58;padding: 5px 25px;border-radius: 10px;}
+#header .headTop .LY_chat ol li span{margin-right:0 !important;border-radius:4px;padding:0 10px;cursor:pointer;margin-right:60px;float:right;font-weight:100;}
+  
+#header .headTop .LY_chat ol li span:hover{background:red;color:#fff;}
 
-#header .headTop .LY_chat ol li em{margin-left:345px;display:none;padding: 5px 25px;border-radius: 10px;border:1px solid #ddd;}
+#header .headTop .LY_chat ol li .LY_kefu{margin-left:0;padding:10px;width: 423px;height: 110px;background:#ddd;overflow: auto;border-radius: 4px;}
+ 
+#header .headTop .LY_chat ol li .LY_kefu .LY_right{text-align: right;} 
 
-#header .headTop .LY_chat ol li b{margin-right:60px;float:right;font-weight:100;}
+#header .headTop .LY_chat ol li .LY_kefu .LY_right a{display:inline-block;background:#58bc58;padding:5px 10px;border-radius: 4px; margin-bottom:3px;}
+
+#header .headTop .LY_chat ol li .LY_kefu .LY_right p{margin-top:5px;}
+ 
+#header .headTop .LY_chat ol li .LY_kefu .LY_left a{display:inline-block;background:#fff;padding:5px 10px; border-radius: 4px;}
+ 
+#header .headTop .LY_chat ol li .LY_kefu .LY_left p{margin-top:5px;}
 
 #header .headTop .LY_chat .LY_chat_btn {text-align:right; width:550px;margin-left:25px;}
-
+  
 #header .headTop .LY_chat .LY_chat_btn a{margin-top:2px;display: inline-block; padding:0 25px; line-height:25px; background:#ff9; border-radius: 4px;}
+
 
 
 #header .headLogo img { display: inline-block; margin-bottom: 16px; }

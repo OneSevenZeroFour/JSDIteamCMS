@@ -303,7 +303,6 @@ io.on('connection',function(socket){
                 id:socket.id,
             });
         }
-
         user.forEach(function(item){
             if(item.name == 'admin'){
                 if(item.id){
@@ -314,6 +313,7 @@ io.on('connection',function(socket){
                     });   
                 }   
             }
+            
         });
 
     })
