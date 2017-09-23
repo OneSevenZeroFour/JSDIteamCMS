@@ -956,7 +956,7 @@ require(['config'],function(){
 
         if(nameIn !== ''){
             if(nameIn == 'admin'){
-                $('.top_right').children().eq(0).find('a').html('客户咨询');
+                $('.top_right').children().eq(0).find('a').html('消息管理中心');
            }
             Chat.init(nameIn).receive(nameIn);
         }else{
