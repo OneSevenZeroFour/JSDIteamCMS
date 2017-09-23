@@ -304,14 +304,12 @@ io.on('connection',function(socket){
             });
         }
         user.forEach(function(item){
-            if(item.name == 'admin'){
-                if(item.id){
-                    io.sockets.sockets[item.id].emit('id',{
-                        name:data.name,
-                        id:socket.id,
-                        value:data.value,
-                    });   
-                }   
+            if(item.name == 'admin'){  
+                io.sockets.sockets[item.id].emit('id',{
+                    name:data.name,
+                    id:socket.id,
+                    value:data.value,
+                });                  
             }
             
         });
