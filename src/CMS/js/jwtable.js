@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-21 19:20:32
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-23 11:10:15
+* @Last Modified time: 2017-09-23 14:44:10
 */
 
 require.config({
@@ -68,10 +68,10 @@ require(["jquery","amazeui.min"],function($){
     var maxid;
     var search_val;
 
-    // var options=$("#jw_types option:selected");
-    // val_sel_op=options.text()
-    val_sel_op=$("#jw_types").val();
+    val_sel_op=$("#jw_types option:selected").text()
+    // val_sel_op=$("#jw_types").val();
     search_val=$('#myInput').val();
+    console.log(val_sel_op)
     if(!val_sel_op){
       val_sel_op='所有类别';
     }
@@ -119,18 +119,17 @@ require(["jquery","amazeui.min"],function($){
     })
        // 筛选改变时发送请求
     jw_types.onchange=function(){
-        // var options=$("#jw_types option:selected");
-        // val_sel_op=options.text();
-         var val_sel_op=$("#jw_types").val();
+        val_sel_op=$("#jw_types option:selected").text();
+         // var val_sel_op=$("#jw_types").val();
         search_val=$('#myInput').val();
         var datas;
         var posts;
-        // console.log(val_sel_op)
+        console.log(val_sel_op)
         if(search_val!=""){
-          datas={pageNo:pageNo,qty:qty,type:val_sel_op,search_val:search_val};
+          datas={pageNo:1,qty:qty,type:val_sel_op,search_val:search_val};
           posts='jw_search';
         }else{
-          datas={pageNo:pageNo,qty:qty,type:val_sel_op};
+          datas={pageNo:1,qty:qty,type:val_sel_op};
           posts='jw_select';
         }
         $.ajax({
