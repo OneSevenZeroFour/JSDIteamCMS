@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-20 10:30:21
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-22 17:43:42
+* @Last Modified time: 2017-09-23 15:16:00
 */
 
 require(['config'],function(){   
@@ -16,7 +16,7 @@ require(['config'],function(){
         require(['base'],function(){
 
         // 获取cookie里的账户名
-        var username;
+        var username='';
         var cookies=document.cookie.split('; ')
                 console.log(cookies)
                 cookies.forEach(function(item){
@@ -32,47 +32,54 @@ require(['config'],function(){
         //声明头像,便于接受修改后的头像;
         var imgurl;
         console.log(username)
-        $.ajax({
-            url:'http://localhost:12345/get',
-            type:'get',
-            data:{username:username},
-            success:function(data){
-                var res = JSON.parse(data).results[0];
-                console.log(res);
-              $('.right .touxiang2').find('img').attr('src',res.imgurl);
-              $('.left .touxiang2').find('img').attr('src',res.imgurl);
-              $('.left_1').find('p').html(res.nicheng);
-              $('.nicheng').html(res.nicheng);
-              $('._nicheng').val(res.nicheng);
-              $('.xb').html(res.xingbie);
-              if(res.xingbie==='女'){
-                $('.nan').removeClass('active').css({'background':'#ccc','color':'#000'});
-                $('.nv').addClass('active').css({'background':'#000','color':'#fff'});
-                console.log(res.province);
+        if(username !==''){
+            console.log(666)
+            $.ajax({
+                url:'http://localhost:12345/get',
+                type:'get',
+                data:{username:username},
+                success:function(data){
+                    var res = JSON.parse(data).results[0];
+                    console.log(res);
+                  $('.right .touxiang2').find('img').attr('src',res.imgurl);
+                  $('.left .touxiang2').find('img').attr('src',res.imgurl);
+                  $('.left_1').find('p').html(res.nicheng);
+                  $('.nicheng').html(res.nicheng);
+                  $('._nicheng').val(res.nicheng);
+                  $('.xb').html(res.xingbie);
+                  if(res.xingbie==='女'){
+                    $('.nan').removeClass('active').css({'background':'#ccc','color':'#000'});
+                    $('.nv').addClass('active').css({'background':'#000','color':'#fff'});
+                    console.log(res.province);
+                    }
+                    $('.sheng').html(res.province);
+                    $('.shi').html(res.city);
+                    $('.qu').html(res.district);
+
+                    $('#header .top_left').find('a')[2].innerHTML= res.city+res.district;
+                    
+                    $('#header .top_left').find('a')[1].innerHTML = username;
+                    
+                    imgurl = $('.right .touxiang2').find('img').attr('src');
+
+                    $('.addslist ul').append(`
+                            <li>
+                                <h3 class="ren">${res.user}</h3>
+                                <p class="phone">${res.phone}</p>
+                                <p class="ssq">${res.province+res.city+res.district}</p>
+                                <p class="dizhi">${res.dizhi}</p>
+                                <p class="youzheng">${res.youbian}</p>
+                            </li>
+                        `)
+                    // console.log($('.ren').html());
+                    if(res.user===''){
+                        $('.addslist').hide();
+                    }
                 }
-                $('.sheng').html(res.province);
-                $('.shi').html(res.city);
-                $('.qu').html(res.district);
+            })
 
-                $('#header .top_left').find('a')[2].innerHTML= res.city+res.district;
-                
-                $('#header .top_left').find('a')[1].innerHTML = username;
-                
-                imgurl = $('.right .touxiang2').find('img').attr('src');
-
-                $('.addslist ul').append(`
-                        <li>
-                            <h3 class="ren">${res.user}</h3>
-                            <p class="phone">${res.phone}</p>
-                            <p class="ssq">${res.province+res.city+res.district}</p>
-                            <p class="dizhi">${res.dizhi}</p>
-                            <p class="youzheng">${res.youbian}</p>
-                        </li>
-                    `)
-                // console.log($('.ren').html());
-            }
-        })
-
+        }
+        
         // 点击编辑进去编辑状态
         $('#content .bianji').on('click',function(){
             $('.bj').show();
@@ -136,7 +143,7 @@ require(['config'],function(){
                     processData: false,
                     contentType: false,
                     success: function(data) {
-                        imgurl ='/js/mulu/'+data;
+                        imgurl ='/img/'+data;
                         $('.right .touxiang2').find('img').attr('src',imgurl);
                     }
                 })
@@ -155,7 +162,7 @@ require(['config'],function(){
         })
 
 
-
+        
 
         // 页面加载开始定位地理位置
         var geolocation = new BMap.Geolocation();
@@ -165,6 +172,7 @@ require(['config'],function(){
             var pt = r.point;
             geoc.getLocation(pt, function(rs){
                 var addComp = rs.addressComponents;
+                
                 console.log(addComp)
                 $.ajax({
                     url:'http://localhost:12345/adds',
@@ -177,6 +185,7 @@ require(['config'],function(){
                 
             });       
         },{enableHighAccuracy: true})
+        
 
         // // 获取cookie里的地址
         // var xu_cookies=document.cookie.split('; ')
@@ -225,15 +234,40 @@ require(['config'],function(){
         var phone = $('.phone').val();
         var dizhi = $('.dizhi').val();
         var youbian = $('.youzheng').val();
-        $.ajax({
-                    url:'http://localhost:12345/dizhi',
-                    type:'POST',
-                    data:{username:username,user:user,phone:phone,dizhi:dizhi,youbian:youbian},
-                    success:function(data){
+        if(user !== '' && phone !=='' && dizhi !== '' &&youbian !==''){
+            $('.addslist').show();
+            $('.addslist ul').append(`
+                <li>
+                    <h3 class="ren">${user}</h3>
+                    <p class="phone">${phone}</p>
+                    
+                    
+                    <p class="dizhi">${dizhi}</p>
+                    <p class="youzheng">${youbian}</p>
+                </li>
+            `)
 
-                             
-                    }
-        })
+            $.ajax({
+                        url:'http://localhost:12345/dizhi',
+                        type:'POST',
+                        data:{username:username,user:user,phone:phone,dizhi:dizhi,youbian:youbian},
+                        success:function(data){             
+                                 
+                        }
+            })
+        }
+        if(user ===''){
+            alert('收件人不能为空')
+        }else if(phone===''){
+            alert('手机号不能为空')
+        }else if(dizhi ===''){
+            alert('地址不能为空')
+        }else if(youbian ===''){
+            alert('邮编不能为空')
+        }
+
+
+        
     })
 
 
