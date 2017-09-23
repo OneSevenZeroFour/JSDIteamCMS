@@ -33,7 +33,18 @@ require(['config'],function(){
             },function(){
                 $('.ledgerlist').hide();
             })
-            $('.out a').click(function(){
+            $('.out a').click(function(){               
+                $.ajax({
+                    url:'http://localhost:12345/LY_name',
+                    data:{
+                        name:nameIn,
+                    },
+                    type:'get',
+                    success:function(res){
+                        console.log(res);
+                    }
+
+                })
                 com.Cookie.remove('prusername');
                 window.location.reload();
             })
@@ -602,6 +613,7 @@ require(['config'],function(){
             
             //初始化
             init:function(name){
+
                 //跟后端连接
                 var socket = io("http://localhost:3001");
                 //生成结构
@@ -783,9 +795,32 @@ require(['config'],function(){
                     })
 
                     
-                    this.send(name,'','',time);
-                    
+                    this.send(name,'','',time);    
                 })
+
+                //键盘弹起事件
+                document.onkeyup = e=>{
+                    var keyCode = e.keyCode;
+
+                    if(keyCode === 13 && e.ctrlKey){
+                        //获取当前时间
+                        var now = new Date()
+                        var data = now.toLocaleDateString();
+                        var s = now.getHours();
+                        var f = now.getMinutes();
+                        var m = now.getSeconds();
+                        var time = data+' '+s+':'+f+':'+m;
+                        //获取输入框的值
+                        var values = this.LY_chat.find('textarea').val();
+                        socket.emit('name',{
+                            name:name,
+                            value:values,
+                        })
+
+                        
+                        this.send(name,'','',time);    
+                    }
+                }
 
                 //管理员回复
                 LY_chat[0].onclick = e=>{
