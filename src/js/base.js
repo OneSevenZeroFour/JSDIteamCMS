@@ -867,7 +867,7 @@ require(['config'],function(){
 
             //显示
             show:function(name){
-                this.LY_chat.show().animate({width:600,height:500});
+                this.LY_chat.stop().show().animate({width:600,height:500});
                 if(name != 'admin'){
                     //输入框获取焦点
                     this.LY_chat.find('textarea')[0].focus();
@@ -881,7 +881,7 @@ require(['config'],function(){
             //隐藏
             hide:function(){
 
-                this.LY_chat.animate({width:0,height:0},()=>{
+                this.LY_chat.stop().animate({width:0,height:0},()=>{
                     this.LY_chat.hide();
                 });
 
