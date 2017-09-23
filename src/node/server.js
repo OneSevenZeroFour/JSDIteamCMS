@@ -303,16 +303,20 @@ io.on('connection',function(socket){
                 id:socket.id,
             });
         }
-        user.forEach(function(item){
-            if(item.name == 'admin'){  
-                io.sockets.sockets[item.id].emit('id',{
-                    name:data.name,
-                    id:socket.id,
-                    value:data.value,
-                });                  
-            }
-            
-        });
+  
+        var obj1 = socket.server.sockets.connected;
+        var arr1 = Object.keys(obj1);
+        if(arr1.length>1){
+            user.forEach(function(item){
+                if(item.name == 'admin'){
+                    io.sockets.sockets[item.id].emit('id',{
+                        name:data.name,
+                        id:socket.id,
+                        value:data.value,
+                    });    
+                }               
+            });
+        }
 
     })
 
