@@ -903,7 +903,6 @@ require(['config'],function(){
             receive:function(nameIn){
 
                 this.socket.on('send',data=>{
-                    console.log(data)
                     if(nameIn == 'admin'){
                        //生成结构         
                         var $li = $('<li/>');      
