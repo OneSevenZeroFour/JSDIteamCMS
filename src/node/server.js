@@ -306,6 +306,7 @@ io.on('connection',function(socket){
   
         var obj1 = socket.server.sockets.connected;
         var arr1 = Object.keys(obj1);
+        console.log(arr1.length,user)
         if(arr1.length>1){
             user.forEach(function(item){
                 if(item.name == 'admin'){
