@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-09-20 10:30:21
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-09-23 15:16:00
+* @Last Modified time: 2017-09-23 15:52:00
 */
 
 require(['config'],function(){   
@@ -72,7 +72,10 @@ require(['config'],function(){
                             </li>
                         `)
                     // console.log($('.ren').html());
-                    if(res.user===''){
+                    // if(res.user==='null'){
+                    //     $('.addslist').hide();
+                    // }else{$('.addslist').show();}
+                    if(!res.user){
                         $('.addslist').hide();
                     }
                 }
@@ -229,6 +232,7 @@ require(['config'],function(){
 
     // 新增收货地址
     $('.xinzheng').on('click',function(){
+        $('.addslist ul').html('');
 
         var user = $('.ren').val()
         var phone = $('.phone').val();
