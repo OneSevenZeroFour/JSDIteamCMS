@@ -284,8 +284,24 @@ app.post("/adds", function(req, res) {
                 });
 })
 
+
+
 server.listen(3001);
 var user = [];
+
+//获取name
+app.get('/LY_name',function(req,res){
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    
+    var name = req.query.name;
+
+    for(var i=0;i<user.length;i++){
+        if(user[i].name == name){
+            user.splice(i,1);
+        }
+    }
+   
+})
 //连接
 io.on('connection',function(socket){
 
@@ -306,7 +322,7 @@ io.on('connection',function(socket){
   
         var obj1 = socket.server.sockets.connected;
         var arr1 = Object.keys(obj1);
-        if(arr1.length>1){
+        if(arr1.length>1&& user.length>0){
             user.forEach(function(item){
                 if(item.name == 'admin'){
                     io.sockets.sockets[item.id].emit('id',{
@@ -319,7 +335,6 @@ io.on('connection',function(socket){
         }
 
     })
-
     //接收
     socket.on('receive',function(data){
        
@@ -341,8 +356,20 @@ io.on('connection',function(socket){
             });
         }
         
+    })
+
+    //监听关闭链接
+    socket.on('disconnect',function(data){
+        var id = socket.id;
+         for(var i=0;i<user.length;i++){
+            if(user[i].id == id){
+                user.splice(i,1);
+            }
+        }
     })    
 });
+
+
 
 
 app.listen(12345);
