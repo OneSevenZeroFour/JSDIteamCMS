@@ -1,6 +1,7 @@
 require(['config'],function(){   
     require(['jquery'],function(){
         require(['common','../wangEditor-3.0.9/release/wangEditor.min.js'],function(com,E){
+            var already = true;
             $(".price input").on("input",function(){
                 var val = '￥'+$(this).val();
                 $(this).siblings('.showprice').text(val);
@@ -12,8 +13,9 @@ require(['config'],function(){
             
             $('.size button').click(function(){
                 var rel = $(this).siblings('input').val();
-                if(rel==''){
-                    $(this).siblings('input').val('未输入')
+                if(rel==''||rel=='未输入'){
+                    $(this).siblings('input').val('未输入');
+                    return;
                 }else{
                     var $span = $('<span/>').text(rel).addClass('selected');
                     $('.showsize').append($span);
@@ -31,7 +33,10 @@ require(['config'],function(){
             $('.inventory input').on("blur",function(){
                 var val = $(this).val();
                 if(isNaN(val)){
-                    $(this).val("请输入数字")
+                    $(this).val("请输入数字");
+                    already = false;
+                }else{
+                    already = true;
                 }
             })
             $('.changebtn').hide();
@@ -191,77 +196,82 @@ require(['config'],function(){
             }
             $('.jdtbox').hide();
             $('.sendgood').click(function(){
-                var title = $('.title input').val();
-                var price = $('.showprice').text();
-                var sale = $('.showsale').text();
-                var inventory = $('.inventory input').val();
-                var point = $('.intro textarea').val();
-                var color = $('.color input').val();
-                var sizearr = [];
-                $('.showsize span.selected').each(function(){
-                    sizearr.push($(this).text());
-                })
-                var size = sizearr.join('-');
-                var img = $('.imgs li img').length;
-                var imgurls = [];
-                $('.imgs img').each(function(){
-                    imgurls.push($(this).attr('src').split('?')[0]);
-                })
-                var descrption = editor.txt.html();
-                var type = $('#alltype').val();
-                
-                if(title==''||price=='￥'||sale=='￥'||inventory==''||img==0||price==''||sale==''){
-                    $('.sendwaring').text("*(必填项)不能为空");
-                    $('.jdtbox').hide();
+                if(already==false){
+                    $('.sendwaring').text("*(必填项)不能为空,必须符合规范");
+                    return;
                 }else{
-                    if(typeto=='maxid'){
-                        var setid = id*1+1;
-                        console.log(setid);
-                        var url = "http://localhost:12345/addgoods";
-                    }else if(typeto=="id"){
-                        var setid = id;
-                        var url = "http://localhost:12345/setgoods";
-                    }
-                    $('.jdtbox').show();
-                    var i=0;
-                    var timer = setInterval(function(){
-                        $('.sendwaring').text("正在上传"+i+"%");
-                        $('.jdt').width(i+'%');
-                        if(i==100){
-                            clearInterval(timer);
-                            $('.sendwaring').text("上传成功");
-                            $('.jdt').width('100%');
-                            window.location.href="/html/goodsdetail.html?id="+setid;
-                        }
-                        i++;
-                    },25)                    
-                    var goodsobj = {
-                        title:title,
-                        price:price.slice(1),
-                        sale:sale.slice(1),
-                        inventory:inventory,
-                        point:point,
-                        color:color,
-                        size:size,
-                        imgqty:img,
-                        imgurls:imgurls,
-                        descrption:descrption,
-                        type:type,
-                        id:setid
-                    }
-                    console.log(JSON.stringify(goodsobj));
-                    var good = JSON.stringify(goodsobj);
-
-                    $.ajax({
-                        type:'POST',
-                        url:url,
-                        data:{
-                            good:good
-                        },
-                        success:function(res){
-                            console.log(res);
-                        }
+                    var title = $('.title input').val();
+                    var price = $('.showprice').text();
+                    var sale = $('.showsale').text();
+                    var inventory = $('.inventory input').val();
+                    var point = $('.intro textarea').val();
+                    var color = $('.color input').val();
+                    var sizearr = [];
+                    $('.showsize span.selected').each(function(){
+                        sizearr.push($(this).text());
                     })
+                    var size = sizearr.join('-');
+                    var img = $('.imgs li img').length;
+                    var imgurls = [];
+                    $('.imgs img').each(function(){
+                        imgurls.push($(this).attr('src').split('?')[0]);
+                    })
+                    var descrption = editor.txt.html();
+                    var type = $('#alltype').val();
+                    
+                    if(title==''||price=='￥'||sale=='￥'||inventory==''||img==0||price==''||sale==''){
+                        $('.sendwaring').text("*(必填项)不能为空");
+                        $('.jdtbox').hide();
+                    }else{
+                        if(typeto=='maxid'){
+                            var setid = id*1+1;
+                            console.log(setid);
+                            var url = "http://localhost:12345/addgoods";
+                        }else if(typeto=="id"){
+                            var setid = id;
+                            var url = "http://localhost:12345/setgoods";
+                        }
+                        $('.jdtbox').show();
+                        var i=0;
+                        var timer = setInterval(function(){
+                            $('.sendwaring').text("正在上传"+i+"%");
+                            $('.jdt').width(i+'%');
+                            if(i==100){
+                                clearInterval(timer);
+                                $('.sendwaring').text("上传成功");
+                                $('.jdt').width('100%');
+                                window.location.href="/html/goodsdetail.html?id="+setid;
+                            }
+                            i++;
+                        },25)                    
+                        var goodsobj = {
+                            title:title,
+                            price:price.slice(1),
+                            sale:sale.slice(1),
+                            inventory:inventory,
+                            point:point,
+                            color:color,
+                            size:size,
+                            imgqty:img,
+                            imgurls:imgurls,
+                            descrption:descrption,
+                            type:type,
+                            id:setid
+                        }
+                        console.log(JSON.stringify(goodsobj));
+                        var good = JSON.stringify(goodsobj);
+
+                        $.ajax({
+                            type:'POST',
+                            url:url,
+                            data:{
+                                good:good
+                            },
+                            success:function(res){
+                                console.log(res);
+                            }
+                        })
+                    }
                 }               
             })
         })
